@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import './NewTest.css'
+import {Button} from 'react-bootstrap';
+
 
 class NewTest extends Component {
     render() {

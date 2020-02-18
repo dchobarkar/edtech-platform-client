@@ -2,10 +2,16 @@ import React from 'react';
 import NewTest from '../../containers/NewTest/NewTest';
 import MyTest from '../../containers/MyTest/MyTest'
 import TestDetails from '../../containers/TestDetails/TestDetails';
+import './Layout.css'
 
 const layout = () => (
     <div>
-        create new test, my test, my accout
+        <div id="Navbar">
+            <li>create new test</li>
+            <li>my test</li>
+            <li id="right">my accout</li>
+        </div>
+        
         <NewTest></NewTest>
         <MyTest></MyTest>
         <TestDetails></TestDetails>
