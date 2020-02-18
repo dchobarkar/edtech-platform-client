@@ -1,0 +1,9 @@
+#MyTest{
+    display: table;
+}
+#MyTestBox{
+    width: 20%;
+    height: 100px;
+    float: left;
+    margin: 2.5%;
+}
