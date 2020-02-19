@@ -1,9 +1,4 @@
-#MyTest{
-    display: table;
-}
-#MyTestBox{
-    width: 20%;
-    height: 100px;
-    float: left;
-    margin: 2.5%;
+#card {
+  width: 15rem;
+  margin: 10px auto;
 }
