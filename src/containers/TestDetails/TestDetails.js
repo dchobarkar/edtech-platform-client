@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { Button } from "react-bootstrap";
+
+
 class TestDetails extends Component {
+    state = {
+        title: 'Phy I',
+        stdno: '3462',
+        maxmark: '110',
+        queno: '30'
+
+    }
+
+
     render() {
         return (
             <div className="container">
@@ -10,25 +21,25 @@ class TestDetails extends Component {
                         <h6>Test Title :</h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>testid.title</p>
+                        <p>{this.state.title}</p>
                     </div>
                     <div className="col-sm-3">
-                        <h6>Students Appeared :</h6>
+                        <h6>Students Appeared : </h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>testid.stdno</p>
+                        <p>{this.state.stdno}</p>
                     </div>
                     <div className="col-sm-3">
                         <h6>Maximum Marks :</h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>testid.max</p>
+                        <p>{this.state.maxmark}</p>
                     </div>
                     <div className="col-sm-3">
                         <h6>Number of Questions :</h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>testid.queno</p>
+                        <p>{this.state.queno}</p>
                     </div>
                     <Button> View Questions</Button>
                 </div>

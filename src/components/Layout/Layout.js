@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import NewTest from '../../containers/NewTest/NewTest';
 import MyTest from '../../containers/MyTest/MyTest'
 import TestDetails from '../../containers/TestDetails/TestDetails';
+import Footer from '../Footer/Footer';
 import './Layout.css'
 
 const layout = () => (
@@ -11,6 +12,7 @@ const layout = () => (
         <NewTest />
         <MyTest />
         <TestDetails />
+        <Footer />
     </div>
 );
 
