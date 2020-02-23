@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 
 class TestDetails extends Component {
@@ -41,7 +42,9 @@ class TestDetails extends Component {
                     <div className="col-sm-9">
                         <p>{this.state.queno}</p>
                     </div>
-                    <Button> View Questions</Button>
+                    <Link to="/NewQuestion">
+                        <Button> View Questions</Button>
+                    </Link>
                 </div>
             </div>
         )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import './MyTest.css';
+import { Link } from 'react-router-dom';
 
 class MyTest extends Component {
     state = {
@@ -35,7 +36,7 @@ class MyTest extends Component {
                                     <ListGroupItem>Status : {mytest.status}</ListGroupItem>
                                 </ListGroup>
 
-                                <Button variant="primary">View Details</Button>
+                                <Button variant="primary"><Link to="/testdetails">View Details</Link></Button>
                             </Card>
                         )
                     })}

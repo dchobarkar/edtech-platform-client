@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className="navbar-fixed-bottom">
             <div className="container">
-                <div className="row">
+                <div className="row" id="footer">
                     <p>Made with Knowledge by Team GaNeTy </p>
                     <p>&copy; Copyright 2020</p>
 
