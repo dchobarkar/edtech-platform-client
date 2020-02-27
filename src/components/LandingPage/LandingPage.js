@@ -15,7 +15,7 @@ const LandingPage = () => (
 
             <div className="col-sm-6">
                 <Link to="/mytest">
-                    <Button variant="outline-dark"><i class="fas fa-book fa-10x"></i></Button>
+                    <Button variant="outline-dark"><i className="fas fa-book fa-10x"></i></Button>
                 </Link>
                 <h3>My Tests</h3>
             </div>

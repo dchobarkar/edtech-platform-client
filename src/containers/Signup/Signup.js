@@ -43,7 +43,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="Name"
                                     name="name"
-                                    onclick={this.newuserHandler} />
+                                    onChange={this.newuserHandler} />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="surname">
@@ -52,7 +52,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="Surname"
                                     name="surname"
-                                    onclick={this.newuserHandler} />
+                                    onChange={this.newuserHandler} />
                             </Form.Group>
                         </Form.Row>
 
@@ -63,7 +63,7 @@ class Signup extends Component {
                                     type="email"
                                     placeholder="Tution's Email"
                                     name="email"
-                                    onclick={this.newuserHandler} />
+                                    onChange={this.newuserHandler} />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="mobileno">
@@ -72,7 +72,7 @@ class Signup extends Component {
                                     type="number"
                                     placeholder="Mobile No."
                                     name="mobileno"
-                                    onclick={this.newuserHandler} />
+                                    onChange={this.newuserHandler} />
                             </Form.Group>
                         </Form.Row>
 
@@ -82,7 +82,7 @@ class Signup extends Component {
                                 type="text"
                                 placeholder="xyz coaching classes"
                                 name="tutionname"
-                                onclick={this.newuserHandler} />
+                                onChange={this.newuserHandler} />
                         </Form.Group>
 
                         <Form.Group controlId="address">
@@ -91,7 +91,7 @@ class Signup extends Component {
                                 type="text"
                                 placeholder="Apartment, studio, or floor"
                                 name="address"
-                                onclick={this.newuserHandler} />
+                                onChange={this.newuserHandler} />
                         </Form.Group>
 
 
@@ -102,7 +102,7 @@ class Signup extends Component {
                                     as="select"
                                     value="Choose..."
                                     name="state"
-                                    onclick={this.newuserHandler}>
+                                    onChange={this.newuserHandler}>
                                     <option>Choose...</option>
                                     <option>...</option>
                                 </Form.Control>
@@ -115,7 +115,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="City"
                                     name="city"
-                                    onclick={this.newuserHandler} />
+                                    onChange={this.newuserHandler} />
                             </Form.Group>
 
 
@@ -125,7 +125,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="Zip Code"
                                     name="zip"
-                                    onclick={this.newuserHandler} />
+                                    onChange={this.newuserHandler} />
                             </Form.Group>
                         </Form.Row>
 
@@ -135,7 +135,7 @@ class Signup extends Component {
                                 type="password"
                                 placeholder="Password"
                                 name="password"
-                                onclick={this.newuserHandler} />
+                                onChange={this.newuserHandler} />
                         </Form.Group>
 
 
@@ -143,7 +143,7 @@ class Signup extends Component {
                             <Button
                                 variant="primary"
                                 type="submit"
-                                onClick={() => this.props.newuserregister(this.state)}>
+                                onChange={() => this.props.newuserregister(this.state)}>
                                 Create Account
                             </Button>
                         </Link>
