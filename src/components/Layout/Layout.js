@@ -1,19 +1,19 @@
 import React from 'react';
-import Navbar from '../Navbar/Navbar';
-import NewTest from '../../containers/NewTest/NewTest';
-import MyTest from '../../containers/MyTest/MyTest'
-import TestDetails from '../../containers/TestDetails/TestDetails';
-import Footer from '../Footer/Footer';
-import './Layout.css'
-import Login from '../Login/Login';
 import { Route } from 'react-router-dom';
+
+import Navbar from '../Navbar/Navbar';
 import LandingPage from '../LandingPage/LandingPage';
-import Signup from '../Signup/Signup'
-import NewQuestion from '../../containers/NewTest/NewQuestion/NewQuestion'
+import Footer from '../Footer/Footer';
+
+import NewTest from '../../containers/NewTest/NewTest';
+import MyTest from '../../containers/MyTest/MyTest';
+import TestDetails from '../../containers/TestDetails/TestDetails';
+import NewQuestion from '../../containers/NewTest/NewQuestion/NewQuestion';
+import Login from './../../containers/Login/Login';
+import Signup from './../../containers/Signup/Signup';
 
 const layout = () => (
     <div>
-
         <Navbar />
 
         <Route path="/" exact component={LandingPage} />

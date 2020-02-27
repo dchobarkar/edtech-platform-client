@@ -1,4 +1,7 @@
-.App {
-  /* text-align: center; */
+#fullscreen {
+  height: 100vh;
 }
 
+#right {
+  text-align: right;
+}

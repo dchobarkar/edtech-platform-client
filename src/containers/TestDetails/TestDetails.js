@@ -2,45 +2,41 @@ import React, { Component } from 'react';
 import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
+import './TestDetails.css';
+
 
 class TestDetails extends Component {
-    state = {
-        title: 'Phy I',
-        stdno: '3462',
-        maxmark: '110',
-        queno: '30'
-
-    }
-
 
     render() {
         return (
-            <div className="container">
+            <div className="container" id="fullscreen">
                 <h4>Test Details</h4>
                 <div className="row shadow p-3 mb-5 bg-white rounded">
                     <div className="col-sm-3">
                         <h6>Test Title :</h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>{this.state.title}</p>
+                        <p>{this.props.test[0].testinitials.testtitle}</p>
                     </div>
                     <div className="col-sm-3">
                         <h6>Students Appeared : </h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>{this.state.stdno}</p>
+                        <p>{this.props.test[0].testinitials.suscribed}</p>
                     </div>
                     <div className="col-sm-3">
-                        <h6>Maximum Marks :</h6>
+                        <h6>Instructions :</h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>{this.state.maxmark}</p>
+                        <p>{this.props.test[0].testinitials.instructions}</p>
                     </div>
                     <div className="col-sm-3">
-                        <h6>Number of Questions :</h6>
+                        <h6>Target Audience :</h6>
                     </div>
                     <div className="col-sm-9">
-                        <p>{this.state.queno}</p>
+                        <p>{this.props.test[0].testinitials.targetaudience}</p>
                     </div>
                     <Link to="/NewQuestion">
                         <Button> View Questions</Button>
@@ -51,4 +47,10 @@ class TestDetails extends Component {
     }
 }
 
-export default TestDetails;
+const mapStateToProps = state => {
+    return {
+        test: state.mytests
+    }
+}
+
+export default connect(mapStateToProps)(TestDetails);

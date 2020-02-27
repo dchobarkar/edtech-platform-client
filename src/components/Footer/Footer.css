@@ -1,3 +1,7 @@
 #footer {
   text-align: center;
+  background-color: dimgray;
+}
+#footer .row {
+  justify-content: center;
 }

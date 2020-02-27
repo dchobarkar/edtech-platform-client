@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap'
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/actionTypes'
+
 import './NewTest.css';
 
 class NewTest extends Component {
     state = {
-        testinitials: [
-            { title: '' },
-            { instructions: '' },
-            { targetaudience: '' }
-        ]
+        title: '',
+        instructions: '',
+        targetaudience: ''
     }
 
-    testinitialshandler = (e) => {
+    testinitialsHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    testinitials = () => {
-        alert(this.state.title + '+' + this.state.instructions + '+' + this.state.targetaudience)
-
-    }
-
-
     render() {
         return (
-            <div className="container">
+            <div className="container" id="fullscreen">
                 <h4>New Test Setup</h4>
                 <Form className="shadow p-3 mb-5 bg-white rounded">
                     <Form.Group as={Row} controlId="examtitle">
@@ -38,7 +34,7 @@ class NewTest extends Component {
                                 type="text"
                                 placeholder="Title"
                                 name="title"
-                                onChange={this.testinitialshandler} />
+                                onChange={this.testinitialsHandler} />
                         </Col>
                     </Form.Group>
 
@@ -52,7 +48,7 @@ class NewTest extends Component {
                                 rows="5"
                                 placeholder="Instructions"
                                 name="instructions"
-                                onChange={this.testinitialshandler} />
+                                onChange={this.testinitialsHandler} />
                         </Col>
                     </Form.Group>
 
@@ -64,7 +60,7 @@ class NewTest extends Component {
                             <Form.Control
                                 as="select"
                                 name="targetaudience"
-                                onChange={this.testinitialshandler}
+                                onChange={this.testinitialsHandler}
                             >
                                 <option>11th - PCB</option>
                                 <option>11th - PCM</option>
@@ -78,10 +74,11 @@ class NewTest extends Component {
                         <Col sm={{ span: 10, offset: 2 }}>
                             <Link to="/newquestion">
                                 <Button
-                                    onClick={this.testinitials}
+                                    onClick={() => this.props.testinitialsregister(this.state)}
                                     type="submit"
-                                    value="submit"
-                                >Create Test</Button>
+                                    value="submit">
+                                    Create Test
+                                </Button>
                             </Link>
                         </Col>
                     </Form.Group>
@@ -91,4 +88,13 @@ class NewTest extends Component {
     }
 }
 
-export default NewTest;
+const mapDispatchToProps = dispatch => {
+    return {
+        testinitialsregister: (newtest) => dispatch({
+            type: actions.TESTINITIALSREGISTER, value: { newtest }
+        })
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(NewTest);
