@@ -8,10 +8,17 @@ import * as actions from '../../store/actions/auth';
 import './Login.css'
 
 class Login extends Component {
+    state = {}
+
+    inputchangeHandler = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
     submitHandler = (event) => {
-        event.prevenDafault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value)
+        // console.log(this.state);
+        this.props.onAuth(this.state.email, this.state.password)
     }
 
     render() {
@@ -26,26 +33,36 @@ class Login extends Component {
                         <Form onSubmit={this.submitHandler}>
                             <Form.Group controlId="email">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="abc@def.com" />
+                                <Form.Control
+                                    name="email"
+                                    type="email"
+                                    placeholder="abc@def.com"
+                                    onChange={this.inputchangeHandler} />
                             </Form.Group>
 
                             <Form.Group controlId="password">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control
+                                    name="password"
+                                    type="password"
+                                    placeholder="Password"
+                                    onChange={this.inputchangeHandler} />
                             </Form.Group>
 
                             <Form.Group controlId="keeploggedin">
                                 <Form.Check type="checkbox" label="Keep Logged In" />
                             </Form.Group>
 
-                            <Link to="/">
-                                <Button variant="outline-dark" type="submit">
-                                    Login
+                            {/* <Link to="/"> */}
+                            <Button variant="outline-dark" type="submit">
+                                Login
                                 </Button>
-                            </Link>
+                            {/* </Link> */}
 
                             <Form.Text className="text-muted" id="right">
-                                <Link to="/signup">New User</Link>
+                                <Link to="/signup">
+                                    New User
+                                    </Link>
                             </Form.Text>
                         </Form>
                     </div>

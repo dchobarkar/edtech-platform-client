@@ -143,7 +143,7 @@ class Signup extends Component {
                             <Button
                                 variant="primary"
                                 type="submit"
-                                onChange={() => this.props.newuserregister(this.state)}>
+                                onClick={() => this.props.newuserregister(this.state)}>
                                 Create Account
                             </Button>
                         </Link>

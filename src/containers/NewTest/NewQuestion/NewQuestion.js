@@ -23,7 +23,7 @@ class NewQuestion extends Component {
     render() {
         return (
             <div className="container" id="fullscreen">
-                <Form className="shadow p-3 mb-5 bg-white rounded">
+                <Form onSubmit={() => this.props.newquestionregister(this.state)} className="shadow p-3 mb-5 bg-white rounded">
                     <Form.Group as={Row} controlId="question">
                         <Form.Label column sm={2}>
                             Question
@@ -46,7 +46,8 @@ class NewQuestion extends Component {
                             <Form.Control
                                 type="file"
                                 name="fig"
-                                onChange={this.questionHandler} />
+                            // onChange={this.questionHandler} 
+                            />
                         </Col>
                     </Form.Group>
 
@@ -122,7 +123,7 @@ class NewQuestion extends Component {
                     <Form.Group id="right">
                         <Col sm={{ span: 10, offset: 2 }}>
                             <Button
-                                onClick={() => this.props.newquestionregister(this.state)}
+
                                 type="submit">Submit</Button>
                         </Col>
                     </Form.Group>

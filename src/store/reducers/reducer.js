@@ -1,4 +1,5 @@
 import * as actions from '../actions/actionTypes';
+import axios from '../../axios-server';
 
 const initialState = {
     user: {
@@ -91,9 +92,12 @@ const reducer = (state = initialState, action) => {
             newstate.mytests[1].testinitials.testtitle = action.value.newtest.title;
             newstate.mytests[1].testinitials.instructions = action.value.newtest.instructions;
             newstate.mytests[1].testinitials.targetaudience = action.value.newtest.targetaudience;
-            return {
-                newstate
-            }
+            return (
+                newstate,
+                axios.post('/users.json', newstate)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error))
+            )
         case actions.NEWQUESTIONREGISTER:
             const newquestion = Object.assign({}, state);
             newquestion.mytests[1].questions[2].que = action.value.newque.que;
@@ -101,12 +105,15 @@ const reducer = (state = initialState, action) => {
             newquestion.mytests[1].questions[2].opt2 = action.value.newque.op2;
             newquestion.mytests[1].questions[2].opt3 = action.value.newque.op3;
             newquestion.mytests[1].questions[2].opt4 = action.value.newque.op4;
-            return {
-                newquestion
-            }
+            return (
+                newquestion,
+                axios.post('/users.json', newquestion)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error))
+            )
         case actions.NEWUSERREGISTER:
             const newu = Object.assign({}, state);
-            newu.user.name = action.value.newuser.que;
+            newu.user.name = action.value.newuser.name;
             newu.user.surname = action.value.newuser.surname;
             newu.user.email = action.value.newuser.email;
             newu.user.mobileno = action.value.newuser.mobileno;
@@ -116,9 +123,13 @@ const reducer = (state = initialState, action) => {
             newu.user.address.city = action.value.newuser.city;
             newu.user.address.zip = action.value.newuser.zip;
 
-            return {
-                newu
-            }
+            return (
+                newu,
+                axios.post('/users.json', newu)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error))
+            );
+
         default:
             return state;
 
