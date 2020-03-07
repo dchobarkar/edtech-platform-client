@@ -1,40 +1,63 @@
-import React, { Component } from 'react';
-import { Form, Button, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React from 'react';
+import { Table, Button, Form, Col } from 'react-bootstrap';
+import './MyProfile.css';
 
-import * as actions from '../../store/actions/actionTypes';
-
-import './Signup.css'
-
-class Signup extends Component {
-    state = {
-        name: '',
-        surname: '',
-        email: '',
-        mobileno: '',
-        tutionname: '',
-        address: '',
-        state: '',
-        city: '',
-        zip: ''
-    }
-
-    newuserHandler = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-
-    }
-
-
-
-
-    render() {
-        return (
-
+const MyProfile = () => (
+    <div id="myprofile">
+        <section id="myinfo">
             <div className="container">
-                <div className="row" id="signuppage">
+                <div className="row align-items-center">
+                    <div id="tutionsname">
+                        <h4>Tution's Name</h4>
+                    </div>
+                </div>
+            </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-3" id="tutionimage">
+                        <img alt="Tution's banner" src="https://scontent.fnag1-1.fna.fbcdn.net/v/t1.0-9/77067159_1193340290876690_4502540149132886016_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_ohc=NXNR2KrGBQ4AX_hWwTb&_nc_ht=scontent.fnag1-1.fna&oh=8a558ad996f01280ff710ff40c4f2206&oe=5E9427B0"></img>
+                    </div>
+                    <div className="col-9 justify-content-center align-items-center" id="tutioninfotable">
+                        <Table>
+                            <tbody>
+                                <tr>
+                                    <td>Tutor's Name</td>
+                                    <td>: Name</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>: dchobarkar@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile No.</td>
+                                    <td>: 9421333333</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>: Address</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+
+                        <div id="tutionwelcomenote">
+                            <h6>Welcome Note</h6>
+                            <p>
+                                Lorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+
+                            </p>
+                        </div>
+                        <Button type="submit" id="editbutton">
+                            Edit
+                        </Button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="editmyinfo">
+            <div className="container">
+                <div className="row">
                     <Form>
                         <Form.Row>
                             <Form.Group as={Col} controlId="name">
@@ -43,7 +66,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="Name"
                                     name="name"
-                                    onChange={this.newuserHandler} />
+                                />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="surname">
@@ -52,7 +75,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="Surname"
                                     name="surname"
-                                    onChange={this.newuserHandler} />
+                                />
                             </Form.Group>
                         </Form.Row>
 
@@ -63,7 +86,7 @@ class Signup extends Component {
                                     type="email"
                                     placeholder="Tution's Email"
                                     name="email"
-                                    onChange={this.newuserHandler} />
+                                />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="mobileno">
@@ -72,7 +95,7 @@ class Signup extends Component {
                                     type="number"
                                     placeholder="Mobile No."
                                     name="mobileno"
-                                    onChange={this.newuserHandler} />
+                                />
                             </Form.Group>
                         </Form.Row>
 
@@ -82,7 +105,7 @@ class Signup extends Component {
                                 type="text"
                                 placeholder="xyz coaching classes"
                                 name="tutionname"
-                                onChange={this.newuserHandler} />
+                            />
                         </Form.Group>
 
                         <Form.Group controlId="address">
@@ -91,7 +114,7 @@ class Signup extends Component {
                                 type="text"
                                 placeholder="Apartment, studio, or floor"
                                 name="address"
-                                onChange={this.newuserHandler} />
+                            />
                         </Form.Group>
 
 
@@ -102,7 +125,7 @@ class Signup extends Component {
                                     as="select"
                                     value="Choose..."
                                     name="state"
-                                    onChange={this.newuserHandler}>
+                                >
                                     <option>Choose...</option>
                                     <option>...</option>
                                 </Form.Control>
@@ -115,7 +138,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="City"
                                     name="city"
-                                    onChange={this.newuserHandler} />
+                                />
                             </Form.Group>
 
 
@@ -125,45 +148,33 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="Zip Code"
                                     name="zip"
-                                    onChange={this.newuserHandler} />
+                                />
                             </Form.Group>
                         </Form.Row>
 
-                        <Form.Group controlId="password">
-                            <Form.Label>Password</Form.Label>
+                        <Form.Group controlId="welcomenote">
+                            <Form.Label>Welcome Note</Form.Label>
                             <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                onChange={this.newuserHandler} />
+                                as="textarea"
+                                rows="4"
+                                placeholder="Welcome Note"
+                                name="welcomenote"
+                            />
                         </Form.Group>
 
-
-                        <Link to="/login">
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                onClick={() => this.props.newuserregister(this.state)}>
-                                Create Account
-                            </Button>
-                        </Link>
+                        <Button
+                            variant="primary"
+                            type="submit">
+                            Save
+                        </Button>
 
 
                     </Form>
                 </div>
             </div >
-        )
-    }
-}
+        </section>
 
-const mapDispatchToProps = dispatch => {
-    return {
-        newuserregister: (newuser) => dispatch({
-            type: actions.NEWUSERREGISTER, value: { newuser }
-        })
-    }
-}
+    </div>
+)
 
-
-
-export default connect(null, mapDispatchToProps)(Signup);
+export default MyProfile;

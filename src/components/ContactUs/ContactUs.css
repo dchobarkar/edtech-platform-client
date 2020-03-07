@@ -1,0 +1,13 @@
+#contactus {
+  background-color: lightskyblue;
+  text-align: center;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  width: 100%;
+  height: 84vh;
+}
+
+#contactusform {
+  max-width: 150px;
+  margin: auto;
+}

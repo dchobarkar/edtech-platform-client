@@ -1,0 +1,65 @@
+#previouscontent h4 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2%;
+  padding-top: 2%;
+}
+#previouscontent h6 {
+  width: 100%;
+}
+/* #previouscontent p {
+  padding: 0 10%;
+} */
+#previouscontent .row {
+  padding: 4%;
+}
+#individualcontent {
+  width: 100%;
+}
+/* #individualcontent p {
+  width: 50%;
+} */
+/* #individualcontent button {
+  width: 20%;
+} */
+#addbutton {
+  padding-top: 2%;
+}
+#addbutton button {
+  margin: auto;
+}
+
+#addnewchapter {
+  padding: 2%;
+}
+#addnewchapter p {
+  width: 100%;
+}
+#addnewchapter form {
+  width: 100%;
+  padding: 0 10%;
+}
+
+#addnewlecture {
+  padding: 2%;
+}
+#addnewlecture form {
+  width: 100%;
+  padding: 0 10%;
+}
+#addnewlecture p {
+  width: 100%;
+  padding: 0 10%;
+}
+
+#addnewexam {
+  padding: 2%;
+}
+#addnewexam form {
+  width: 100%;
+  padding: 0 10%;
+}
+#addnewexam p {
+  width: 100%;
+  padding: 0 10%;
+}

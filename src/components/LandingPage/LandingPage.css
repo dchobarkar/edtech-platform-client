@@ -1,3 +1,66 @@
+#landingpage {
+  background-color: whitesmoke;
+}
+
+#welcomepage {
+  text-align: center;
+  height: 50vh;
+  width: 100%;
+}
+#welcomepage .container {
+  height: 100%;
+}
+#welcomepage .container .row {
+  height: 100%;
+}
+
+#multipleclassroom {
+  text-align: center;
+  height: 50vh;
+  width: 100%;
+}
+#multipleclassroom .container {
+  height: 100%;
+}
+#multipleclassroom .container .row {
+  height: 100%;
+}
+
+#simplesetup {
+  text-align: center;
+  height: 50vh;
+  width: 100%;
+}
+#simplesetup .container {
+  height: 100%;
+}
+#simplesetup .container .row {
+  height: 100%;
+}
+
+#payasyouuse {
+  text-align: center;
+  height: 50vh;
+  width: 100%;
+}
+#payasyouuse .container {
+  height: 100%;
+}
+#payasyouuse .container .row {
+  height: 100%;
+}
+
+#servicesoffered {
+  text-align: center;
+  height: 50vh;
+  width: 100%;
+}
+#servicesoffered .container {
+  height: 100%;
+}
+#servicesoffered .container .row {
+  height: 100%;
+}
 #buttonpage {
   text-align: center;
   padding: 15%;

@@ -26,6 +26,18 @@ class MyTest extends Component {
             <div className="container top-space" id="fullscreen" >
                 <h4>My Tests</h4>
                 <div className="row">
+                    <Link to="/newtest">
+                        <Card id="card">
+                            <Card.Body>
+                                <Card.Title>
+                                    Create New Test
+                            </Card.Title>
+                            </Card.Body>
+
+                            {/* <Button variant="primary"><Link to="/testdetails">View Details</Link></Button> */}
+                        </Card>
+                    </Link>
+
                     <Card id="card">
                         <Card.Body>
                             <Card.Title>

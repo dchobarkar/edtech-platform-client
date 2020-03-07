@@ -1,0 +1,35 @@
+#addnewquestion {
+  padding: 2%;
+}
+#addnewquestion form {
+  width: 100%;
+}
+
+#questionnoscroll {
+  padding: 2% 0;
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  margin: 0 4px; /* 0 is for top and bottom. Feel free to change it */
+
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
