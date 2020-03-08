@@ -1,136 +1,239 @@
 import React, { Component } from 'react';
-import './CourseContent.css';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import './CourseContent.css';
+
 class CourseContent extends Component {
+    state = {
+        coursename: 'Physics I',
+        1: {
+            chaptername: 'Chapter 1',
+
+        }
+    }
     render() {
         return (
-            <div id="coursecontent">
+            <div className="fullscreen">
                 <section id="previouscontent">
-                    <h4>Course Content</h4>
                     <div className="container">
-                        <div className="row">
+                        <h4>{this.state.coursename}</h4>
+                        <div className="row" id="individualchapter">
                             <h6>Chapter 1</h6>
                             <div id="individualcontent">
-                                <p>Lecture 1 : Newton's Fourth Law
-                                </p>
-                                <Button>Edit</Button>
-                                <Button>Delete</Button>
+                                <span>Lecture 1 : Newton's Fourth Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
                             </div>
+
                             <div id="individualcontent">
-                                <p>Lecture 2 : Newton's Fifth Law
-                                </p>
-                                <Button>Edit</Button>
-                                <Button>Delete</Button>
+                                <span>Lecture 2 : Newton's Fourth Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
                             </div>
+
                             <div id="individualcontent">
-                                <p>Lecture 3 : Newton's Sixth Law
-                                </p>
-                                <Button>Edit</Button>
-                                <Button>Delete</Button>
+                                <span>Lecture 3 : Newton's Fifth Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
                             </div>
+
                             <div id="individualcontent">
-                                <p>Exam 1 : Newton's 10th Law
-                                </p>
-                                <Link to={'/newquestion'}><Button>Edit</Button></Link>
-                                <Button>Delete</Button>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <h6>Chapter 2</h6>
-                            <div id="individualcontent">
-                                <p>Lecture 4 : Newton's Fourth Law
-                                </p>
-                                <Button>Edit</Button>
-                                <Button>Delete</Button>
-                            </div>
-                            <div id="individualcontent">
-                                <p>Lecture 5 : Newton's Fifth Law
-                                </p>
-                                <Button>Edit</Button>
-                                <Button>Delete</Button>
-                            </div>
-                            <div id="individualcontent">
-                                <p>Lecture 6 : Newton's Sixth Law
-                                </p>
-                                <Button>Edit</Button>
-                                <Button>Delete</Button>
-                            </div>
-                            <div id="individualcontent">
-                                <p>Exam 2 : Newton's 10th Law
-                                </p>
-                                <Button>Edit</Button>
-                                <Button>Delete</Button>
+                                <span>Exam 1 : Newton's 10th Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
                             </div>
                         </div>
 
+                        <div className="row" id="individualchapter">
+                            <h6>Chapter 2</h6>
+                            <div id="individualcontent">
+                                <span>Lecture 4 : Newton's 6th Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
+                            </div>
+
+                            <div id="individualcontent">
+                                <span>Lecture 5 : Newton's 7th Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
+                            </div>
+
+                            <div id="individualcontent">
+                                <span>Lecture 6 : Newton's 8th Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
+                            </div>
+
+                            <div id="individualcontent">
+                                <span>Exam 2 : Newton's 11th Law</span>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-trash-alt"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="far fa-edit"></i>
+                                </Button>
+                                <Button className="float-right" variant="light">
+                                    <i className="fas fa-book"></i>
+                                </Button>
+                                <div id="description">
+                                    DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
+
+
                 <section id="addbutton">
                     <div className="container">
                         <div className="row">
-                            <Button>New Chapter</Button>
-                            <Button>New Lecture</Button>
-                            <Button>New Exam</Button>
+                            <Button variant="outline-dark">New Chapter</Button>
+                            <Button variant="outline-dark">New Lecture</Button>
+                            <Button variant="outline-dark">New Exam</Button>
                         </div>
                     </div>
                 </section>
 
-                <section id="addnewchapter">
+
+                <section id="addnew">
                     <div className="container">
                         <div className="row">
-                            <p>Chapter Name(Maybe Two-way Binding)</p>
+                            <p>Title</p>
                             <Form>
-                                <Form.Group as={Row} controlId="chaptername">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Chapter Name
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control type="text" placeholder="Title" />
+                                        <Form.Control
+                                            id="noborder"
+                                            type="text"
+                                            placeholder="Title" />
                                     </Col>
                                 </Form.Group>
-                            </Form>
-
-                            <Form>
-                                <Form.Group as={Row} controlId="chapterdescription">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Description
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control as="textarea" rows="2" placeholder="Description" />
+                                        <Form.Control
+                                            id="noborder"
+                                            as="textarea"
+                                            rows="2"
+                                            placeholder="Description" />
                                     </Col>
                                 </Form.Group>
-                                <Button>Add</Button>
-
+                                <Button
+                                    className="float-right"
+                                    variant="outline-dark">Add
+                                    </Button>
                             </Form>
                         </div>
                     </div>
                 </section>
-                <section id="addnewlecture">
+
+                <section id="addnew">
                     <div className="container">
                         <div className="row">
-                            <p>Lecture Name (Two-way Binding)</p>
+                            <p>Lecture Name</p>
                             <Form>
-                                <Form.Group as={Row} controlId="chaptername">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm={2}>
                                         Lecture Name
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control type="text" placeholder="Title" />
+                                        <Form.Control
+                                            id="noborder"
+                                            type="text"
+                                            placeholder="Title" />
                                     </Col>
-
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="chapterdescription">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm={2}>
                                         Content
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control as="textarea" rows="2" placeholder="Description" />
+                                        <Form.Control
+                                            id="noborder"
+                                            as="textarea"
+                                            rows="2"
+                                            placeholder="Description" />
                                     </Col>
                                 </Form.Group>
-                                <Form.Group as={Row} controlId="questionimage">
+
+                                <Form.Group as={Row} controlId="lecturevideo">
                                     <Form.Label column sm={2}>
                                         Video
                                     </Form.Label>
@@ -140,48 +243,54 @@ class CourseContent extends Component {
                                             name="Video" />
                                     </Col>
                                 </Form.Group>
-
-                                <Button>Add</Button>
-
+                                <Button
+                                    className="float-right"
+                                    variant="outline-dark">Add
+                                </Button>
                             </Form>
-
                         </div>
                     </div>
                 </section>
-                <section id="addnewexam">
+
+                <section id="addnew">
                     <div className="container">
                         <div className="row">
-                            <p>Exam Title (Two-way Binding)</p>
+                            <p>Exam Title</p>
                             <Form>
-                                <Form.Group as={Row} controlId="chaptername">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm={2}>
                                         Test Title
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control type="text" placeholder="Title" />
+                                        <Form.Control
+                                            id="noborder"
+                                            type="text"
+                                            placeholder="Title" />
                                     </Col>
-
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="chapterdescription">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm={2}>
                                         Instructions
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control as="textarea" rows="2" placeholder="instructions" />
+                                        <Form.Control
+                                            id="noborder"
+                                            as="textarea"
+                                            rows="2"
+                                            placeholder="Instructions" />
                                     </Col>
                                 </Form.Group>
 
-                                <Button>Add</Button>
-
+                                <Button
+                                    className="float-right"
+                                    variant="outline-dark">Add
+                                </Button>
                             </Form>
-
                         </div>
                     </div>
                 </section>
             </div >
-
-
         )
     }
 }
