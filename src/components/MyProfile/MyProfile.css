@@ -1,33 +1,36 @@
-#myprofile {
-  background-color: white;
-  text-align: center;
-  padding-top: 4%;
-  padding-bottom: 4%;
+#myinfo {
+  padding: 10px;
 }
+
 #tutionsname {
   width: 100%;
-  background-color: blanchedalmond;
   text-align: left;
-  padding-left: 10px;
-  padding-top: 5px;
-  border-radius: 7px;
-  margin-bottom: 10px;
+  border: 2px solid gray;
 }
-#tutionimage {
-  height: 84vh;
-  background-color: cornflowerblue;
-  border-radius: 7px;
-}
+
 #tutionimage img {
   width: 100%;
   height: auto;
   border-radius: 7px;
 }
+
 #tutioninfotable {
   text-align: left;
 }
-#editbutton {
-}
+
 #tutionwelcomenote {
+  padding: 5px;
   margin: 10px;
+}
+
+#myprofileeditbtn {
+  width: 100%;
+}
+
+#editmyinfo {
+  justify-content: center;
+  padding: 50px 50px;
+}
+#editmyinfo button {
+  float: right;
 }

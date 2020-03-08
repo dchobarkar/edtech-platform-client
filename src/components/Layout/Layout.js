@@ -3,6 +3,10 @@ import { Route } from 'react-router-dom';
 
 import Navbar from '../Navbar/Navbar';
 import LandingPage from '../LandingPage/LandingPage';
+import Services from '../Services/Services';
+import ContactUs from '../ContactUs/ContactUs';
+import About from '../About/About';
+import MyProfile from '../MyProfile/MyProfile';
 import Footer from '../Footer/Footer';
 
 import NewTest from '../../containers/NewTest/NewTest';
@@ -11,10 +15,6 @@ import TestDetails from '../../containers/TestDetails/TestDetails';
 import NewQuestion from '../../containers/NewTest/NewQuestion/NewQuestion';
 import Login from './../../containers/Login/Login';
 import Signup from './../../containers/Signup/Signup';
-import Services from '../Services/Services';
-import ContactUs from '../ContactUs/ContactUs';
-import About from '../About/About';
-import MyProfile from '../MyProfile/MyProfile';
 import MyCourse from '../../containers/MyCourse/MyCourse';
 import NewCourse from '../../containers/NewCourse/NewCourse';
 import CourseContent from '../../containers/CourseContent/CourseContent';

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import './About.css';
 
 const About = () => (
-    <div id="about">
-        <section id="aboutinfo">
+    <div className="fullscreen" id="about">
+        <section >
             <div className="container">
                 <div className="row">
                     <p>Tobe frank, we want to do something new. Education and tution are becoming a luxury as passing day.
@@ -12,7 +13,6 @@ const About = () => (
                     </p>
                 </div>
             </div>
-
         </section>
     </div>
 )

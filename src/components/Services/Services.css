@@ -1,9 +1,6 @@
 #services {
-  padding-top: 4%;
-  background-color: aquamarine;
+  padding: 4% 0;
   text-align: center;
-  width: 100%;
-  padding-bottom: 4%;
 }
 
 #servicebox {

@@ -1,7 +1,10 @@
-#fullscreen {
-  min-height: 100vh;
+.fullscreen {
+  min-height: 84vh;
+  width: 100%;
 }
 
-#right {
-  text-align: right;
+#noborder {
+  border: hidden;
+  border-radius: 0%;
+  border-bottom: 2px solid gray;
 }

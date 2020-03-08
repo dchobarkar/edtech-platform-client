@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Footer.css';
 
 const Footer = () => {
@@ -6,8 +7,7 @@ const Footer = () => {
         <div id="footer">
             <div className="container">
                 <div className="row">
-                    <p>Made with Knowledge by Team GaNeTy </p>
-                    <p> &copy; Copyright 2020</p>
+                    <p>Made with Knowledge by Team GaNeTy &copy; Copyright 2020</p>
                 </div>
             </div>
         </div>
