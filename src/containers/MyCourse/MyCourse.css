@@ -1,0 +1,27 @@
+#mycourse {
+  padding-top: 2%;
+}
+#mycourse h4 {
+  text-align: center;
+  padding: 2%;
+}
+
+#cardadd {
+  width: 15rem;
+  margin: 10px auto;
+  text-decoration-line: none;
+}
+
+#plussign {
+  padding: 0 8%;
+}
+
+#card {
+  width: 15rem;
+  margin: 10px auto;
+}
+
+#cardbutton {
+  width: 100%;
+  border: none;
+}

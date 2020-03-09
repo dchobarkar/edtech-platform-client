@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import './NewQuestion.css'
 
-import * as actions from '../../../store/actions/actionTypes';
+import * as actions from '../../store/actions/actionTypes';
 
 class NewQuestion extends Component {
     state = {
@@ -21,133 +21,99 @@ class NewQuestion extends Component {
         })
     }
 
+    newQuestionAdder = () => {
+        console.log(this.state)
+    }
+
     render() {
         return (
-            <div>
+            <div className="fullscreen">
                 <section id="addnewquestion">
                     <div className="container">
                         <div className="row">
-                            <Form onSubmit={() => this.props.newquestionregister(this.state)} className="shadow p-3 mb-5 bg-white rounded">
-                                <Form.Group as={Row} controlId="question">
+                            <Form
+                                onSubmit={() => this.props.newquestionregister(this.state)}
+                                className="shadow p-3 mb-5 bg-white rounded">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Question
-                                </Form.Label>
+                                    </Form.Label>
                                     <Col sm={10}>
                                         <Form.Control
+                                            id="noborder"
                                             as="textarea"
                                             rows="2"
-                                            placeholder="Question"
+                                            value={this.state.que}
                                             name="que"
                                             onChange={this.questionHandler} />
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="questionimage">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Figure
-                        </Form.Label>
+                                    </Form.Label>
                                     <Col sm={10}>
                                         <Form.Control
                                             type="file"
                                             name="fig"
-                                        // onChange={this.questionHandler} 
                                         />
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="opt1">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Option 1
-                        </Form.Label>
+                                    </Form.Label>
                                     <Col sm={10}>
                                         <Form.Control
+                                            id="noborder"
                                             type="text"
-                                            placeholder="Option 1"
+                                            value={this.state.opt1}
                                             name="opt1"
                                             onChange={this.questionHandler} />
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="opt2">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Option 2
-                        </Form.Label>
+                                    </Form.Label>
                                     <Col sm={10}>
                                         <Form.Control
+                                            id="noborder"
                                             type="text"
-                                            placeholder="Option 2"
+                                            value={this.state.opt2}
                                             name="opt2"
                                             onChange={this.questionHandler} />
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="opt3">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Option 3
-                        </Form.Label>
+                                    </Form.Label>
                                     <Col sm={10}>
                                         <Form.Control
+                                            id="noborder"
                                             type="text"
-                                            placeholder="Option 3"
+                                            value={this.state.opt3}
                                             name="opt3"
                                             onChange={this.questionHandler} />
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="opt4">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Option 4
-                        </Form.Label>
+                                    </Form.Label>
                                     <Col sm={10}>
                                         <Form.Control
+                                            id="noborder"
                                             type="text"
-                                            placeholder="Option 4"
+                                            value={this.state.opt4}
                                             name="opt4"
                                             onChange={this.questionHandler} />
-                                    </Col>
-                                </Form.Group>
-
-                                {/* <Form.Row>
-                                    <Form.Group as={Col}>
-                                        <Col sm={{ span: 10, offset: 4 }}>
-                                            <Button
-                                                type="submit"
-                                            >Previous</Button>
-                                        </Col>
-                                    </Form.Group>
-
-                                    <Form.Group as={Col}>
-                                        <Col sm={{ span: 10, offset: 2 }}>
-                                            <Button
-                                                type="submit">Next</Button>
-                                        </Col>
-                                    </Form.Group>
-                                </Form.Row> */}
-                            </Form>
-                            <div className="row">
-                                <div class="pagination">
-                                    <a href="#">&laquo;</a>
-                                    <a href="#" class="active">1</a>
-                                    <a href="#" >2</a>
-                                    <a href="#">3</a>
-                                    <a href="#">4</a>
-                                    <a href="#">5</a>
-                                    <a href="#">6</a>
-                                    <a href="#">7</a>
-                                    <a href="#">8</a>
-                                    <a href="#">9</a>
-                                    <a href="#">10</a>
-                                    <a href="#">&raquo;</a>
-                                </div>
-
-                            </div>
-                            <Form>
-
-                                <Form.Group id="right">
-                                    <Col sm={{ span: 10, offset: 2 }}>
-                                        <Button
-
-                                            type="submit">Submit</Button>
                                     </Col>
                                 </Form.Group>
                             </Form>
@@ -157,7 +123,16 @@ class NewQuestion extends Component {
 
                 <section id="questionnoscroll">
                     <div className="container">
-
+                        <div className="row">
+                            <div id="questionbutton">
+                                <Button
+                                    className="float-right"
+                                    onClick={this.newQuestionAdder}
+                                    variant="outline-dark"
+                                >Submit
+                            </Button>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

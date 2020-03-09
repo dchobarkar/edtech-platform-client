@@ -1,0 +1,14 @@
+#addnewquestion {
+  padding: 2%;
+}
+#addnewquestion form {
+  width: 100%;
+}
+
+#questionnoscroll {
+  padding: 2% 0;
+}
+
+#questionbutton {
+  width: 100%;
+}

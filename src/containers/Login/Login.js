@@ -17,54 +17,54 @@ class Login extends Component {
     }
 
     submitHandler = (event) => {
-        // console.log(this.state);
         this.props.onAuth(this.state.email, this.state.password)
     }
 
     render() {
         return (
-            <div className="container" id="fullscreen">
-                <div className="row" >
-                    <div className="col-lg-9">
+            <div className="fullscreen">
+                <div className="container">
+                    <div className="row" >
+                        <div className="col-lg-9">
 
-                    </div>
+                        </div>
 
-                    <div className="col-lg-3" id="loginpage">
-                        <Form onSubmit={this.submitHandler}>
-                            <Form.Group controlId="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control
-                                    name="email"
-                                    type="email"
-                                    placeholder="abc@def.com"
-                                    onChange={this.inputchangeHandler} />
-                            </Form.Group>
+                        <div className="col-lg-3" id="loginpage">
+                            <Form onSubmit={this.submitHandler}>
+                                <Form.Group>
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        id="noborder"
+                                        name="email"
+                                        type="email"
+                                        placeholder="abc@def.com"
+                                        onChange={this.inputchangeHandler} />
+                                </Form.Group>
 
-                            <Form.Group controlId="password">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                    name="password"
-                                    type="password"
-                                    placeholder="Password"
-                                    onChange={this.inputchangeHandler} />
-                            </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
+                                        id="noborder"
+                                        name="password"
+                                        type="password"
+                                        placeholder="Password"
+                                        onChange={this.inputchangeHandler} />
+                                </Form.Group>
 
-                            <Form.Group controlId="keeploggedin">
-                                <Form.Check type="checkbox" label="Keep Logged In" />
-                            </Form.Group>
+                                <Form.Group>
+                                    <Form.Check
+                                        type="checkbox"
+                                        label="Keep Logged In" />
+                                </Form.Group>
 
-                            {/* <Link to="/"> */}
-                            <Button variant="outline-dark" type="submit">
-                                Login
+                                <Button
+                                    className="float-right"
+                                    variant="outline-dark"
+                                >Login
                                 </Button>
-                            {/* </Link> */}
-
-                            <Form.Text className="text-muted" id="right">
-                                <Link to="/signup">
-                                    New User
-                                    </Link>
-                            </Form.Text>
-                        </Form>
+                            </Form>
+                            <p>Don't have an account? <Link to={"/signup"}>Start here</Link></p>
+                        </div>
                     </div>
                 </div>
             </div>
