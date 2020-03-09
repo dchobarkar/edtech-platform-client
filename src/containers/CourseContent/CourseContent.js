@@ -8,14 +8,46 @@ class CourseContent extends Component {
     state = {
         coursename: 'Physics I',
         chaptername: 'Lesson 1',
-        lecturename: 'lecture 1',
-        description: 'DescriptionLorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.',
-        examname: 'exam 1',
-        show: false,
+        coursedetails: [
+            {
+                lecturename: 'lecture 1 : Circular Motion',
+                description: '1',
+                show: false,
+                isnew: false,
+                id: '1'
+            },
+            {
+                lecturename: 'lecture 2 : Units and Measurements',
+                description: '2',
+                show: false,
+                isnew: false,
+                id: '2'
+            },
+            {
+                lecturename: 'lecture 3 : Magnetic Movements',
+                description: '3',
+                show: false,
+                isnew: false,
+                id: '3'
+            },
+            {
+                lecturename: 'lecture 4 : Linear Motion ',
+                description: '4',
+                show: false,
+                isnew: false,
+                id: '4'
+            },
+            {
+                lecturename: 'lecture 5 : Kinetic Energy',
+                description: '5',
+                show: false,
+                isnew: false,
+                id: '5'
+            }
+        ],
         newchapter: false,
         newlecture: false,
         newexam: false,
-        isnew: false
     }
 
     inputChangeHandler = (e) => {
@@ -24,26 +56,80 @@ class CourseContent extends Component {
         })
     }
 
-    showDescriptionHandler = () => {
-        this.setState({
-            show: !this.state.show
-        })
-    }
-    LectureDescription = () => (
+    LectureDescription = (description) => (
         <div id="description">
-            {this.state.description}
+            {description}
         </div>
     )
+    showDescriptionHandler = (event, id) => {
+        const detailsIndex = this.state.coursedetails.findIndex(d => {
+            return d.id === id
+        });
+        const detail = {
+            ...this.state.coursedetails[detailsIndex]
+        };
+        detail.show = !detail.show;
 
+        const details = [...this.state.coursedetails];
+        details[detailsIndex] = detail;
 
-    newChapterHandler = (e) => {
         this.setState({
-            newlecture: false,
-            newexam: false,
-            newchapter: !this.state.newchapter
+            coursedetails: details
         })
+    }
+
+    editDetailsHandler = (e, id) => {
+        const detailsIndex = this.state.coursedetails.findIndex(d => {
+            return d.id === id
+        });
+        const detail = {
+            ...this.state.coursedetails[detailsIndex]
+        };
+        detail.isnew = !detail.isnew;
+
+        const details = [...this.state.coursedetails];
+        details[detailsIndex] = detail;
+
+        this.setState({
+            coursedetails: details,
+            newlecture: !this.state.newlecture
+        })
+    }
+
+    deleteLectureHandler = (lectureindex) => {
+        const lectures = [...this.state.coursedetails];
+        lectures.splice(lectureindex, 1);
+        this.setState({
+            coursedetails: lectures
+        })
+    }
+
+    newContentHandler = (e) => {
+        if (e === 'Chapter') {
+            this.setState({
+                newlecture: false,
+                newexam: false,
+                newchapter: !this.state.newchapter
+            })
+        }
+        else if (e === 'Lecture') {
+            this.setState({
+                newchapter: false,
+                newexam: false,
+                newlecture: !this.state.newlecture
+            })
+        }
+        else if (e === 'Exam') {
+            this.setState({
+                newchapter: false,
+                newlecture: false,
+                newexam: !this.state.newexam
+            })
+        }
+
         console.log(this.state)
     }
+
     NewChapterAdder = () => (
         <section id="addnew">
             <div className="container">
@@ -58,7 +144,7 @@ class CourseContent extends Component {
                                 <Form.Control
                                     id="noborder"
                                     type="text"
-                                    value={this.state.isnew ? this.state.chaptername : "Title"}
+                                    value={this.state.isnew ? this.state.chapter : "Title"}
                                     name="chaptername"
                                     onChange={this.inputChangeHandler} />
                             </Col>
@@ -79,7 +165,7 @@ class CourseContent extends Component {
                             </Col>
                         </Form.Group>
                         <Button
-                            onClick={this.newChapterHandler}
+                            onClick={() => this.newContentHandler('Chapter')}
                             className="float-right"
                             variant="outline-dark">Add
                         </Button>
@@ -89,13 +175,6 @@ class CourseContent extends Component {
         </section>
     )
 
-    newLectureHandler = () => {
-        this.setState({
-            newchapter: false,
-            newexam: false,
-            newlecture: !this.state.newlecture
-        })
-    }
     newLectureAdder = () => (
         <section id="addnew">
             <div className="container">
@@ -143,24 +222,16 @@ class CourseContent extends Component {
                             </Col>
                         </Form.Group>
                         <Button
-                            onClick={this.newLectureHandler}
-
+                            onClick={() => this.newContentHandler('Lecture')}
                             className="float-right"
                             variant="outline-dark">Add
-                                </Button>
+                        </Button>
                     </Form>
                 </div>
             </div>
         </section>
     )
 
-    newexamHandler = () => {
-        this.setState({
-            newchapter: false,
-            newlecture: false,
-            newexam: !this.state.newexam
-        })
-    }
     newExamAdder = () => (
         <section id="addnew">
             <div className="container">
@@ -197,7 +268,7 @@ class CourseContent extends Component {
                         </Form.Group>
 
                         <Button
-                            onClick={this.newexamHandler}
+                            onClick={() => this.newContentHandler('Exam')}
                             className="float-right"
                             variant="outline-dark">Add
                                 </Button>
@@ -206,13 +277,6 @@ class CourseContent extends Component {
             </div>
         </section>
     )
-
-    editDetailsHandler = () => {
-        this.setState({
-            isnew: !this.state.isnew,
-            newchapter: !this.state.newchapter
-        })
-    }
 
 
     render() {
@@ -224,11 +288,13 @@ class CourseContent extends Component {
                         <div className="row" id="individualchapter">
                             <div id="chaptername">
                                 <span>{this.state.chaptername}</span>
-                                <Button className="float-right" variant="light">
+                                <Button
+                                    className="float-right"
+                                    variant="light">
                                     <i className="fas fa-trash-alt"></i>
                                 </Button>
                                 <Button
-                                    onClick={this.editDetailsHandler}
+                                    onClick={() => this.editDetailsHandler(true)}
                                     className="float-right"
                                     variant="light">
                                     <i className="far fa-edit"></i>
@@ -241,146 +307,30 @@ class CourseContent extends Component {
                                 </Button>
                                 {this.state.show ? <this.LectureDescription /> : null}
                             </div>
-
-                            <div id="individualcontent">
-                                <span>{this.state.lecturename}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Button className="float-right" variant="light">
-                                    <i className="far fa-edit"></i>
-                                </Button>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
-
-                            <div id="individualcontent">
-                                <span>{this.state.lecturename}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Button className="float-right" variant="light">
-                                    <i className="far fa-edit"></i>
-                                </Button>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
-
-                            <div id="individualcontent">
-                                <span>{this.state.lecturename}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Button className="float-right" variant="light">
-                                    <i className="far fa-edit"></i>
-                                </Button>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
-
-                            <div id="individualcontent">
-                                <span>{this.state.examname}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Link to={"/newquestion"}>
-                                    <Button className="float-right" variant="light">
+                            {this.state.coursedetails.map((lecture, index) => {
+                                return < div id="individualcontent" >
+                                    <span>{lecture.lecturename}</span>
+                                    <Button
+                                        onClick={() => this.deleteLectureHandler(index)}
+                                        className="float-right"
+                                        variant="light">
+                                        <i className="fas fa-trash-alt"></i>
+                                    </Button>
+                                    <Button
+                                        onClick={(event) => this.editDetailsHandler(true, lecture.id)}
+                                        className="float-right"
+                                        variant="light">
                                         <i className="far fa-edit"></i>
                                     </Button>
-                                </Link>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
-                        </div>
-
-                        <div className="row" id="individualchapter">
-                            <div id="chaptername">
-                                <span>{this.state.chaptername}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Button className="float-right" variant="light">
-                                    <i className="far fa-edit"></i>
-                                </Button>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
-
-                            <div id="individualcontent">
-                                <span>{this.state.lecturename}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Button className="float-right" variant="light">
-                                    <i className="far fa-edit"></i>
-                                </Button>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
-
-                            <div id="individualcontent">
-                                <span>{this.state.lecturename}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Button className="float-right" variant="light">
-                                    <i className="far fa-edit"></i>
-                                </Button>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
-
-                            <div id="individualcontent">
-                                <span>{this.state.lecturename}</span>
-                                <Button className="float-right" variant="light">
-                                    <i className="fas fa-trash-alt"></i>
-                                </Button>
-                                <Button className="float-right" variant="light">
-                                    <i className="far fa-edit"></i>
-                                </Button>
-                                <Button
-                                    onClick={this.showDescriptionHandler}
-                                    className="float-right"
-                                    variant="light">
-                                    <i className="fas fa-book"></i>
-                                </Button>
-                                {this.state.show ? <this.LectureDescription /> : null}
-                            </div>
+                                    <Button
+                                        onClick={(event) => this.showDescriptionHandler(event, lecture.id)}
+                                        className="float-right"
+                                        variant="light">
+                                        <i className="fas fa-book"></i>
+                                    </Button>
+                                    {lecture.show ? this.LectureDescription(lecture.description) : null}
+                                </div>
+                            })}
                         </div>
                     </div>
                 </section>
@@ -390,17 +340,17 @@ class CourseContent extends Component {
                     <div className="container">
                         <div className="row">
                             <Button
-                                onClick={this.newChapterHandler}
+                                onClick={() => this.newContentHandler('Chapter')}
                                 variant="outline-dark"
                             >New Chapter
                             </Button>
                             <Button
-                                onClick={this.newLectureHandler}
+                                onClick={() => this.newContentHandler('Lecture')}
                                 variant="outline-dark"
                             >New Lecture
                             </Button>
                             <Button
-                                onClick={this.newexamHandler}
+                                onClick={() => this.newContentHandler('Exam')}
                                 variant="outline-dark"
                             >New Exam
                             </Button>
@@ -411,7 +361,6 @@ class CourseContent extends Component {
                 {this.state.newchapter ? <this.NewChapterAdder /> : null}
                 {this.state.newlecture ? <this.newLectureAdder /> : null}
                 {this.state.newexam ? <this.newExamAdder /> : null}
-
 
             </div >
         )
