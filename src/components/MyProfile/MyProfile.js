@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Image, Table, Button, Form, Col, Row } from 'react-bootstrap';
+import { Image, Table, Button } from 'react-bootstrap';
+
+import axios from '../../axios-server';
+
+import MyProfileEdit from './MyProfileEdit/MyProfileEdit';
 
 import './MyProfile.css';
 
@@ -22,10 +26,15 @@ class MyProfile extends Component {
         })
     }
     infoSaveHandler = () => {
+        const myprofile = {
+            ...this.state
+        }
+        axios.post('/myprofile.json', myprofile)
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
         this.setState({
             showeditbox: !this.state.showeditbox
         })
-        console.log(this.state)
     }
 
     editBoxHandler = () => {
@@ -33,175 +42,6 @@ class MyProfile extends Component {
             showeditbox: !this.state.showeditbox
         })
     }
-
-    myInfoEditBox = () => (
-        <section >
-            <div className="container" >
-                <div className="row shadow p-3 mb-5 bg-white rounded" id="editmyinfo">
-                    <Form>
-                        <Form.Group as={Row}>
-                            <Form.Label column sm={4} >
-                                Tution's Name
-                                    </Form.Label>
-                            <Col sm={8}>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    value={this.state.tutionsname}
-                                    name="tutionsname"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
-
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={4}>
-                                Tutor's Name
-                                    </Form.Label>
-                            <Col sm={8}>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    value={this.state.tutorsname}
-                                    name="tutorsname"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
-
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={4}>
-                                Mobile No.
-                                    </Form.Label>
-                            <Col sm={8}>
-                                <Form.Control
-                                    id="noborder"
-                                    type="number"
-                                    value={this.state.mobileno}
-                                    name="mobileno"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
-
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={4}>
-                                Address
-                                    </Form.Label>
-                            <Col sm={8}>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    value={this.state.address}
-                                    name="address"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
-
-                        <Form.Row>
-                            <Form.Group as={Col} >
-                                <Form.Label>State</Form.Label>
-                                <Form.Control
-                                    id="noborder"
-                                    as="select"
-                                    value={this.state.state}
-                                    name="state"
-                                    onChange={this.inputChangeHandler}
-                                >
-                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                    <option value="Assam">Assam</option>
-                                    <option value="Bihar">Bihar</option>
-                                    <option value="Chandigarh">Chandigarh</option>
-                                    <option value="Chhattisgarh">Chhattisgarh</option>
-                                    <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                                    <option value="Daman and Diu">Daman and Diu</option>
-                                    <option value="Delhi">Delhi</option>
-                                    <option value="Lakshadweep">Lakshadweep</option>
-                                    <option value="Puducherry">Puducherry</option>
-                                    <option value="Goa">Goa</option>
-                                    <option value="Gujarat">Gujarat</option>
-                                    <option value="Haryana">Haryana</option>
-                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                    <option value="Jharkhand">Jharkhand</option>
-                                    <option value="Karnataka">Karnataka</option>
-                                    <option value="Kerala">Kerala</option>
-                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                    <option value="Maharashtra">Maharashtra</option>
-                                    <option value="Manipur">Manipur</option>
-                                    <option value="Meghalaya">Meghalaya</option>
-                                    <option value="Mizoram">Mizoram</option>
-                                    <option value="Nagaland">Nagaland</option>
-                                    <option value="Odisha">Odisha</option>
-                                    <option value="Punjab">Punjab</option>
-                                    <option value="Rajasthan">Rajasthan</option>
-                                    <option value="Sikkim">Sikkim</option>
-                                    <option value="Tamil Nadu">Tamil Nadu</option>
-                                    <option value="Telangana">Telangana</option>
-                                    <option value="Tripura">Tripura</option>
-                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                    <option value="Uttarakhand">Uttarakhand</option>
-                                    <option value="West Bengal">West Bengal</option>
-                                </Form.Control>
-                            </Form.Group>
-
-                            <Form.Group as={Col} >
-                                <Form.Label>City</Form.Label>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    value={this.state.city}
-                                    name="city"
-                                    onChange={this.inputChangeHandler}
-                                />
-                            </Form.Group>
-
-                            <Form.Group as={Col} >
-                                <Form.Label>Pin Code</Form.Label>
-                                <Form.Control
-                                    id="noborder"
-                                    type="number"
-                                    value={this.state.pincode}
-                                    name="pincode"
-                                    onChange={this.inputChangeHandler}
-                                />
-                            </Form.Group>
-                        </Form.Row>
-
-                        <Form.Group >
-                            <Form.Label>Welcome Note</Form.Label>
-                            <Form.Control
-                                id="noborder"
-                                as="textarea"
-                                rows="4"
-                                value={this.state.tutionwelcomenote}
-                                name="tutionwelcomenote"
-                                onChange={this.inputChangeHandler}
-                            />
-                        </Form.Group>
-
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={4}>
-                                Banner Image
-                                    </Form.Label>
-                            <Col sm={8}>
-                                <Form.Control
-                                    type="file"
-                                    name="bannerimage"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
-
-                        <Button
-                            variant="outline-dark"
-                            onClick={this.infoSaveHandler}
-                        >Save
-                        </Button>
-                    </Form>
-                </div>
-            </div >
-        </section>
-    )
-
 
     render() {
         return (
@@ -263,7 +103,12 @@ class MyProfile extends Component {
                     </div>
                 </section>
 
-                {this.state.showeditbox ? <this.myInfoEditBox /> : null}
+                {this.state.showeditbox ?
+                    <MyProfileEdit
+                        changed={this.inputChangeHandler}
+                        saver={this.infoSaveHandler}
+                        info={this.state}
+                    /> : null}
             </div >
         )
     }

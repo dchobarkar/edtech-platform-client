@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Button, Modal } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
+import axios from '../../axios-server';
+
+import Modal from './Modal/Modal';
 
 import './ContactUs.css';
 
@@ -14,10 +17,16 @@ class ContactUs extends Component {
         })
     }
     submitContactnumHandler = () => {
+        const num = {
+            mobileno: this.state.mobilenum
+        }
+        axios.post('/contactusmobileno.json', num)
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+        console.log(this.state.mobilenum)
         this.setState({
             show: true
         })
-        console.log(this.state.mobilenum)
     }
 
     closeHandler = () => {
@@ -64,22 +73,9 @@ class ContactUs extends Component {
                 </div>
 
                 <Modal
-                    centered
                     show={this.state.show}
-                    onHide={this.closeHandler}
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Thank you</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <i className="fas fa-mobile-alt"></i> We will reach you shortly.
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.closeHandler}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                    closestatus={this.closeHandler}
+                />
             </div >
         )
     }

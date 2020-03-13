@@ -9,7 +9,7 @@ import About from '../About/About';
 import MyProfile from '../MyProfile/MyProfile';
 import Footer from '../Footer/Footer';
 
-import NewQuestion from '../../containers/NewQuestion/NewQuestion';
+import QuestionPaper from '../../containers/AddNew/NewExam/QuestionPaper/QuestionPapar';
 import Login from './../../containers/Login/Login';
 import Signup from './../../containers/Signup/Signup';
 import MyCourse from '../../containers/MyCourse/MyCourse';
@@ -30,7 +30,7 @@ const layout = () => (
         <Route path="/coursecontent" exact component={CourseContent} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/newquestion" exact component={NewQuestion} />
+        <Route path="/questionpaper" exact component={QuestionPaper} />
 
         <Footer />
     </div>

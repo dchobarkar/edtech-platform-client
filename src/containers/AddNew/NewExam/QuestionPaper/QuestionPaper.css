@@ -1,0 +1,27 @@
+#questionpaper h3 {
+  text-align: center;
+  padding-top: 2%;
+}
+#questionpaper h6 {
+  padding-left: 4%;
+}
+
+#exampreview {
+  border: 2px solid gray;
+  margin: 2%;
+  padding: 2%;
+  max-height: 80vh;
+  overflow: scroll;
+}
+
+#question {
+  width: 100%;
+  padding: 1% 0;
+}
+#question span {
+  padding: 0 2%;
+}
+
+#addnewquestion button {
+  margin-bottom: 2%;
+}
