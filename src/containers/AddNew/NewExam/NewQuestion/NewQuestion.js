@@ -5,7 +5,7 @@ import './NewQuestion.css'
 
 class NewQuestion extends Component {
     state = {
-        show: true
+        show: false
     }
 
     questionHandler = (e) => {
@@ -22,8 +22,15 @@ class NewQuestion extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" id="addnewquestion">
                 <Button
+                    onClick={this.newQuestionAdder}
+                    variant="outline-dark"
+                >Edit
+                </Button>
+
+                <Button
+                    id="addnewquestionbutton"
                     onClick={this.showInputBoxHandler}
                     variant="outline-dark">
                     Add New Question
@@ -99,37 +106,29 @@ class NewQuestion extends Component {
                                         </Col>
                                     </Form.Group>
                                 </Form.Row>
+
                                 <Form.Group>
-                                    <Button
-                                        onClick={this.newQuestionAdder}
-                                        variant="outline-dark"
-                                    >Previous
-                            </Button>
                                     <Button
                                         className="float-right"
                                         onClick={() => this.props.newquestionsubmit(this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4)}
                                         variant="outline-dark"
-                                    >Next
-                            </Button>
+                                    >Add
+                                    </Button>
                                 </Form.Group>
                             </Form>
-                            <Button
-                                className="float-right"
-                                onClick={this.newQuestionAdder}
-                                variant="outline-dark"
-                            >Submit
+
+                            <div id="questionbutton">
+                                <Button
+                                    className="float-right"
+                                    onClick={this.newQuestionAdder}
+                                    variant="outline-dark"
+                                >Submit
                             </Button>
+                            </div>
+
+
                         </div > : null
                 }
-                <section id="questionnoscroll">
-                    <div className="container">
-                        <div className="row">
-                            <div id="questionbutton">
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
         )
     }

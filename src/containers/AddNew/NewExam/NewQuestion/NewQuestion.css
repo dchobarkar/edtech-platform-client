@@ -1,14 +1,18 @@
 #addnewquestion {
   padding: 2%;
+  width: 100%;
 }
+#addnewquestion .row,
 #addnewquestion form {
   width: 100%;
 }
-
-#questionnoscroll {
-  padding: 2% 0;
+#addnewquestionbutton {
+  max-width: 200px;
+  width: 100%;
+  float: right;
 }
 
 #questionbutton {
   width: 100%;
+  padding: 2% 0;
 }

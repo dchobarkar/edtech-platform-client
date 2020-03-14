@@ -9,6 +9,8 @@ class CourseContent extends Component {
     state = {
         id: 9,
         coursename: 'Physics I',
+        chapno: 0,
+        lesno: 0,
         coursedetails: [
             {
                 chaptername: 'Chapter 1',
@@ -152,6 +154,8 @@ class CourseContent extends Component {
     }
 
     render() {
+        let i = 0
+        let j = 0
         return (
             <div className="fullscreen">
                 <section id="previouscontent">
@@ -161,7 +165,8 @@ class CourseContent extends Component {
                         {this.state.coursedetails.map((chapter, index) => {
                             return <div className="row" id="individualchapter" key={chapter.id}>
                                 <div id="chaptername">
-                                    <span>{chapter.chaptername}</span>
+
+                                    <span>{i = i + 1}.  {chapter.chaptername}</span>
                                     <EditButtons
                                         contentid={chapter.id}
                                         chpid={null}
@@ -171,7 +176,7 @@ class CourseContent extends Component {
 
                                 {chapter.lessons.map((lesson, index) => {
                                     return < div id="individualcontent" key={lesson.id} >
-                                        <span>{lesson.lessonname}
+                                        <span>{j = j + 1}.  {lesson.lessonname}
                                             <EditButtons
                                                 contentid={lesson.id}
                                                 chpid={chapter.id}
