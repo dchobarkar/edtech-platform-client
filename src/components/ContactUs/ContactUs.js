@@ -25,7 +25,7 @@ class ContactUs extends Component {
             .catch(error => console.log(error))
         console.log(this.state.mobilenum)
         this.setState({
-            show: true
+            show: !this.state.show
         })
     }
 

@@ -37,6 +37,7 @@
 }
 #addbutton button {
   margin: auto;
+  margin: 5px auto;
 }
 
 #addnew {

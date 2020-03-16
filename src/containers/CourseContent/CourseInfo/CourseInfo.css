@@ -1,0 +1,11 @@
+#courseinfobox {
+  border: 2px solid gray;
+}
+
+#courseinfoeditbutton {
+  padding: 0 25%;
+}
+
+#courseinfoeditbutton button {
+  width: 100%;
+}

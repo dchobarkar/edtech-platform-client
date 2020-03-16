@@ -37,36 +37,52 @@ class AddNewButtons extends Component {
     }
 
     render() {
+        let disable = null;
+        this.props.disablebutton > 0 ? disable = false : disable = true
+
         return (
             <div>
                 <section id="addbutton">
                     <div className="container">
                         <div className="row">
                             <Button
-                                onClick={() => this.newContentHandler('Chapter')}
                                 variant="outline-dark"
-                            >New Chapter
+                                onClick={() => this.newContentHandler('Chapter')}>
+                                New Chapter
                             </Button>
+
                             <Button
-                                onClick={() => this.newContentHandler('Lecture')}
+                                disabled={disable}
                                 variant="outline-dark"
-                            >New Lecture
+                                onClick={() => this.newContentHandler('Lecture')}>
+                                New Lecture
                             </Button>
+
                             <Button
-                                onClick={() => this.newContentHandler('Exam')}
+                                disabled={disable}
                                 variant="outline-dark"
-                            >New Exam
+                                onClick={() => this.newContentHandler('Exam')}>
+                                New Exam
                             </Button>
                         </div>
                     </div>
                 </section>
 
                 <section>
-                    {this.state.newchapter ? <NewChapter newchaptersubmit={this.props.newchaptersubmit} /> : null}
+                    {this.state.newchapter ?
+                        <NewChapter
+                            newchaptersubmit={this.props.newchaptersubmit}
+                            closetab={this.newContentHandler} /> : null}
 
-                    {this.state.newlecture ? <NewLecture newlessonsubmit={this.props.newlessonsubmit} /> : null}
+                    {this.state.newlecture ?
+                        <NewLecture
+                            newlessonsubmit={this.props.newlessonsubmit}
+                            closetab={this.newContentHandler} /> : null}
 
-                    {this.state.newexam ? <NewExam newexamsubmit={this.props.newexamsubmit} /> : null}
+                    {this.state.newexam ?
+                        <NewExam
+                            newexamsubmit={this.props.newexamsubmit}
+                            closetab={this.newContentHandler} /> : null}
                 </section>
             </div>
         )
