@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/auth';
 
-import './Login.css'
+import './Login.css';
 
 class Login extends Component {
-    state = {}
+    state = {
+
+    }
 
     inputchangeHandler = (e) => {
         this.setState({
@@ -16,7 +18,7 @@ class Login extends Component {
         })
     }
 
-    submitHandler = (event) => {
+    submitHandler = () => {
         this.props.onAuth(this.state.email, this.state.password)
     }
 
@@ -59,10 +61,11 @@ class Login extends Component {
 
                                 <Button
                                     className="float-right"
-                                    variant="outline-dark"
-                                >Login
+                                    variant="outline-dark">
+                                    Login
                                 </Button>
                             </Form>
+
                             <p>Don't have an account? <Link to={"/signup"}>Start here</Link></p>
                         </div>
                     </div>

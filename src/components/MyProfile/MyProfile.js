@@ -15,6 +15,7 @@ class MyProfile extends Component {
         mobileno: '9404168827',
         address: 'Sudarshan, Dinadayal Conlony',
         city: 'Ambajogai',
+        pincode: '431517',
         bannerimage: 'https://scontent.fnag1-1.fna.fbcdn.net/v/t1.0-9/77067159_1193340290876690_4502540149132886016_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_ohc=NXNR2KrGBQ4AX_hWwTb&_nc_ht=scontent.fnag1-1.fna&oh=8a558ad996f01280ff710ff40c4f2206&oe=5E9427B0',
         tutionwelcomenote: 'Lorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.',
         showeditbox: false
@@ -25,6 +26,7 @@ class MyProfile extends Component {
             [e.target.name]: e.target.value
         })
     }
+
     infoSaveHandler = () => {
         const myprofile = {
             ...this.state
@@ -32,12 +34,11 @@ class MyProfile extends Component {
         axios.post('/myprofile.json', myprofile)
             .then(response => console.log(response))
             .catch(error => console.log(error))
-        this.setState({
-            showeditbox: !this.state.showeditbox
-        })
+
+        this.showEditBoxHandler()
     }
 
-    editBoxHandler = () => {
+    showEditBoxHandler = () => {
         this.setState({
             showeditbox: !this.state.showeditbox
         })
@@ -57,7 +58,7 @@ class MyProfile extends Component {
 
                         <div className="row">
                             <div className="col-3" id="tutionimage">
-                                <Image alt="Tution's banner" src={this.state.bannerimage} roundedCircle />
+                                <Image alt={this.state.tutionsname} src={this.state.bannerimage} roundedCircle />
                             </div>
 
                             <div className="col-9" id="tutioninfotable">
@@ -94,8 +95,8 @@ class MyProfile extends Component {
                                 <Button
                                     className="float-right"
                                     variant="outline-dark"
-                                    onClick={this.editBoxHandler}
-                                >Edit
+                                    onClick={this.showEditBoxHandler}>
+                                    Edit
                                 </Button>
                             </div>
                         </div>
@@ -107,8 +108,7 @@ class MyProfile extends Component {
                     <MyProfileEdit
                         changed={this.inputChangeHandler}
                         saver={this.infoSaveHandler}
-                        info={this.state}
-                    /> : null}
+                        info={this.state} /> : null}
             </div >
         )
     }

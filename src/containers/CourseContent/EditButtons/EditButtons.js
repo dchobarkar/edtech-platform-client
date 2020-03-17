@@ -35,9 +35,9 @@ class EditButtons extends Component {
 
     LessonButton = () => (
         <Button
-            onClick={this.showEditModalHandler}
             className="float-right"
-            variant="light">
+            variant="light"
+            onClick={this.showEditModalHandler}>
             <i className="far fa-edit"></i>
         </Button>
     )
@@ -54,7 +54,7 @@ class EditButtons extends Component {
     render() {
         let showplaybutton = true;
         if (this.props.chpid === null || this.props.isexam === true)
-            showplaybutton = false
+            showplaybutton = false;
 
         return (
             <div>

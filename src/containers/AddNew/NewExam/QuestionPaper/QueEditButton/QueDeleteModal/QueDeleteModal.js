@@ -1,11 +1,10 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const DeleteModal = (props) => (
+const QueDeleteModal = (props) => (
     <Modal centered
         show={props.show}
         onHide={props.showdeletemodal}>
-
         <Modal.Header closeButton></Modal.Header>
 
         <Modal.Body>
@@ -23,11 +22,11 @@ const DeleteModal = (props) => (
             <Button
                 className="float-right"
                 variant="outline-dark"
-                onClick={() => props.delete(props.contentid, props.chpid)}>
+                onClick={() => props.deletequestion(props.index)}>
                 Delete
             </Button>
         </Modal.Footer>
     </Modal>
 )
 
-export default DeleteModal;
+export default QueDeleteModal;

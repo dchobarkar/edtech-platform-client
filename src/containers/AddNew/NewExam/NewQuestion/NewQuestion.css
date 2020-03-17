@@ -6,13 +6,8 @@
 #addnewquestion form {
   width: 100%;
 }
+
 #addnewquestionbutton {
   max-width: 200px;
   width: 100%;
-  float: right;
-}
-
-#questionbutton {
-  width: 100%;
-  padding: 2% 0;
 }

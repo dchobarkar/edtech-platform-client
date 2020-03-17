@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from '../../axios-server';
 
-import Modal from './Modal/Modal';
+import CustMobNoModal from './CustMobNoModal/CustMobNoModal';
 
 import './ContactUs.css';
 
@@ -11,11 +11,13 @@ class ContactUs extends Component {
         mobilenum: ' ',
         show: false
     }
-    contactnoHandler = (e) => {
+
+    inputChangeHandler = (e) => {
         this.setState({
-            mobilenum: e.target.value
+            [e.target.name]: e.target.value
         })
     }
+
     submitContactnumHandler = () => {
         const num = {
             mobileno: this.state.mobilenum
@@ -23,15 +25,13 @@ class ContactUs extends Component {
         axios.post('/contactusmobileno.json', num)
             .then(response => console.log(response))
             .catch(error => console.log(error))
-        console.log(this.state.mobilenum)
-        this.setState({
-            show: !this.state.show
-        })
+
+        this.closeHandler()
     }
 
     closeHandler = () => {
         this.setState({
-            show: false
+            show: !this.state.show
         })
     }
 
@@ -49,16 +49,15 @@ class ContactUs extends Component {
                                     <Form.Label>Please Enter Your Mobile Number</Form.Label>
                                     <Form.Control
                                         id="noborder"
-                                        name="conatactusmobileno"
+                                        name="mobilenum"
                                         type="number"
                                         placeholder="0000000000"
-                                        onChange={this.contactnoHandler}
-                                    />
+                                        onChange={this.inputChangeHandler} />
                                 </Form.Group>
                                 <Button
                                     variant="outline-dark"
-                                    onClick={this.submitContactnumHandler}
-                                >Contact Me
+                                    onClick={this.submitContactnumHandler}>
+                                    Contact Me
                                 </Button>
                             </Form>
                         </div>
@@ -72,10 +71,9 @@ class ContactUs extends Component {
                     </div>
                 </div>
 
-                <Modal
+                <CustMobNoModal
                     show={this.state.show}
-                    closestatus={this.closeHandler}
-                />
+                    closestatus={this.closeHandler} />
             </div >
         )
     }

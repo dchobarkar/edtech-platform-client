@@ -27,24 +27,3 @@
   padding: 3px 0;
   padding-left: 1%;
 }
-
-#description {
-  padding: 10px;
-}
-
-#addbutton {
-  padding: 2%;
-}
-#addbutton button {
-  margin: auto;
-  margin: 5px auto;
-}
-
-#addnew {
-  padding-top: 2%;
-}
-#addnew p,
-#addnew form {
-  width: 100%;
-  padding: 1% 4%;
-}

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/actionTypes';
 
-import './Signup.css'
+import './Signup.css';
 
 class Signup extends Component {
     state = {
@@ -20,7 +20,7 @@ class Signup extends Component {
         pincode: ''
     }
 
-    newuserHandler = (e) => {
+    inputChangeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -44,7 +44,7 @@ class Signup extends Component {
                                         type="text"
                                         placeholder="Name"
                                         name="name"
-                                        onChange={this.newuserHandler} />
+                                        onChange={this.inputChangeHandler} />
                                 </Form.Group>
 
                                 <Form.Group as={Col}>
@@ -54,7 +54,7 @@ class Signup extends Component {
                                         type="text"
                                         placeholder="Surname"
                                         name="surname"
-                                        onChange={this.newuserHandler} />
+                                        onChange={this.inputChangeHandler} />
                                 </Form.Group>
                             </Form.Row>
 
@@ -66,7 +66,7 @@ class Signup extends Component {
                                         type="email"
                                         placeholder="Tution's Email"
                                         name="email"
-                                        onChange={this.newuserHandler} />
+                                        onChange={this.inputChangeHandler} />
                                 </Form.Group>
 
                                 <Form.Group as={Col} >
@@ -76,7 +76,7 @@ class Signup extends Component {
                                         type="number"
                                         placeholder="Mobile No."
                                         name="mobileno"
-                                        onChange={this.newuserHandler} />
+                                        onChange={this.inputChangeHandler} />
                                 </Form.Group>
                             </Form.Row>
 
@@ -87,7 +87,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="xyz coaching classes"
                                     name="tutionname"
-                                    onChange={this.newuserHandler} />
+                                    onChange={this.inputChangeHandler} />
                             </Form.Group>
 
                             <Form.Group >
@@ -97,7 +97,7 @@ class Signup extends Component {
                                     type="text"
                                     placeholder="Apartment, studio, or floor"
                                     name="address"
-                                    onChange={this.newuserHandler} />
+                                    onChange={this.inputChangeHandler} />
                             </Form.Group>
 
                             <Form.Row>
@@ -107,7 +107,7 @@ class Signup extends Component {
                                         id="noborder"
                                         as="select"
                                         name="state"
-                                        onChange={this.newuserHandler}>
+                                        onChange={this.inputChangeHandler}>
                                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                                         <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -154,7 +154,7 @@ class Signup extends Component {
                                         type="text"
                                         placeholder="City"
                                         name="city"
-                                        onChange={this.newuserHandler} />
+                                        onChange={this.inputChangeHandler} />
                                 </Form.Group>
 
                                 <Form.Group as={Col}>
@@ -164,7 +164,7 @@ class Signup extends Component {
                                         type="text"
                                         placeholder="Pin Code"
                                         name="pincode"
-                                        onChange={this.newuserHandler} />
+                                        onChange={this.inputChangeHandler} />
                                 </Form.Group>
                             </Form.Row>
 
@@ -175,15 +175,14 @@ class Signup extends Component {
                                     type="password"
                                     placeholder="Password"
                                     name="password"
-                                    onChange={this.newuserHandler} />
+                                    onChange={this.inputChangeHandler} />
                             </Form.Group>
 
                             <Link to="/login">
                                 <Button
                                     variant="outline-dark"
                                     // onClick={() => this.props.newuserregister(this.state)}
-                                    onClick={this.userInfoSaver}
-                                >
+                                    onClick={this.userInfoSaver}>
                                     Create Account
                                 </Button>
                             </Link>

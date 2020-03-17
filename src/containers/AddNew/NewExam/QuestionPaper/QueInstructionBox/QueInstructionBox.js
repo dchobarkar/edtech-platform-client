@@ -1,89 +1,112 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
-import './QueInstructionBox.css'
+import './QueInstructionBox.css';
 
 class QueInstructionBox extends Component {
-
     state = {
-        showinstruction: false,
-        showedit: false,
-        instructions: this.props.instructions
+        examname: this.props.examname,
+        instructions: this.props.instructions,
+        show: false,
+        edit: false
     }
 
-    showDescriptionHandler = () => {
-        this.setState({
-            showinstruction: !this.state.showinstruction,
-            showedit: false
-        })
-    }
-
-    showEditHandler = () => {
-        this.setState({
-            showedit: !this.state.showedit
-        })
-    }
-    instructionEditHandler = (e) => {
+    inputChangeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    ShowInstruction = () => (
-        < div id="examinstruction" >
-            <div className="row">
-                <Button
-                    onClick={this.showEditHandler}
-                    variant="light">
-                    <i className="far fa-edit"></i>
-                </Button>
-                <p align="justify">{this.state.instructions}</p>
-            </div>
-        </div >
-    )
+    showExamInfoHandler = () => {
+        this.setState({
+            show: !this.state.show,
+            edit: false
+        })
+    }
+    showEditHandler = () => {
+        this.setState({
+            edit: !this.state.edit
+        })
+    }
 
-    EditInstruction = () => (
-        <div id="examinstructionedit">
-            <Form>
-                <Form.Group>
-                    <Form.Control
-                        id="noborder"
-                        as="textarea"
-                        rows="4"
-                        value={this.state.instructions}
-                        name="instructions"
-                        onChange={this.instructionEditHandler} />
-                </Form.Group>
-            </Form>
+    inputClearer = () => {
+        this.setState({
+            show: !this.state.show,
+            edit: !this.state.edit,
+            examname: this.props.examname,
+            instructions: this.props.instructions
+        })
+    }
 
-            <Button
-                onClick={() => this.props.saveEditInstruction(this.state.instructions)}
-                variant="light">
-                <i className="far fa-save"></i> Save
-            </Button>
-        </div>
-    )
+    saveeditinfo = () => {
+        this.props.editexam(this.state.examname, this.state.instructions);
+        this.showExamInfoHandler();
+    }
 
     render() {
-
-        let content = null
-        this.state.showedit ? content = <this.EditInstruction /> : content = <this.ShowInstruction />
-
+        let disable = null;
+        this.state.edit ? disable = false : disable = true;
 
         return (
             <div className="container" >
                 <div className="row" id="showexaminstructionsbutton">
-                    <h6>Preview</h6>
                     <Button
-                        onClick={this.showDescriptionHandler}
-                        variant="light">
-                        <i className="fas fa-book"></i>
+                        variant="light"
+                        onClick={this.showExamInfoHandler}>
+                        <i className="fas fa-info-circle"></i>
                         Instructions
                     </Button>
                 </div>
-                {this.state.showinstruction ? content : null}
 
+                {this.state.show ?
+                    <div className="row" id="examinstructionedit">
+                        <Form>
+                            <Form.Group>
+                                <Form.Control
+                                    disabled={disable}
+                                    id="noborder"
+                                    type="text"
+                                    name="examname"
+                                    value={this.state.examname}
+                                    onChange={this.inputChangeHandler} />
+                            </Form.Group>
 
+                            <Form.Group>
+                                <Form.Control
+                                    disabled={disable}
+                                    id="noborder"
+                                    as="textarea"
+                                    rows="4"
+                                    name="instructions"
+                                    value={this.state.instructions}
+                                    onChange={this.inputChangeHandler} />
+                            </Form.Group>
+                        </Form>
+
+                        {this.state.edit ? null :
+                            <Button
+                                variant="light"
+                                onClick={this.showEditHandler}>
+                                <i className="far fa-edit"></i>
+                                Edit
+                            </Button>}
+
+                        {this.state.edit ?
+                            <div>
+                                <Button
+                                    variant="light"
+                                    onClick={this.saveeditinfo}>
+                                    <i className="far fa-save"></i>
+                                    Save
+                                </Button>
+                                <Button
+                                    variant="light"
+                                    onClick={this.inputClearer}>
+                                    Discard Changes
+                                </Button>
+                            </div> : null}
+
+                    </div > : null}
             </div >
         )
     }

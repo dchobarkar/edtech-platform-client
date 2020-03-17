@@ -12,7 +12,7 @@ class NewCourse extends Component {
         introduction: ''
     }
 
-    courseSetUpHandler = (e) => {
+    inputChangeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -27,33 +27,28 @@ class NewCourse extends Component {
             <div className="fullscreen">
                 <div className="container" id="newcoursesetup">
                     <h4>New Course Setup</h4>
+
                     <Form className="shadow p-3 mb-5 bg-white rounded">
                         <Form.Group as={Row} >
-                            <Form.Label column sm={2}>
-                                Course Title
-                            </Form.Label>
+                            <Form.Label column sm={2}>Course Title</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
                                     id="noborder"
                                     type="text"
                                     placeholder="Title"
                                     name="coursename"
-                                    onChange={this.courseSetUpHandler} />
+                                    onChange={this.inputChangeHandler} />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} >
-                            <Form.Label column sm={2}>
-                                Target Audience
-                            </Form.Label>
+                            <Form.Label column sm={2}>Target Audience</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
                                     id="noborder"
                                     as="select"
                                     name="targetaudience"
-                                    defaultVaule="8th"
-                                    onChange={this.courseSetUpHandler}
-                                >
+                                    onChange={this.inputChangeHandler}>
                                     <option value="8th">8th</option>
                                     <option value="9th">9th</option>
                                     <option value="10th">10th</option>
@@ -68,23 +63,19 @@ class NewCourse extends Component {
                         </Form.Group>
 
                         <Form.Group as={Row}>
-                            <Form.Label column sm={2}>
-                                Subject
-                            </Form.Label>
+                            <Form.Label column sm={2}>Subject</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
                                     id="noborder"
                                     type="text"
                                     placeholder="Subject"
                                     name="subject"
-                                    onChange={this.courseSetUpHandler} />
+                                    onChange={this.inputChangeHandler} />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row}>
-                            <Form.Label column sm={2}>
-                                Course Introduction
-                            </Form.Label>
+                            <Form.Label column sm={2}>Course Introduction</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
                                     id="noborder"
@@ -92,7 +83,7 @@ class NewCourse extends Component {
                                     rows="5"
                                     placeholder="Introduction"
                                     name="introduction"
-                                    onChange={this.courseSetUpHandler} />
+                                    onChange={this.inputChangeHandler} />
                             </Col>
                         </Form.Group>
 
@@ -102,8 +93,8 @@ class NewCourse extends Component {
                                     <Button
                                         onClick={this.newCourseAdder}
                                         className="float-right"
-                                        variant="outline-dark"
-                                    >Add Course
+                                        variant="outline-dark">
+                                        Add Course
                                     </Button>
                                 </Link>
                             </Col>

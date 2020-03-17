@@ -8,7 +8,9 @@ const NavBar = () => (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" >
         <Link to="/">
             <Navbar.Brand>
-                <i className="fab fa-glide-g"></i> GaNeTy</Navbar.Brand>
+                <i className="fab fa-glide-g"></i>
+                GaNeTy
+            </Navbar.Brand>
         </Link>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

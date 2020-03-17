@@ -32,9 +32,8 @@ class CourseInfo extends Component {
     }
 
     saveCourseDetailsHandler = () => {
-        this.props.editinfo(this.state.coursename, this.state.targetaudience, this.state.subject, this.state.introduction)
-        this.showInfoHandler()
-        this.editInfoHandler()
+        this.props.editinfo(this.state.coursename, this.state.targetaudience, this.state.subject, this.state.introduction);
+        this.showInfoHandler();
     }
 
     discardChangeHandler = () => {
@@ -131,7 +130,7 @@ class CourseInfo extends Component {
                                     onClick={this.editInfoHandler}>
                                     <i className="far fa-edit"></i>
                                     Edit
-                                    </Button> : null}
+                                </Button> : null}
 
                             {this.state.edit ?
                                 null : <div>
@@ -141,13 +140,13 @@ class CourseInfo extends Component {
                                         <i className="far fa-save"></i>
                                         Save
                                     </Button>
+
                                     <Button
                                         variant="light"
                                         onClick={this.discardChangeHandler}>
                                         Discard Changes
                                     </Button>
                                 </div>}
-
                         </div>
                     </div> : null}
             </div>

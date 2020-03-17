@@ -19,7 +19,7 @@ class NewExam extends Component {
             examname: '',
             instructions: ''
         });
-        this.props.closetab('Exam')
+        this.props.closetab('Exam');
     }
 
     render() {

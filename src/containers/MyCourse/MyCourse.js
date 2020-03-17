@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Button, ListGroupItem, Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import axios from 'axios';
+
 import './MyCourse.css';
 
 class MyCourse extends Component {
@@ -18,9 +20,7 @@ class MyCourse extends Component {
             // { coursename: 'Combine', students: '3465', date: '08/02/2020', targetaudiance: '10th', id: '9' },
             // { coursename: '8th', students: '2959', date: '10/02/2020', targetaudiance: '8th', id: '10' },
             // { coursename: '9th', students: '2499', date: '23/02/2020', targetaudiance: '9th', id: '11' },
-
         ]
-
     }
 
 
@@ -50,8 +50,11 @@ class MyCourse extends Component {
                         <Link id="cardadd" to="/newcourse">
                             <Card >
                                 <Card.Body>
-                                    <Card.Title id="plussign"><i className="far fa-plus-square fa-10x"></i></Card.Title>
+                                    <Card.Title id="plussign">
+                                        <i className="far fa-plus-square fa-10x"></i>
+                                    </Card.Title>
                                 </Card.Body>
+
                                 <Button
                                     id="cardbutton"
                                     variant="light">
@@ -60,9 +63,8 @@ class MyCourse extends Component {
                             </Card>
                         </Link>
 
-
                         {this.state.details.map(course => {
-                            return <Card className="shadow bg-white rounded" id="card" key={course.id}>
+                            return <Card id="card" className="shadow bg-white rounded" key={course.id}>
                                 <Card.Body>
                                     <Card.Title>{course.userId}</Card.Title>
                                 </Card.Body>
@@ -76,9 +78,9 @@ class MyCourse extends Component {
                                 <Link to="/coursecontent">
                                     <Button
                                         id="cardbutton"
-                                        variant="outline-dark"
-                                    >View Details
-                                </Button>
+                                        variant="outline-dark">
+                                        View Details
+                                    </Button>
                                 </Link>
                             </Card>
                         })}

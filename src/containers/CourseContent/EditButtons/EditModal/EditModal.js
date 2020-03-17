@@ -37,8 +37,8 @@ class EditModal extends Component {
             <Modal centered
                 show={this.props.show}
                 onHide={this.discardChangeHandler}>
-
                 <Modal.Header closeButton></Modal.Header>
+
                 <Modal.Body >
                     <Form>
                         <Form.Group as={Row}>
@@ -72,14 +72,14 @@ class EditModal extends Component {
 
                 <Modal.Footer>
                     <Button
-                        onClick={this.discardChangeHandler}
-                        variant="outline-dark">
+                        variant="outline-dark"
+                        onClick={this.discardChangeHandler}>
                         Discard Changes
                     </Button>
 
                     <Button
-                        onClick={() => this.props.editsubmit(this.props.chpid, this.props.contentid, this.state.title, this.state.description)}
-                        variant="outline-dark">
+                        variant="outline-dark"
+                        onClick={() => this.props.editsubmit(this.props.chpid, this.props.contentid, this.state.title, this.state.description)}>
                         Save
                     </Button>
                 </Modal.Footer>

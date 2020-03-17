@@ -2,16 +2,13 @@
   text-align: center;
   padding-top: 2%;
 }
-#questionpaper h6 {
-  padding: 0 4%;
-}
 
 #exampreview {
   border: 2px solid gray;
   margin: 2%;
   padding: 2%;
   max-height: 80vh;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 #question {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, Col, Row, Button } from 'react-bootstrap';
 
+import './MyProfileEdit.css'
+
 const MyProfileEdit = (props) => (
 
     <section >
@@ -8,57 +10,49 @@ const MyProfileEdit = (props) => (
             <div className="row shadow p-3 mb-5 bg-white rounded" id="editmyinfo">
                 <Form>
                     <Form.Group as={Row}>
-                        <Form.Label column sm={4} >
-                            Tution's Name
-                                    </Form.Label>
+                        <Form.Label column sm={4} >Tution's Name</Form.Label>
                         <Col sm={8}>
                             <Form.Control
                                 id="noborder"
                                 type="text"
-                                value={props.info.tutionsname}
                                 name="tutionsname"
+                                value={props.info.tutionsname}
                                 onChange={props.changed} />
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row} >
-                        <Form.Label column sm={4}>
-                            Tutor's Name
-                                    </Form.Label>
+                        <Form.Label column sm={4}>Tutor's Name</Form.Label>
                         <Col sm={8}>
                             <Form.Control
                                 id="noborder"
                                 type="text"
-                                value={props.info.tutorsname}
                                 name="tutorsname"
+                                value={props.info.tutorsname}
                                 onChange={props.changed} />
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row} >
-                        <Form.Label column sm={4}>
-                            Mobile No.
-                                    </Form.Label>
+                        <Form.Label column sm={4}>Mobile No.</Form.Label>
                         <Col sm={8}>
                             <Form.Control
                                 id="noborder"
                                 type="number"
-                                value={props.info.mobileno}
                                 name="mobileno"
+                                value={props.info.mobileno}
                                 onChange={props.changed} />
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row} >
-                        <Form.Label column sm={4}>
-                            Address
-                                    </Form.Label>
+                        <Form.Label column sm={4}>Address</Form.Label>
                         <Col sm={8}>
                             <Form.Control
                                 id="noborder"
                                 type="text"
-                                value={props.info.address}
                                 name="address"
+                                value={props.info.address}
                                 onChange={props.changed} />
                         </Col>
                     </Form.Group>
@@ -69,10 +63,9 @@ const MyProfileEdit = (props) => (
                             <Form.Control
                                 id="noborder"
                                 as="select"
-                                value={props.info.state}
                                 name="state"
-                                onChange={props.changed}
-                            >
+                                value={props.info.state}
+                                onChange={props.changed}>
                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                 <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -117,10 +110,9 @@ const MyProfileEdit = (props) => (
                             <Form.Control
                                 id="noborder"
                                 type="text"
-                                value={props.info.city}
                                 name="city"
-                                onChange={props.changed}
-                            />
+                                value={props.info.city}
+                                onChange={props.changed} />
                         </Form.Group>
 
                         <Form.Group as={Col} >
@@ -128,10 +120,9 @@ const MyProfileEdit = (props) => (
                             <Form.Control
                                 id="noborder"
                                 type="number"
-                                value={props.info.pincode}
                                 name="pincode"
-                                onChange={props.changed}
-                            />
+                                value={props.info.pincode}
+                                onChange={props.changed} />
                         </Form.Group>
                     </Form.Row>
 
@@ -141,16 +132,13 @@ const MyProfileEdit = (props) => (
                             id="noborder"
                             as="textarea"
                             rows="4"
-                            value={props.info.tutionwelcomenote}
                             name="tutionwelcomenote"
-                            onChange={props.changed}
-                        />
+                            value={props.info.tutionwelcomenote}
+                            onChange={props.changed} />
                     </Form.Group>
 
                     <Form.Group as={Row} >
-                        <Form.Label column sm={4}>
-                            Banner Image
-                                    </Form.Label>
+                        <Form.Label column sm={4}>Banner Image</Form.Label>
                         <Col sm={8}>
                             <Form.Control
                                 type="file"
@@ -161,14 +149,13 @@ const MyProfileEdit = (props) => (
 
                     <Button
                         variant="outline-dark"
-                        onClick={props.saver}
-                    >Save
-                        </Button>
+                        onClick={props.saver}>
+                        Save
+                    </Button>
                 </Form>
             </div>
         </div >
     </section>
-
 
 )
 

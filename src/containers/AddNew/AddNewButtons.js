@@ -5,6 +5,8 @@ import NewChapter from './NewChapter/NewChapter';
 import NewLecture from './NewLecture/NewLecture';
 import NewExam from './NewExam/NewExam';
 
+import './AddNewButton.css';
+
 class AddNewButtons extends Component {
     state = {
         newchapter: false,
@@ -38,7 +40,7 @@ class AddNewButtons extends Component {
 
     render() {
         let disable = null;
-        this.props.disablebutton > 0 ? disable = false : disable = true
+        this.props.disablebutton > 0 ? disable = false : disable = true;
 
         return (
             <div>

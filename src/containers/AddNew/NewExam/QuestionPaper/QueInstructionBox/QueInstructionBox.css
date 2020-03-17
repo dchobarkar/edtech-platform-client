@@ -1,17 +1,19 @@
 #showexaminstructionsbutton {
-  margin: 20px;
-}
-#showexaminstructionsbutton button {
-  position: absolute;
-  right: 0;
-  margin: 0 7%;
-}
-#examinstruction {
-  border: 2px solid gray;
-  padding: 2% 4%;
-  margin: 0 2%;
+  padding: 0 2%;
 }
 
 #examinstructionedit {
-  margin: 2%;
+  border: 2px solid gray;
+  width: 100%;
+}
+#examinstructionedit form {
+  width: 100%;
+  padding: 1% 2%;
+}
+#examinstructionedit div {
+  width: 100%;
+}
+#examinstructionedit button {
+  padding: 0 25%;
+  width: 100%;
 }

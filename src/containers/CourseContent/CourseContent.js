@@ -62,6 +62,21 @@ class CourseContent extends Component {
         ]
     };
 
+    courseInfoHandler = (coursename, targetaudiance, subject, introduction) => {
+        const newCourseInfo = { ...this.state };
+        newCourseInfo.coursename = coursename;
+        newCourseInfo.targetaudiance = targetaudiance;
+        newCourseInfo.subject = subject;
+        newCourseInfo.introduction = introduction;
+
+        this.setState({
+            coursename: newCourseInfo.coursename,
+            targetaudiance: newCourseInfo.targetaudiance,
+            subject: newCourseInfo.subject,
+            introduction: newCourseInfo.introduction
+        });
+    };
+
     newChapterHandler = (chaptername, description) => {
         const newchapter = {
             chaptername: chaptername,
@@ -87,6 +102,7 @@ class CourseContent extends Component {
         const addlesson = [...this.state.coursedetails];
         const i = addlesson.length - 1;
         addlesson[i].lessons.push(newlesson);
+
         this.setState({
             id: newlesson.id,
             coursedetails: addlesson
@@ -103,6 +119,7 @@ class CourseContent extends Component {
         const addexam = [...this.state.coursedetails]
         const i = addexam.length - 1;
         addexam[i].lessons.push(newexam)
+
         this.setState({
             id: newexam.id,
             coursedetails: addexam
@@ -146,6 +163,7 @@ class CourseContent extends Component {
             });
             const chapters = [...this.state.coursedetails];
             chapters.splice(detailIndex, 1);
+
             this.setState({
                 coursedetails: chapters
             });
@@ -166,24 +184,10 @@ class CourseContent extends Component {
         };
     };
 
-    courseInfoHandler = (coursename, targetaudiance, subject, introduction) => {
-        const newCourseInfo = { ...this.state };
-        newCourseInfo.coursename = coursename;
-        newCourseInfo.targetaudiance = targetaudiance;
-        newCourseInfo.subject = subject;
-        newCourseInfo.introduction = introduction;
-
-        this.setState({
-            coursename: newCourseInfo.coursename,
-            targetaudiance: newCourseInfo.targetaudiance,
-            subject: newCourseInfo.subject,
-            introduction: newCourseInfo.introduction
-        });
-    };
-
     render() {
-        let i = 0
-        let j = 0
+        let i = 0;
+        let j = 0;
+
         return (
             <div className="fullscreen">
                 <section id="previouscontent">
@@ -201,6 +205,7 @@ class CourseContent extends Component {
                             return <div className="row" id="individualchapter" key={chapter.id}>
                                 <div id="chaptername">
                                     <span>{i = i + 1}.  {chapter.chaptername}</span>
+
                                     <EditButtons
                                         chpid={null}
                                         contentid={chapter.id}
