@@ -8,21 +8,25 @@ import './ContactUs.css';
 
 class ContactUs extends Component {
     state = {
+        id: '',
         mobilenum: ' ',
         show: false
     }
 
     inputChangeHandler = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            id: e.target.value
         })
     }
 
     submitContactnumHandler = () => {
         const num = {
-            mobileno: this.state.mobilenum
+            id: this.state.mobilenum,
+            mobileno: this.state.mobilenum,
+            time: new Date()
         }
-        axios.post('/contactusmobileno.json', num)
+        axios.post('/contactdata/teacher', num)
             .then(response => console.log(response))
             .catch(error => console.log(error))
 

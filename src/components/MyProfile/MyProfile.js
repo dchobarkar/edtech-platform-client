@@ -9,29 +9,43 @@ import './MyProfile.css';
 
 class MyProfile extends Component {
     state = {
-        tutionsname: 'Chobarkar Coaching Classes',
-        tutorsname: 'Darshan Chobarkar',
+        firstname: '',
+        lastname: '',
+        classname: 'Chobarkar Coaching Classes',
+        mobile: '9404168827',
         email: 'dchobarkar@gmail.com',
-        mobileno: '9404168827',
         address: 'Sudarshan, Dinadayal Conlony',
         city: 'Ambajogai',
         pincode: '431517',
-        bannerimage: 'https://scontent.fnag1-1.fna.fbcdn.net/v/t1.0-9/77067159_1193340290876690_4502540149132886016_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_ohc=NXNR2KrGBQ4AX_hWwTb&_nc_ht=scontent.fnag1-1.fna&oh=8a558ad996f01280ff710ff40c4f2206&oe=5E9427B0',
-        tutionwelcomenote: 'Lorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.',
+        bannerimgurl: 'https://scontent.fnag1-1.fna.fbcdn.net/v/t1.0-9/77067159_1193340290876690_4502540149132886016_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_ohc=NXNR2KrGBQ4AX_hWwTb&_nc_ht=scontent.fnag1-1.fna&oh=8a558ad996f01280ff710ff40c4f2206&oe=5E9427B0',
+        classintro: 'Lorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.',
+        country_id: '',
+        state_id: '',
         showeditbox: false
     }
 
     inputChangeHandler = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            // [e.target.name]: e.target.value
         })
     }
 
     infoSaveHandler = () => {
-        const myprofile = {
-            ...this.state
+        const tuser = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            classname: this.state.classname,
+            // classintro: this.state.classintro,
+            // mobile: this.state.mobile,
+            // address: this.state.address,
+            // city: this.state.city,
+            pincode: this.state.pincode,
+            // bannerimgurl: this.state.bannerimgurl,
+            // country_id: this.state.country_id,
+            // state_id: this.state.state_id
+
         }
-        axios.post('/myprofile.json', myprofile)
+        axios.post('/tuser', tuser)
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
@@ -52,21 +66,21 @@ class MyProfile extends Component {
 
                         <div className="row align-items-center">
                             <div className="shadow p-3 mb-5 bg-white rounded" id="tutionsname">
-                                <h4>{this.state.tutionsname}</h4>
+                                <h4>{this.state.classname}</h4>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-3" id="tutionimage">
-                                <Image alt={this.state.tutionsname} src={this.state.bannerimage} roundedCircle />
+                                <Image alt={this.state.classname} src={this.state.bannerimgurl} roundedCircle />
                             </div>
 
                             <div className="col-9" id="tutioninfotable">
                                 <Table>
                                     <tbody>
                                         <tr>
-                                            <td>Tutor's Name</td>
-                                            <td>: {this.state.tutorsname}</td>
+                                            <td>Name</td>
+                                            <td>: {this.state.firstname} {this.state.lastname}</td>
                                         </tr>
                                         <tr>
                                             <td>Email</td>
@@ -74,7 +88,7 @@ class MyProfile extends Component {
                                         </tr>
                                         <tr>
                                             <td>Mobile No.</td>
-                                            <td>: {this.state.mobileno}</td>
+                                            <td>: {this.state.mobile}</td>
                                         </tr>
                                         <tr>
                                             <td>Address</td>
@@ -87,7 +101,7 @@ class MyProfile extends Component {
                             <div id="tutionwelcomenote">
                                 <h6>Welcome Note</h6>
                                 <p align="justify">
-                                    {this.state.tutionwelcomenote}
+                                    {this.state.classintro}
                                 </p>
                             </div>
 

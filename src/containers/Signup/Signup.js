@@ -3,22 +3,13 @@ import { Form, Button, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import axios from '../../axios-server';
 import * as actions from '../../store/actions/actionTypes';
 
 import './Signup.css';
 
 class Signup extends Component {
-    state = {
-        name: '',
-        surname: '',
-        email: '',
-        mobileno: '',
-        tutionname: '',
-        address: '',
-        state: '',
-        city: '',
-        pincode: ''
-    }
+    state = {}
 
     inputChangeHandler = (e) => {
         this.setState({
@@ -27,7 +18,21 @@ class Signup extends Component {
     }
 
     userInfoSaver = () => {
-        console.log(this.state)
+        const user = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            classname: this.state.classname,
+            mobile: this.state.mobile,
+            email: this.state.email,
+            password: this.state.password
+        }
+        axios.post('/auth/signup', user)
+            .then((response => console.log(response)))
+            .catch(error => {
+                console.log(error)
+                alert(error)
+            })
+        console.log(user)
     }
 
     render() {
@@ -43,7 +48,7 @@ class Signup extends Component {
                                         id="noborder"
                                         type="text"
                                         placeholder="Name"
-                                        name="name"
+                                        name="firstname"
                                         onChange={this.inputChangeHandler} />
                                 </Form.Group>
 
@@ -53,117 +58,39 @@ class Signup extends Component {
                                         id="noborder"
                                         type="text"
                                         placeholder="Surname"
-                                        name="surname"
+                                        name="lastname"
                                         onChange={this.inputChangeHandler} />
                                 </Form.Group>
                             </Form.Row>
 
-                            <Form.Row>
-                                <Form.Group as={Col}>
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        id="noborder"
-                                        type="email"
-                                        placeholder="Tution's Email"
-                                        name="email"
-                                        onChange={this.inputChangeHandler} />
-                                </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Class Name</Form.Label>
+                                <Form.Control
+                                    id="noborder"
+                                    type="text"
+                                    placeholder="xyz coaching classes"
+                                    name="classname"
+                                    onChange={this.inputChangeHandler} />
+                            </Form.Group>
 
+                            <Form.Row>
                                 <Form.Group as={Col} >
                                     <Form.Label>Mobile No.</Form.Label>
                                     <Form.Control
                                         id="noborder"
                                         type="number"
                                         placeholder="Mobile No."
-                                        name="mobileno"
-                                        onChange={this.inputChangeHandler} />
-                                </Form.Group>
-                            </Form.Row>
-
-                            <Form.Group>
-                                <Form.Label>Tution Name</Form.Label>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    placeholder="xyz coaching classes"
-                                    name="tutionname"
-                                    onChange={this.inputChangeHandler} />
-                            </Form.Group>
-
-                            <Form.Group >
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    placeholder="Apartment, studio, or floor"
-                                    name="address"
-                                    onChange={this.inputChangeHandler} />
-                            </Form.Group>
-
-                            <Form.Row>
-                                <Form.Group as={Col}>
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Control
-                                        id="noborder"
-                                        as="select"
-                                        name="state"
-                                        onChange={this.inputChangeHandler}>
-                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                        <option value="Assam">Assam</option>
-                                        <option value="Bihar">Bihar</option>
-                                        <option value="Chandigarh">Chandigarh</option>
-                                        <option value="Chhattisgarh">Chhattisgarh</option>
-                                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                                        <option value="Daman and Diu">Daman and Diu</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Lakshadweep">Lakshadweep</option>
-                                        <option value="Puducherry">Puducherry</option>
-                                        <option value="Goa">Goa</option>
-                                        <option value="Gujarat">Gujarat</option>
-                                        <option value="Haryana">Haryana</option>
-                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                        <option value="Jharkhand">Jharkhand</option>
-                                        <option value="Karnataka">Karnataka</option>
-                                        <option value="Kerala">Kerala</option>
-                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                        <option value="Maharashtra">Maharashtra</option>
-                                        <option value="Manipur">Manipur</option>
-                                        <option value="Meghalaya">Meghalaya</option>
-                                        <option value="Mizoram">Mizoram</option>
-                                        <option value="Nagaland">Nagaland</option>
-                                        <option value="Odisha">Odisha</option>
-                                        <option value="Punjab">Punjab</option>
-                                        <option value="Rajasthan">Rajasthan</option>
-                                        <option value="Sikkim">Sikkim</option>
-                                        <option value="Tamil Nadu">Tamil Nadu</option>
-                                        <option value="Telangana">Telangana</option>
-                                        <option value="Tripura">Tripura</option>
-                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                        <option value="Uttarakhand">Uttarakhand</option>
-                                        <option value="West Bengal">West Bengal</option>
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Form.Group as={Col}>
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control
-                                        id="noborder"
-                                        type="text"
-                                        placeholder="City"
-                                        name="city"
+                                        name="mobile"
                                         onChange={this.inputChangeHandler} />
                                 </Form.Group>
 
                                 <Form.Group as={Col}>
-                                    <Form.Label>Pin Code</Form.Label>
+                                    <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         id="noborder"
-                                        type="text"
-                                        placeholder="Pin Code"
-                                        name="pincode"
+                                        type="email"
+                                        placeholder="Class's Email"
+                                        name="email"
                                         onChange={this.inputChangeHandler} />
                                 </Form.Group>
                             </Form.Row>
@@ -178,14 +105,14 @@ class Signup extends Component {
                                     onChange={this.inputChangeHandler} />
                             </Form.Group>
 
-                            <Link to="/login">
-                                <Button
-                                    variant="outline-dark"
-                                    // onClick={() => this.props.newuserregister(this.state)}
-                                    onClick={this.userInfoSaver}>
-                                    Create Account
+                            {/* <Link to="/login"> */}
+                            <Button
+                                variant="outline-dark"
+                                // onClick={() => this.props.newuserregister(this.state)}
+                                onClick={this.userInfoSaver}>
+                                Create Account
                                 </Button>
-                            </Link>
+                            {/* </Link> */}
                         </Form>
                     </div>
                 </div >

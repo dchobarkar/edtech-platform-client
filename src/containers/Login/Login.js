@@ -3,14 +3,13 @@ import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import axios from '../../axios-server';
 import * as actions from '../../store/actions/auth';
 
 import './Login.css';
 
 class Login extends Component {
-    state = {
-
-    }
+    state = {}
 
     inputchangeHandler = (e) => {
         this.setState({
@@ -19,7 +18,23 @@ class Login extends Component {
     }
 
     submitHandler = () => {
-        this.props.onAuth(this.state.email, this.state.password)
+        const user = {
+            email: this.state.email,
+            password: this.state.password
+        }
+
+        axios.post('/auth/login', user)
+            .then(response => {
+                console.log(response.data.accessToken)
+                console.log(response)
+                localStorage.setItem('authkey', response.data.accessToken)
+            })
+            .catch(error => {
+                console.log(error)
+                alert(error.message)
+            })
+
+        // this.props.onAuth(this.state.email, this.state.password)
     }
 
     render() {
@@ -32,7 +47,7 @@ class Login extends Component {
                         </div>
 
                         <div className="col-lg-3" id="loginpage">
-                            <Form onSubmit={this.submitHandler}>
+                            <Form>
                                 <Form.Group>
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
@@ -61,7 +76,8 @@ class Login extends Component {
 
                                 <Button
                                     className="float-right"
-                                    variant="outline-dark">
+                                    variant="outline-dark"
+                                    onClick={this.submitHandler}>
                                     Login
                                 </Button>
                             </Form>
