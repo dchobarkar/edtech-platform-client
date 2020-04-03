@@ -3,8 +3,8 @@ import { Form, Col, Row, Button } from 'react-bootstrap';
 
 class NewLecture extends Component {
     state = {
-        lessonname: '',
-        description: ''
+        lecturetitle: '',
+        lectureintro: ''
     }
 
     inputChangeHandler = (e) => {
@@ -13,11 +13,11 @@ class NewLecture extends Component {
         })
     }
 
-    inputClearer = () => {
-        this.props.newlessonsubmit(this.state.lessonname, this.state.description);
+    newLectureHandler = () => {
+        this.props.newlecturehandler(this.props.sectionid, this.state.lecturetitle, this.state.lectureintro, this.state.lecturevideo);
         this.setState({
-            lessonname: '',
-            description: ''
+            lecturetitle: '',
+            lectureintro: ''
         });
         this.props.closetab('Lecture');
     }
@@ -27,46 +27,46 @@ class NewLecture extends Component {
             <section id="addnew">
                 <div className="container">
                     <div className="row">
-                        <p>{this.state.lessonname}</p>
+                        <p>{this.state.lecturetitle}</p>
                         <Form>
                             <Form.Group as={Row} >
-                                <Form.Label column sm={2}>Lecture Name</Form.Label>
+                                <Form.Label column sm={2}>Lecture Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
                                         id="noborder"
                                         type="text"
-                                        name="lessonname"
-                                        value={this.state.lessonname}
+                                        name="lecturetitle"
+                                        value={this.state.lecturetitle}
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
 
                             <Form.Group as={Row} >
-                                <Form.Label column sm={2}>Content</Form.Label>
+                                <Form.Label column sm={2}>Description</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
                                         id="noborder"
                                         as="textarea"
                                         rows="2"
-                                        name="description"
-                                        value={this.state.description}
+                                        name="lectureintro"
+                                        value={this.state.lectureintro}
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} controlId="lecturevideo">
+                            <Form.Group as={Row}>
                                 <Form.Label column sm={2}>Video</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
                                         type="file"
-                                        name="video" />
+                                        name="lecturevideo" />
                                 </Col>
                             </Form.Group>
 
                             <Button
                                 className="float-right"
                                 variant="outline-dark"
-                                onClick={this.inputClearer}>
+                                onClick={this.newLectureHandler}>
                                 Add
                             </Button>
                         </Form>

@@ -23,7 +23,7 @@ const DeleteModal = (props) => (
             <Button
                 className="float-right"
                 variant="outline-dark"
-                onClick={() => props.delete(props.contentid, props.chpid)}>
+                onClick={() => props.deletecontenthandler(props.sectionid, props.contentid)}>
                 Delete
             </Button>
         </Modal.Footer>

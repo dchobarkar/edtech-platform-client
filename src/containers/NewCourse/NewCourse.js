@@ -15,17 +15,17 @@ class NewCourse extends Component {
         })
     }
 
-    newCourseAdder = () => {
-        const newcourse = {
-            ...this.state
-        }
-        console.log(newcourse)
+    newCourseHandler = () => {
         let config = {
             headers: {
                 "Authorization": "Bearer " + localStorage.authkey
             }
         }
-        axios.post('course', newcourse, config)
+
+        const newCourse = {
+            ...this.state
+        }
+        axios.post('course', newCourse, config)
     }
 
     render() {
@@ -55,15 +55,15 @@ class NewCourse extends Component {
                                     as="select"
                                     name="targetaudience_id"
                                     onChange={this.inputChangeHandler}>
-                                    <option value={1}>8th</option>
-                                    <option value={2}>9th</option>
-                                    <option value={3}>10th</option>
-                                    <option value={4}>11th - PCB</option>
-                                    <option value={5}>11th - PCM</option>
-                                    <option value={6}>11th - PCMB</option>
-                                    <option value={7}>12th - PCB</option>
-                                    <option value={8}>12th - PCM</option>
-                                    <option value={9}>12th - PCMB</option>
+                                    <option value="1">8th</option>
+                                    <option value="2">9th</option>
+                                    <option value="3">10th</option>
+                                    <option value="4">11th - PCB</option>
+                                    <option value="5">11th - PCM</option>
+                                    <option value="6">11th - PCMB</option>
+                                    <option value="7">12th - PCB</option>
+                                    <option value="8">12th - PCM</option>
+                                    <option value="9">12th - PCMB</option>
                                 </Form.Control>
                             </Col>
                         </Form.Group>
@@ -76,13 +76,13 @@ class NewCourse extends Component {
                                     as="select"
                                     name="subject_id"
                                     onChange={this.inputChangeHandler}>
-                                    <option value={1}>English</option>
-                                    <option value={2}>Physics</option>
-                                    <option value={3}>Biology</option>
-                                    <option value={4}>Chemistry</option>
-                                    <option value={5}>Mathematics</option>
-                                    <option value={6}>Science</option>
-                                    <option value={7}>Marathi</option>
+                                    <option value="1">English</option>
+                                    <option value="2">Physics</option>
+                                    <option value="3">Biology</option>
+                                    <option value="4">Chemistry</option>
+                                    <option value="5">Mathematics</option>
+                                    <option value="6">Science</option>
+                                    <option value="7">Marathi</option>
                                 </Form.Control>
                             </Col>
                         </Form.Group>
@@ -118,7 +118,7 @@ class NewCourse extends Component {
                             <Col sm={{ span: 10, offset: 2 }}>
                                 {/* <Link to="/coursecontent"> */}
                                 <Button
-                                    onClick={this.newCourseAdder}
+                                    onClick={this.newCourseHandler}
                                     className="float-right"
                                     variant="outline-dark">
                                     Add Course

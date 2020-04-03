@@ -6,3 +6,12 @@
 #navmenucolor {
   color: white;
 }
+
+#link {
+  color: aliceblue;
+  text-decoration: none;
+  background-color: none;
+}
+#link:hover {
+  color: aqua;
+}

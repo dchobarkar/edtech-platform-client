@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import axios from '../../axios-server';
-import * as actions from '../../store/actions/auth';
 
 import './Login.css';
 
@@ -25,16 +23,11 @@ class Login extends Component {
 
         axios.post('/auth/login', user)
             .then(response => {
-                console.log(response.data.accessToken)
-                console.log(response)
                 localStorage.setItem('authkey', response.data.accessToken)
             })
             .catch(error => {
-                console.log(error)
                 alert(error.message)
             })
-
-        // this.props.onAuth(this.state.email, this.state.password)
     }
 
     render() {
@@ -92,10 +85,4 @@ class Login extends Component {
 
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (email, password) => dispatch(actions.auth(email, password))
-    };
-};
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

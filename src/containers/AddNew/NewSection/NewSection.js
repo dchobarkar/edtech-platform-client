@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Col, Row, Button } from 'react-bootstrap';
 
-class NewChapter extends Component {
+class NewSection extends Component {
     state = {
-        chaptername: '',
-        description: ''
+        sectiontitle: '',
+        sectionintro: ''
     }
 
     inputChangeHandler = (e) => {
@@ -13,13 +13,13 @@ class NewChapter extends Component {
         })
     }
 
-    inputClearer = () => {
-        this.props.newchaptersubmit(this.state.chaptername, this.state.description);
+    newSectionHandler = () => {
+        this.props.newsectionhandler(this.state.sectiontitle, this.state.sectionintro);
         this.setState({
-            chaptername: '',
-            description: ''
+            sectiontitle: '',
+            sectionintro: ''
         });
-        this.props.closetab('Chapter');
+        this.props.closetab('Section');
     }
 
     render() {
@@ -27,29 +27,29 @@ class NewChapter extends Component {
             <section id="addnew">
                 <div className="container">
                     <div className="row">
-                        <p>{this.state.chaptername}</p>
+                        <p>{this.state.sectiontitle}</p>
                         <Form>
                             <Form.Group as={Row}>
-                                <Form.Label column sm={2}>Chapter Name</Form.Label>
+                                <Form.Label column sm={2}>Section Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
                                         id="noborder"
                                         type="text"
-                                        name="chaptername"
-                                        value={this.state.chaptername}
+                                        name="sectiontitle"
+                                        value={this.state.sectiontitle}
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
 
                             <Form.Group as={Row}>
-                                <Form.Label column sm={2}>Description</Form.Label>
+                                <Form.Label column sm={2}>Section Description</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
                                         id="noborder"
                                         as="textarea"
                                         rows="2"
-                                        name="description"
-                                        value={this.state.description}
+                                        name="sectionintro"
+                                        value={this.state.sectionintro}
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
@@ -57,7 +57,7 @@ class NewChapter extends Component {
                             <Button
                                 className="float-right"
                                 variant="outline-dark"
-                                onClick={this.inputClearer}>
+                                onClick={this.newSectionHandler}>
                                 Add
                             </Button>
                         </Form>
@@ -68,4 +68,4 @@ class NewChapter extends Component {
     }
 }
 
-export default NewChapter;
+export default NewSection;

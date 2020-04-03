@@ -20,8 +20,8 @@ class NewQuestion extends Component {
         })
     }
 
-    saveQuestionHandler = () => {
-        this.props.newquestionsubmit(this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4);
+    newQuestionHandler = () => {
+        this.props.newquestionhandler(this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4, this.state.answer, this.state.queimage);
         this.showInputBoxHandler();
     }
 
@@ -53,7 +53,7 @@ class NewQuestion extends Component {
                                 <Col sm={10}>
                                     <Form.Control
                                         type="file"
-                                        name="fig" />
+                                        name="queimage" />
                                 </Col>
                             </Form.Group>
 
@@ -105,11 +105,26 @@ class NewQuestion extends Component {
                                 </Form.Group>
                             </Form.Row>
 
+                            <Form.Group >
+                                <Col lg={6}>
+                                    <Form.Label>Answer</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name="answer"
+                                        onChange={this.inputChangeHandler}>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </Form.Control>
+                                </Col>
+                            </Form.Group>
+
                             <Form.Group>
                                 <Button
                                     className="float-right"
                                     variant="outline-dark"
-                                    onClick={this.saveQuestionHandler}>
+                                    onClick={this.newQuestionHandler}>
                                     Add
                                 </Button>
                             </Form.Group>

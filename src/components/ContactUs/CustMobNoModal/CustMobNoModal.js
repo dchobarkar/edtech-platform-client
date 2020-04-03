@@ -3,8 +3,8 @@ import { Modal, Button } from 'react-bootstrap';
 
 const CustMobNoModal = (props) => (
     <Modal centered
-        show={props.show}
-        onHide={props.closestatus}>
+        show={props.showmodal}
+        onHide={props.modalhandler}>
 
         <Modal.Header closeButton>
             <Modal.Title>Thank you</Modal.Title>
@@ -18,7 +18,7 @@ const CustMobNoModal = (props) => (
         <Modal.Footer>
             <Button
                 variant="secondary"
-                onClick={props.closestatus}>
+                onClick={props.modalhandler}>
                 Close
             </Button>
         </Modal.Footer>

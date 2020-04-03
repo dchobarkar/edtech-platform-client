@@ -4,7 +4,8 @@ import { Modal, Button, Form, Col, Row } from 'react-bootstrap';
 class EditModal extends Component {
     state = {
         title: this.props.title,
-        description: this.props.des
+        description: this.props.description,
+        lecturevideo: this.props.lecturevideo
     }
 
     inputChangeHandler = (e) => {
@@ -16,18 +17,19 @@ class EditModal extends Component {
     discardChangeHandler = () => {
         this.setState({
             title: this.props.title,
-            description: this.props.des
+            description: this.props.description,
+            lecturevideo: this.props.lecturevideo
         });
         this.props.showeditmodal();
     }
 
     LectureVideo = () => (
-        <Form.Group as={Row} controlId="lecturevideo">
+        <Form.Group as={Row}>
             <Form.Label column sm={2}>Video</Form.Label>
             <Col sm={10}>
                 <Form.Control
                     type="file"
-                    name="video" />
+                    name="lecturevideo" />
             </Col>
         </Form.Group>
     )
@@ -66,7 +68,7 @@ class EditModal extends Component {
                             </Col>
                         </Form.Group>
 
-                        {this.props.chpid ? <this.LectureVideo /> : null}
+                        {this.props.sectionid ? <this.LectureVideo /> : null}
                     </Form>
                 </Modal.Body>
 
@@ -79,7 +81,7 @@ class EditModal extends Component {
 
                     <Button
                         variant="outline-dark"
-                        onClick={() => this.props.editsubmit(this.props.chpid, this.props.contentid, this.state.title, this.state.description)}>
+                        onClick={() => this.props.updatecontenthandler(this.props.sectionid, this.props.contentid, this.state.title, this.state.description, this.state.lecturevideo)}>
                         Save
                     </Button>
                 </Modal.Footer>

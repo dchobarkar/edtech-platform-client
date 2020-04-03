@@ -27,10 +27,10 @@ const layout = () => (
         <Route path="/myprofile" exact component={MyProfile} />
         <Route path="/mycourse" exact component={MyCourse} />
         <Route path="/newcourse" exact component={NewCourse} />
-        <Route path="/coursecontent" exact component={CourseContent} />
+        <Route path="/coursecontent/:id" exact component={CourseContent} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/questionpaper" exact component={QuestionPaper} />
+        <Route path="/questionpaper/:id" exact component={QuestionPaper} />
 
         <Footer />
     </div>

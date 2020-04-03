@@ -4,58 +4,10 @@ import { Form, Col, Row, Button } from 'react-bootstrap';
 import './MyProfileEdit.css'
 
 const MyProfileEdit = (props) => (
-
     <section >
         <div className="container" >
             <div className="row shadow p-3 mb-5 bg-white rounded" id="editmyinfo">
                 <Form>
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Firstname</Form.Label>
-                            <Form.Control
-                                id="noborder"
-                                type="text"
-                                name="firstname"
-                                value={props.info.firstname}
-                                onChange={props.changed} />
-                        </Form.Group>
-
-                        <Form.Group as={Col}>
-                            <Form.Label>Lastname</Form.Label>
-                            <Form.Control
-                                id="noborder"
-                                type="text"
-                                name="lastname"
-                                value={props.info.lastname}
-                                onChange={props.changed} />
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm={4} >Class Name</Form.Label>
-                        <Col sm={8}>
-                            <Form.Control
-                                id="noborder"
-                                type="text"
-                                name="classname"
-                                value={props.info.classname}
-                                onChange={props.changed} />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} >
-                        <Form.Label column sm={4}>Mobile No.</Form.Label>
-                        <Col sm={8}>
-                            <Form.Control
-                                id="noborder"
-                                type="number"
-                                name="mobile"
-                                value={props.info.mobile}
-                                onChange={props.changed} />
-                        </Col>
-                    </Form.Group>
-
-
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>Country</Form.Label>
@@ -63,9 +15,10 @@ const MyProfileEdit = (props) => (
                                 id="noborder"
                                 as="select"
                                 name="country_id"
-                                value={props.info.country_id}
-                                onChange={props.changed}>
-                                <option value={1}>India</option>
+                                value={props.profile.country_id}
+                                onChange={props.inputchangehandler}>
+                                <option value="1">India</option>
+                                <option value="2">Please Select</option>
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col} >
@@ -73,10 +26,11 @@ const MyProfileEdit = (props) => (
                             <Form.Control
                                 id="noborder"
                                 as="select"
-                                name="state"
-                                value={props.info.state}
-                                onChange={props.changed}>
-                                <option value={1}>Andhra Pradesh</option>
+                                name="state_id"
+                                value={props.profile.state_id}
+                                onChange={props.inputchangehandler}>
+                                <option value="2">Please Select</option>
+                                <option value={22}>Andhra Pradesh</option>
                                 <option value={2}>Andaman and Nicobar Islands</option>
                                 <option value={3}>Arunachal Pradesh</option>
                                 <option value={4}>Assam</option>
@@ -97,7 +51,7 @@ const MyProfileEdit = (props) => (
                                 <option value={19}>Karnataka</option>
                                 <option value={20}>Kerala</option>
                                 <option value={21}>Madhya Pradesh</option>
-                                <option value={22}>Maharashtra</option>
+                                <option value="1">Maharashtra</option>
                                 <option value={23}>Manipur</option>
                                 <option value={24}>Meghalaya</option>
                                 <option value={25}>Mizoram</option>
@@ -117,30 +71,26 @@ const MyProfileEdit = (props) => (
                     </Form.Row>
 
                     <Form.Row>
-
                         <Form.Group as={Col} >
                             <Form.Label>City</Form.Label>
                             <Form.Control
                                 id="noborder"
                                 type="text"
                                 name="city"
-                                value={props.info.city}
-                                onChange={props.changed} />
+                                value={props.profile.city}
+                                onChange={props.inputchangehandler} />
                         </Form.Group>
 
                         <Form.Group as={Col} >
                             <Form.Label>Pin Code</Form.Label>
                             <Form.Control
                                 id="noborder"
-                                type="number"
+                                type="text"
                                 name="pincode"
-                                value={props.info.pincode}
-                                onChange={props.changed} />
+                                value={props.profile.pincode}
+                                onChange={props.inputchangehandler} />
                         </Form.Group>
-
-
                     </Form.Row>
-
 
                     <Form.Group as={Row} >
                         <Form.Label column sm={4}>Address</Form.Label>
@@ -149,8 +99,8 @@ const MyProfileEdit = (props) => (
                                 id="noborder"
                                 type="text"
                                 name="address"
-                                value={props.info.address}
-                                onChange={props.changed} />
+                                value={props.profile.address}
+                                onChange={props.inputchangehandler} />
                         </Col>
                     </Form.Group>
 
@@ -161,8 +111,8 @@ const MyProfileEdit = (props) => (
                             as="textarea"
                             rows="4"
                             name="classintro"
-                            value={props.info.classinfo}
-                            onChange={props.changed} />
+                            value={props.profile.classintro}
+                            onChange={props.inputchangehandler} />
                     </Form.Group>
 
                     <Form.Group as={Row} >
@@ -171,20 +121,27 @@ const MyProfileEdit = (props) => (
                             <Form.Control
                                 type="file"
                                 name="bannerimgurl"
-                                onChange={props.changed} />
+                                onChange={props.inputchangehandler} />
                         </Col>
                     </Form.Group>
 
                     <Button
                         variant="outline-dark"
-                        onClick={props.saver}>
+                    // onClick={props.submithandler}
+                    >
+                        Discard
+                    </Button>
+
+                    <Button
+                        id="editmyinfobutton"
+                        variant="outline-dark"
+                        onClick={props.submithandler}>
                         Save
                     </Button>
                 </Form>
             </div>
         </div >
     </section>
-
 )
 
 export default MyProfileEdit;

@@ -13,7 +13,6 @@ class MyCourse extends Component {
 
 
     componentDidMount() {
-
         let config = {
             headers: {
                 "Authorization": "Bearer " + localStorage.authkey
@@ -27,6 +26,7 @@ class MyCourse extends Component {
 
             })
     }
+
 
     render() {
 
@@ -66,7 +66,7 @@ class MyCourse extends Component {
                                     <ListGroupItem>Fee : {course.fee}</ListGroupItem>
                                 </ListGroup>
 
-                                <Link to="/coursecontent">
+                                <Link to={"/coursecontent/" + course.course_id}>
                                     <Button
                                         id="cardbutton"
                                         variant="outline-dark">

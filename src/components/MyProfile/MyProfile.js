@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, Table, Button } from 'react-bootstrap';
-
 import axios from '../../axios-server';
 
 import MyProfileEdit from './MyProfileEdit/MyProfileEdit';
@@ -9,45 +8,79 @@ import './MyProfile.css';
 
 class MyProfile extends Component {
     state = {
-        firstname: '',
-        lastname: '',
-        classname: 'Chobarkar Coaching Classes',
-        mobile: '9404168827',
-        email: 'dchobarkar@gmail.com',
-        address: 'Sudarshan, Dinadayal Conlony',
-        city: 'Ambajogai',
-        pincode: '431517',
-        bannerimgurl: 'https://scontent.fnag1-1.fna.fbcdn.net/v/t1.0-9/77067159_1193340290876690_4502540149132886016_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_ohc=NXNR2KrGBQ4AX_hWwTb&_nc_ht=scontent.fnag1-1.fna&oh=8a558ad996f01280ff710ff40c4f2206&oe=5E9427B0',
-        classintro: 'Lorem ipsum dolor sit amet, cu vis epicuri reprimique, id eam ubique gubergren, cetero prompta liberavisse quo an. Vel et fierent urbanitas ullamcorper, te eum consequat reprehendunt. Sea habeo suscipiantur id, ne sed ridens audiam albucius. Mei id summo persius, cu nec quem amet esse. Eos duis vocibus molestie id.',
-        country_id: '',
-        state_id: '',
+        firstname: null,
+        lastname: null,
+        classname: null,
+        mobile: null,
+        email: null,
+        country_id: null,
+        state_id: null,
+        address: null,
+        city: null,
+        pincode: null,
+        bannerimgurl: null,
+        classintro: null,
         showeditbox: false
+    }
+
+    componentDidMount() {
+        let config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.authkey
+            }
+        }
+
+        axios.get('/tuser/profile', config)
+            .then(response => {
+                this.setState({
+                    id: response.data.id,
+                    firstname: response.data.userentity.firstname,
+                    lastname: response.data.userentity.lastname,
+                    classname: response.data.userentity.classname,
+                    classintro: response.data.classintro,
+                    mobile: response.data.userentity.mobile,
+                    email: response.data.userentity.email,
+                    country_id: response.data.countryentityCountryId,
+                    state_id: response.data.stateentityStateId,
+                    address: response.data.address,
+                    city: response.data.city,
+                    pincode: response.data.pincode,
+                    bannerimgurl: response.data.bannerimgurl
+                })
+            })
+            .catch(error => {
+                alert(error.message)
+            })
     }
 
     inputChangeHandler = (e) => {
         this.setState({
-            // [e.target.name]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    infoSaveHandler = () => {
-        const tuser = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            classname: this.state.classname,
-            // classintro: this.state.classintro,
-            // mobile: this.state.mobile,
-            // address: this.state.address,
-            // city: this.state.city,
-            pincode: this.state.pincode,
-            // bannerimgurl: this.state.bannerimgurl,
-            // country_id: this.state.country_id,
-            // state_id: this.state.state_id
-
+    submitHandler = () => {
+        let config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.authkey
+            }
         }
-        axios.post('/tuser', tuser)
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
+
+        const profile = {
+            classintro: this.state.classintro,
+            country_id: this.state.country_id,
+            state_id: this.state.state_id,
+            address: this.state.address,
+            city: this.state.city,
+            pincode: this.state.pincode,
+            bannerimgurl: this.state.bannerimgurl
+        }
+
+        axios.patch('/tuser/update', profile, config)
+            .then(response => { })
+            .catch(error => {
+                alert(error.message)
+            })
 
         this.showEditBoxHandler()
     }
@@ -120,9 +153,9 @@ class MyProfile extends Component {
 
                 {this.state.showeditbox ?
                     <MyProfileEdit
-                        changed={this.inputChangeHandler}
-                        saver={this.infoSaveHandler}
-                        info={this.state} /> : null}
+                        inputchangehandler={this.inputChangeHandler}
+                        submithandler={this.submitHandler}
+                        profile={this.state} /> : null}
             </div >
         )
     }

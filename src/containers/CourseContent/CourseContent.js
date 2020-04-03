@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import axios from '../../axios-server';
 
-import CourseInfo from './CourseInfo/CourseInfo';
+import CourseDetails from './CourseDetails/CourseDetails';
 import EditButtons from './EditButtons/EditButtons';
 import AddNewButtons from '../AddNew/AddNewButtons';
 
@@ -8,181 +9,249 @@ import './CourseContent.css';
 
 class CourseContent extends Component {
     state = {
-        id: 9,
-        coursename: 'Physics I',
-        targetaudiance: '12th-PCM',
-        subject: 'Physics',
-        introduction: 'Here lies the course Introduction',
-        coursedetails: [
+        coursetitle: null,
+        targetaudience_id: null,
+        subject_id: null,
+        courseintro: null,
+        sectionentitys: [
             {
-                chaptername: 'Chapter 1',
-                description: 'In this chapter you will learn to do something',
-                id: '1',
-                lessons: [
-                    {
-                        lessonname: 'Units and Measures',
-                        description: 'You will learn about units and measurements',
-                        id: '2'
-                    },
-                    {
-                        lessonname: 'Circular Motions',
-                        description: 'You will learn about circular motions',
-                        id: '3'
-                    },
-                    {
-                        lessonname: 'Magnetic Force',
-                        description: 'You will learn about Magnetic Force',
-                        id: '4'
-                    }
-                ]
-            },
-            {
-                chaptername: 'Chapter 2',
-                description: 'In this chapter you will learn to do something',
-                id: '5',
-                lessons: [
-                    {
-                        lessonname: 'Kinetic Force',
-                        description: 'In this chapter you will learn about Kinetic Force',
-                        id: '6'
-                    },
-                    {
-                        lessonname: 'Just do It',
-                        description: 'Nike cha slogan',
-                        id: '7'
-                    },
-                    {
-                        isexam: true,
-                        lessonname: 'Life',
-                        description: 'All you can do is try',
-                        id: '8'
-                    }
-                ]
+                lectureentitys: [],
+                examentitys: []
             }
-        ]
+        ],
+
     };
 
-    courseInfoHandler = (coursename, targetaudiance, subject, introduction) => {
-        const newCourseInfo = { ...this.state };
-        newCourseInfo.coursename = coursename;
-        newCourseInfo.targetaudiance = targetaudiance;
-        newCourseInfo.subject = subject;
-        newCourseInfo.introduction = introduction;
+    componentDidMount() {
+        let config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.authkey
+            }
+        }
 
-        this.setState({
-            coursename: newCourseInfo.coursename,
-            targetaudiance: newCourseInfo.targetaudiance,
-            subject: newCourseInfo.subject,
-            introduction: newCourseInfo.introduction
-        });
+        const courseid = this.props.match.params.id;
+        axios.get('/course/' + courseid + '/allsections', config)
+            .then(response => {
+                this.setState({
+                    ...response.data,
+                })
+            })
+            .catch(error => {
+                alert(error.message)
+            })
+    }
+
+    updateCourseHandler = (coursetitle, targetaudience_id, subject_id, courseintro, fee) => {
+        let config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.authkey
+            }
+        }
+
+        const updatedCourseDetails = { coursetitle: null, targetaudience_id: null, subject_id: null, courseintro: null, fee: null };
+        updatedCourseDetails.coursetitle = coursetitle;
+        updatedCourseDetails.targetaudience_id = targetaudience_id;
+        updatedCourseDetails.subject_id = subject_id;
+        updatedCourseDetails.courseintro = courseintro;
+        updatedCourseDetails.fee = fee;
+
+        const courseid = this.props.match.params.id;
+        axios.patch('/course/' + courseid + '/update', updatedCourseDetails, config)
+            .then(response => {
+                this.setState({
+                    coursetitle: response.data.coursetitle,
+                    targetaudience_id: response.data.targetaudience_id,
+                    subject_id: response.data.subject_id,
+                    classintro: response.data.classintro,
+                    fee: response.data.fee
+                })
+            })
+            .catch(error => { alert(error.message) })
     };
 
-    newChapterHandler = (chaptername, description) => {
-        const newchapter = {
-            chaptername: chaptername,
-            description: description,
-            id: this.state.id + 1,
-            lessons: []
+    newSectionHandler = (sectiontitle, sectionintro) => {
+        const newSection = {
+            sectiontitle: sectiontitle,
+            sectionintro: sectionintro,
         };
-        const addchapter = [...this.state.coursedetails];
-        addchapter.push(newchapter);
+        const courseid = this.props.match.params.id;
 
-        this.setState({
-            id: newchapter.id,
-            coursedetails: addchapter
-        })
+        axios.post('/section/' + courseid, newSection)
+            .then(response => {
+                const newSection = {
+                    ...response.data,
+                    lectureentitys: [],
+                    examentitys: []
+                }
+                const addSection = [...this.state.sectionentitys];
+                addSection.push(newSection);
+                this.setState({
+                    sectionentitys: addSection
+                })
+            })
+            .catch(error => { alert(error.message) })
+
     };
 
-    newLessonHandler = (lessonname, description) => {
-        const newlesson = {
-            lessonname: lessonname,
-            description: description,
-            id: this.state.id + 1
-        };
-        const addlesson = [...this.state.coursedetails];
-        const i = addlesson.length - 1;
-        addlesson[i].lessons.push(newlesson);
+    newLectureHandler = (sectionid, lecturetitle, lectureintro, lecturevideo) => {
+        const NewLecture = {
+            lecturetitle: lecturetitle,
+            lectureintro: lectureintro,
+            lecturevideo: 'https://music.youtube.com/watch?v=yAsIp0bjdRs&list=RDAMVMyAsIp0bjdRs'
+        }
+        axios.post('/lecture/' + sectionid, NewLecture)
+            .then(response => {
+                const secIndex = this.state.sectionentitys.findIndex(d => {
+                    return d.section_id === sectionid
+                });
+                const addlecture = this.state.sectionentitys[secIndex]
+                addlecture.lectureentitys.push(response.data)
 
-        this.setState({
-            id: newlesson.id,
-            coursedetails: addlesson
-        });
+                this.setState({
+                    ...this.state.sectionentitys[secIndex],
+                    lectureentitys: addlecture.lectureentitys
+                })
+            })
+            .catch(error => { alert(error.message) })
+
     };
 
-    newExamHandler = (examname, instructions) => {
-        const newexam = {
-            isexam: true,
-            lessonname: examname,
-            description: instructions,
-            id: this.state.id + 1
-        };
-        const addexam = [...this.state.coursedetails]
-        const i = addexam.length - 1;
-        addexam[i].lessons.push(newexam)
+    newExamHandler = (sectionid, examtitle, examinstruction, duration) => {
+        const NewExam = {
+            examtitle: examtitle,
+            examinstruction: examinstruction,
+            duration: duration
+        }
+        axios.post('/exam/' + sectionid, NewExam)
+            .then(response => {
+                const secIndex = this.state.sectionentitys.findIndex(d => {
+                    return d.section_id === sectionid
+                });
+                const addexam = this.state.sectionentitys[secIndex]
+                addexam.examentitys.push(response.data)
 
-        this.setState({
-            id: newexam.id,
-            coursedetails: addexam
-        });
+                this.setState({
+                    ...this.state.sectionentitys[secIndex],
+                    examentitys: addexam.examentitys
+                })
+            })
+            .catch(error => { alert(error.message) })
+
     };
 
-    editHandler = (chpid, id, title, description) => {
-        if (chpid === null) {
-            const chpIndex = this.state.coursedetails.findIndex(d => {
-                return d.id === id
-            });
-            const editchapter = [...this.state.coursedetails];
-            editchapter[chpIndex].chaptername = title;
-            editchapter[chpIndex].description = description;
+    updateContentHandler = (sectionid, contentid, title, description, lecturevideo) => {
+        if (sectionid === null) {
+            const updatedSectionDetails = {
+                sectiontitle: title,
+                sectionintro: description
+            }
 
-            this.setState({
-                coursedetails: editchapter
-            });
+            axios.patch('/section/' + contentid + '/update', updatedSectionDetails)
+                .then(response => {
+                    const secIndex = this.state.sectionentitys.findIndex(d => {
+                        return d.section_id === contentid
+                    });
+                    const updatedSectionEntitys = this.state.sectionentitys[secIndex]
+                    updatedSectionEntitys.sectiontitle = response.data.sectiontitle;
+                    updatedSectionEntitys.sectionintro = response.data.sectionintro;
+
+                    this.setState({
+                        ...this.state.sectionentitys,
+                        [secIndex]: updatedSectionEntitys
+                    })
+                })
+                .catch(error => {
+                    alert(error.message)
+                })
         }
         else {
-            const chpIndex = this.state.coursedetails.findIndex(d => {
-                return d.id === chpid
-            });
-            const lessonIndex = this.state.coursedetails[chpIndex].lessons.findIndex(d => {
-                return d.id === id
-            });
-            const chapters = [...this.state.coursedetails];
-            chapters[chpIndex].lessons[lessonIndex].lessonname = title;
-            chapters[chpIndex].lessons[lessonIndex].description = description;
+            const updatedLectureDetails = {
+                lecturetitle: title,
+                lectureintro: description,
+                lecturevideo: lecturevideo
+            }
+            axios.patch('/lecture/' + contentid + '/update', updatedLectureDetails)
+                .then(response => {
+                    const secIndex = this.state.sectionentitys.findIndex(d => {
+                        return d.section_id === sectionid
+                    });
+                    const updatedsection = this.state.sectionentitys[secIndex]
+                    const lecIndex = updatedsection.lectureentitys.findIndex(d => {
+                        return d.lecture_id === contentid
+                    })
+                    updatedsection.lectureentitys[lecIndex].lecturetitle = response.data.lecturetitle;
+                    updatedsection.lectureentitys[lecIndex].lectureintro = response.data.lectureintro
+                    updatedsection.lectureentitys[lecIndex].lecturevideo = response.data.lecturevideo
 
-            this.setState({
-                coursedetails: chapters
-            });
+                    this.setState({
+                        ...this.state.sectionentitys[secIndex].lectureentitys,
+                        [lecIndex]: updatedsection.lectureentitys[lecIndex],
+                    })
+                })
+                .catch(error => { alert(error.message) })
+
         };
     };
 
-    deleteLectureHandler = (id, chpid) => {
-        if (chpid === null) {
-            const detailIndex = this.state.coursedetails.findIndex(d => {
-                return d.id === id
-            });
-            const chapters = [...this.state.coursedetails];
-            chapters.splice(detailIndex, 1);
-
-            this.setState({
-                coursedetails: chapters
-            });
+    deleteContentHandler = (sectionid, contentid) => {
+        if (sectionid === null) {
+            axios.delete('/section/' + contentid)
+                .then(response => {
+                    const secIndex = this.state.sectionentitys.findIndex(d => {
+                        return d.section_id === contentid
+                    });
+                    const sectionentitys = [...this.state.sectionentitys];
+                    sectionentitys.splice(secIndex, 1);
+                    this.setState({
+                        sectionentitys: sectionentitys
+                    });
+                })
+                .catch(error => {
+                    alert(error.message)
+                })
         }
         else {
-            const chpIndex = this.state.coursedetails.findIndex(d => {
-                return d.id === chpid
-            });
-            const lessonIndex = this.state.coursedetails[chpIndex].lessons.findIndex(d => {
-                return d.id === id
-            });
-            const chapters = [...this.state.coursedetails];
-            chapters[chpIndex].lessons.splice(lessonIndex, 1);
-
-            this.setState({
-                coursedetails: chapters
-            });
+            axios.delete('/lecture/' + contentid)
+                .then(response => {
+                    const secIndex = this.state.sectionentitys.findIndex(d => {
+                        return d.section_id === sectionid
+                    });
+                    const updatedsection = this.state.sectionentitys[secIndex]
+                    const lecIndex = updatedsection.lectureentitys.findIndex(d => {
+                        return d.lecture_id === contentid
+                    })
+                    updatedsection.lectureentitys.splice(lecIndex, 1)
+                    this.setState({
+                        ...this.state.sectionentitys[secIndex],
+                        lectureentitys: updatedsection.lectureentitys
+                    });
+                })
+                .catch(error => {
+                    alert(error.message)
+                })
         };
     };
+
+    deleteExamHandler = (sectionid, examid) => {
+        axios.delete('/exam/' + examid)
+            .then(response => {
+                const secIndex = this.state.sectionentitys.findIndex(d => {
+                    return d.section_id === sectionid
+                });
+                const updatedsection = this.state.sectionentitys[secIndex]
+                const examIndex = updatedsection.examentitys.findIndex(d => {
+                    return d.exam_id === examid
+                })
+                updatedsection.examentitys.splice(examIndex, 1)
+                this.setState({
+                    ...this.state.sectionentitys[secIndex],
+                    examentitys: updatedsection.examentitys
+                });
+            })
+            .catch(error => {
+                alert(error.message)
+            })
+    }
 
     render() {
         let i = 0;
@@ -191,54 +260,74 @@ class CourseContent extends Component {
         return (
             <div className="fullscreen">
                 <section id="previouscontent">
-                    <div className="container">
-                        <h4>{this.state.coursename}</h4>
+                    {this.state.coursetitle ?
+                        <div className="container">
+                            <h4>{this.state.coursetitle}</h4>
 
-                        <CourseInfo
-                            coursename={this.state.coursename}
-                            targetaudiance={this.state.targetaudiance}
-                            subject={this.state.subject}
-                            introduction={this.state.introduction}
-                            editinfo={this.courseInfoHandler} />
+                            <CourseDetails
+                                coursetitle={this.state.coursetitle}
+                                targetaudience_id={this.state.targetaudience_id}
+                                subject_id={this.state.subject_id}
+                                courseintro={this.state.courseintro}
+                                fee={this.state.fee}
+                                updatecoursehandler={this.updateCourseHandler} />
 
-                        {this.state.coursedetails.map((chapter) => {
-                            return <div className="row" id="individualchapter" key={chapter.id}>
-                                <div id="chaptername">
-                                    <span>{i = i + 1}.  {chapter.chaptername}</span>
+                            {this.state.sectionentitys.map((section) => {
+                                return <div className="row" id="individualchapter" key={section.section_id}>
+                                    <div id="chaptername">
+                                        <span>{i = i + 1}.  {section.sectiontitle}</span>
 
-                                    <EditButtons
-                                        chpid={null}
-                                        contentid={chapter.id}
-                                        title={chapter.chaptername}
-                                        description={chapter.description}
-                                        editsubmit={this.editHandler}
-                                        delete={this.deleteLectureHandler} />
-                                </div>
-
-                                {chapter.lessons.map((lesson) => {
-                                    return < div id="individualcontent" key={lesson.id} >
-                                        <span>{j = j + 1}.  {lesson.lessonname}
-                                            <EditButtons
-                                                chpid={chapter.id}
-                                                contentid={lesson.id}
-                                                title={lesson.lessonname}
-                                                description={lesson.description}
-                                                isexam={lesson.isexam}
-                                                editsubmit={this.editHandler}
-                                                delete={this.deleteLectureHandler} />
-                                        </span>
+                                        <EditButtons
+                                            sectionid={null}
+                                            contentid={section.section_id}
+                                            title={section.sectiontitle}
+                                            description={section.sectionintro}
+                                            updatecontenthandler={this.updateContentHandler}
+                                            deletecontenthandler={this.deleteContentHandler} />
                                     </div>
-                                })}
-                            </div>
-                        })}
-                    </div>
+
+                                    {section.lectureentitys.map((lecture) => {
+                                        return < div id="individualcontent" key={lecture.lecture_id} >
+                                            <span>{j = j + 1}.  {lecture.lecturetitle}
+                                                <EditButtons
+                                                    sectionid={section.section_id}
+                                                    contentid={lecture.lecture_id}
+                                                    title={lecture.lecturetitle}
+                                                    description={lecture.lectureintro}
+                                                    lecturevideo={lecture.lecturevideo}
+                                                    updatecontenthandler={this.updateContentHandler}
+                                                    deletecontenthandler={this.deleteContentHandler} />
+                                            </span>
+                                        </div>
+                                    })}
+
+                                    {section.examentitys.map((exam) => {
+                                        return < div id="individualcontent" key={exam.exam_id} >
+                                            <span>{j = j + 1}.  {exam.examtitle}
+                                                <EditButtons
+                                                    sectionid={section.section_id}
+                                                    contentid={exam.exam_id}
+                                                    title={exam.examtitle}
+                                                    description={exam.examinstruction}
+                                                    isexam={true}
+                                                    deletecontenthandler={this.deleteExamHandler} />
+                                            </span>
+                                        </div>
+                                    })}
+                                    <AddNewButtons
+                                        insidesection={true}
+                                        sectionid={section.section_id}
+                                        newlecturehandler={this.newLectureHandler}
+                                        newexamhandler={this.newExamHandler} />
+                                </div>
+                            })}
+                        </div>
+                        : null}
                 </section>
 
                 <AddNewButtons
-                    disablebutton={this.state.coursedetails.length}
-                    newchaptersubmit={this.newChapterHandler}
-                    newlessonsubmit={this.newLessonHandler}
-                    newexamsubmit={this.newExamHandler} />
+                    insidesection={false}
+                    newsectionhandler={this.newSectionHandler} />
             </div>
         )
     }

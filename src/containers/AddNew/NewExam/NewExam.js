@@ -3,8 +3,9 @@ import { Form, Col, Row, Button } from 'react-bootstrap';
 
 class NewExam extends Component {
     state = {
-        examname: '',
-        instructions: ''
+        examtitle: '',
+        examinstruction: '',
+        duration: ''
     }
 
     inputChangeHandler = (e) => {
@@ -13,11 +14,12 @@ class NewExam extends Component {
         })
     }
 
-    inputClearer = () => {
-        this.props.newexamsubmit(this.state.examname, this.state.instructions);
+    newExamHandler = () => {
+        this.props.newexamhandler(this.props.sectionid, this.state.examtitle, this.state.examinstruction, this.state.duration);
         this.setState({
-            examname: '',
-            instructions: ''
+            examtitle: '',
+            examinstruction: '',
+            duration: ''
         });
         this.props.closetab('Exam');
     }
@@ -27,7 +29,7 @@ class NewExam extends Component {
             <section id="addnew">
                 <div className="container">
                     <div className="row">
-                        <p>{this.state.examname}</p>
+                        <p>{this.state.examtitle}</p>
                         <Form>
                             <Form.Group as={Row} >
                                 <Form.Label column sm={2}>Test Title</Form.Label>
@@ -35,8 +37,8 @@ class NewExam extends Component {
                                     <Form.Control
                                         id="noborder"
                                         type="text"
-                                        name="examname"
-                                        value={this.state.examname}
+                                        name="examtitle"
+                                        value={this.state.examtitle}
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
@@ -48,8 +50,19 @@ class NewExam extends Component {
                                         id="noborder"
                                         as="textarea"
                                         rows="2"
-                                        name="instructions"
-                                        value={this.state.instructions}
+                                        name="examinstruction"
+                                        value={this.state.examinstruction}
+                                        onChange={this.inputChangeHandler} />
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} >
+                                <Form.Label column sm={2}>Duration</Form.Label>
+                                <Col sm={10}>
+                                    <Form.Control
+                                        id="noborder"
+                                        type="number"
+                                        name="duration"
+                                        value={this.state.duration}
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
@@ -57,7 +70,7 @@ class NewExam extends Component {
                             <Button
                                 className="float-right"
                                 variant="outline-dark"
-                                onClick={this.inputClearer}>
+                                onClick={this.newExamHandler}>
                                 Add
                             </Button>
                         </Form>

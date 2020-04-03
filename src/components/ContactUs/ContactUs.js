@@ -8,34 +8,33 @@ import './ContactUs.css';
 
 class ContactUs extends Component {
     state = {
-        id: '',
-        mobilenum: ' ',
-        show: false
+        showmodal: false,
     }
 
     inputChangeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
-            id: e.target.value
         })
     }
 
-    submitContactnumHandler = () => {
+    submitHandler = () => {
         const num = {
-            id: this.state.mobilenum,
-            mobileno: this.state.mobilenum,
+            mobile: this.state.mobile,
             time: new Date()
         }
-        axios.post('/contactdata/teacher', num)
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
 
-        this.closeHandler()
+        axios.post('/contactdata/teacher', num)
+            .then(response => {
+                this.modalHandler()
+            })
+            .catch(error => {
+                alert(error.message)
+            })
     }
 
-    closeHandler = () => {
+    modalHandler = () => {
         this.setState({
-            show: !this.state.show
+            showmodal: !this.state.showmodal
         })
     }
 
@@ -53,14 +52,14 @@ class ContactUs extends Component {
                                     <Form.Label>Please Enter Your Mobile Number</Form.Label>
                                     <Form.Control
                                         id="noborder"
-                                        name="mobilenum"
+                                        name="mobile"
                                         type="number"
                                         placeholder="0000000000"
                                         onChange={this.inputChangeHandler} />
                                 </Form.Group>
                                 <Button
                                     variant="outline-dark"
-                                    onClick={this.submitContactnumHandler}>
+                                    onClick={this.submitHandler}>
                                     Contact Me
                                 </Button>
                             </Form>
@@ -70,14 +69,14 @@ class ContactUs extends Component {
                             <h6>Want to reach us?</h6>
                             <p>You can reach us at</p>
                             <p>email: contactus@ganety.com</p>
-                            <p>Phone No.: +91 9433333333</p>
+                            <p>Phone No.: +91 9404168827</p>
                         </div>
                     </div>
                 </div>
 
                 <CustMobNoModal
-                    show={this.state.show}
-                    closestatus={this.closeHandler} />
+                    showmodal={this.state.showmodal}
+                    modalhandler={this.modalHandler} />
             </div >
         )
     }

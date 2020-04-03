@@ -21,7 +21,6 @@ class QueEditButton extends Component {
         })
     }
 
-
     render() {
         return (
             <div>
@@ -40,21 +39,25 @@ class QueEditButton extends Component {
 
 
                 <QueDeleteModal
-                    index={this.props.index}
+                    queIndex={this.props.queIndex}
+                    queid={this.props.queid}
                     show={this.state.showdeletemodal}
                     showdeletemodal={this.showDeleteModalHandler}
-                    deletequestion={this.props.deletequestion} />
+                    deletequestionhandler={this.props.deletequestionhandler} />
 
                 <QueEditModal
-                    index={this.props.index}
+                    queIndex={this.props.queIndex}
+                    queid={this.props.queid}
                     que={this.props.que}
                     opt1={this.props.opt1}
                     opt2={this.props.opt2}
                     opt3={this.props.opt3}
                     opt4={this.props.opt4}
+                    answer={this.props.answer}
+                    queimage={this.props.queimage}
                     show={this.state.showeditmodal}
                     showeditmodal={this.showEditModalHandler}
-                    editquestion={this.props.editquestion} />
+                    updatequestionhandler={this.props.updatequestionhandler} />
             </div >
         )
     }

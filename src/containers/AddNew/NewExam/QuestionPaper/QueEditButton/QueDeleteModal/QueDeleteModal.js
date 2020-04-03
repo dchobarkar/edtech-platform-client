@@ -22,7 +22,7 @@ const QueDeleteModal = (props) => (
             <Button
                 className="float-right"
                 variant="outline-dark"
-                onClick={() => props.deletequestion(props.index)}>
+                onClick={() => props.deletequestionhandler(props.queIndex, props.queid)}>
                 Delete
             </Button>
         </Modal.Footer>

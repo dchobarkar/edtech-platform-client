@@ -5,8 +5,9 @@ import './QueInstructionBox.css';
 
 class QueInstructionBox extends Component {
     state = {
-        examname: this.props.examname,
-        instructions: this.props.instructions,
+        examtitle: this.props.examtitle,
+        examinstruction: this.props.examinstruction,
+        duration: this.props.duration,
         show: false,
         edit: false
     }
@@ -17,7 +18,7 @@ class QueInstructionBox extends Component {
         })
     }
 
-    showExamInfoHandler = () => {
+    showExamDetailsHandler = () => {
         this.setState({
             show: !this.state.show,
             edit: false
@@ -33,14 +34,15 @@ class QueInstructionBox extends Component {
         this.setState({
             show: !this.state.show,
             edit: !this.state.edit,
-            examname: this.props.examname,
-            instructions: this.props.instructions
+            examtitle: this.props.examtitle,
+            examinstruction: this.props.examinstruction,
+            duration: this.props.duration,
         })
     }
 
-    saveeditinfo = () => {
-        this.props.editexam(this.state.examname, this.state.instructions);
-        this.showExamInfoHandler();
+    updateExamHandler = () => {
+        this.props.updateexamhandler(this.state.examtitle, this.state.examinstruction, this.state.duration);
+        this.showExamDetailsHandler();
     }
 
     render() {
@@ -52,7 +54,7 @@ class QueInstructionBox extends Component {
                 <div className="row" id="showexaminstructionsbutton">
                     <Button
                         variant="light"
-                        onClick={this.showExamInfoHandler}>
+                        onClick={this.showExamDetailsHandler}>
                         <i className="fas fa-info-circle"></i>
                         Instructions
                     </Button>
@@ -66,8 +68,8 @@ class QueInstructionBox extends Component {
                                     disabled={disable}
                                     id="noborder"
                                     type="text"
-                                    name="examname"
-                                    value={this.state.examname}
+                                    name="examtitle"
+                                    value={this.state.examtitle}
                                     onChange={this.inputChangeHandler} />
                             </Form.Group>
 
@@ -77,8 +79,17 @@ class QueInstructionBox extends Component {
                                     id="noborder"
                                     as="textarea"
                                     rows="4"
-                                    name="instructions"
-                                    value={this.state.instructions}
+                                    name="examinstruction"
+                                    value={this.state.examinstruction}
+                                    onChange={this.inputChangeHandler} />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Control
+                                    disabled={disable}
+                                    id="noborder"
+                                    type="number"
+                                    name="duration"
+                                    value={this.state.duration}
                                     onChange={this.inputChangeHandler} />
                             </Form.Group>
                         </Form>
@@ -95,7 +106,7 @@ class QueInstructionBox extends Component {
                             <div>
                                 <Button
                                     variant="light"
-                                    onClick={this.saveeditinfo}>
+                                    onClick={this.updateExamHandler}>
                                     <i className="far fa-save"></i>
                                     Save
                                 </Button>
@@ -105,7 +116,6 @@ class QueInstructionBox extends Component {
                                     Discard Changes
                                 </Button>
                             </div> : null}
-
                     </div > : null}
             </div >
         )

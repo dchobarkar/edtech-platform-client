@@ -7,17 +7,20 @@ class QueEditModal extends Component {
         opt1: this.props.opt1,
         opt2: this.props.opt2,
         opt3: this.props.opt3,
-        opt4: this.props.opt4
+        opt4: this.props.opt4,
+        answer: this.props.answer,
+        queimage: this.props.queimage
     }
 
     inputChangeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
+        console.log(this.state)
     }
 
-    saveEditHandler = () => {
-        this.props.editquestion(this.props.index, this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4);
+    updateQuestionHandler = () => {
+        this.props.updatequestionhandler(this.props.queIndex, this.props.queid, this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4, this.state.answer, this.state.queimage);
         this.props.showeditmodal();
     }
 
@@ -27,7 +30,9 @@ class QueEditModal extends Component {
             opt1: this.props.opt1,
             opt2: this.props.opt2,
             opt3: this.props.opt3,
-            opt4: this.props.opt4
+            opt4: this.props.opt4,
+            answer: this.props.answer,
+            queimage: this.props.queimage
         });
         this.props.showeditmodal();
     }
@@ -56,7 +61,7 @@ class QueEditModal extends Component {
                             <Col sm={10}>
                                 <Form.Control
                                     type="file"
-                                    name="fig"
+                                    name="queimage"
                                 />
                             </Col>
                         </Form.Group>
@@ -108,6 +113,23 @@ class QueEditModal extends Component {
                                 </Col>
                             </Form.Group>
                         </Form.Row>
+
+                        <Form.Group >
+                            <Col lg={6}>
+                                <Form.Label>Answer</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="answer"
+                                    value={this.state.answer}
+                                    onChange={this.inputChangeHandler}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </Form.Control>
+                            </Col>
+                        </Form.Group>
+
                     </Form>
                 </Modal.Body>
 
@@ -120,7 +142,7 @@ class QueEditModal extends Component {
 
                     <Button
                         variant="outline-dark"
-                        onClick={this.saveEditHandler}>
+                        onClick={this.updateQuestionHandler}>
                         Save
                     </Button>
                 </Modal.Footer>

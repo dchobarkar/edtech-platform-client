@@ -28,8 +28,8 @@ class EditButtons extends Component {
         })
     }
 
-    returnEditHandler = (chpid, contentid, title, description) => {
-        this.props.editsubmit(chpid, contentid, title, description);
+    updateContentHandler = (sectionid, contentid, title, description, lecturevideo) => {
+        this.props.updatecontenthandler(sectionid, contentid, title, description, lecturevideo);
         this.showEditModalHandler();
     }
 
@@ -42,7 +42,7 @@ class EditButtons extends Component {
         </Button>
     )
     ExamButton = () => (
-        <Link to={"/questionpaper"}>
+        <Link to={"/questionpaper/" + this.props.contentid}>
             <Button
                 className="float-right"
                 variant="light">
@@ -51,9 +51,10 @@ class EditButtons extends Component {
         </Link>
     )
 
+
     render() {
         let showplaybutton = true;
-        if (this.props.chpid === null || this.props.isexam === true)
+        if (this.props.sectionid === null || this.props.isexam === true)
             showplaybutton = false;
 
         return (
@@ -84,19 +85,20 @@ class EditButtons extends Component {
 
                 <EditModal
                     show={this.state.showeditmodal}
-                    chpid={this.props.chpid}
+                    sectionid={this.props.sectionid}
                     contentid={this.props.contentid}
                     title={this.props.title}
-                    des={this.props.description}
+                    description={this.props.description}
+                    lecturevideo={this.props.lecturevideo}
                     showeditmodal={this.showEditModalHandler}
-                    editsubmit={this.returnEditHandler} />
+                    updatecontenthandler={this.updateContentHandler} />
 
                 <DeleteModal
                     show={this.state.showdeletemodal}
-                    chpid={this.props.chpid}
+                    sectionid={this.props.sectionid}
                     contentid={this.props.contentid}
-                    delete={this.props.delete}
-                    showdeletemodal={this.showDeleteModalHandler} />
+                    showdeletemodal={this.showDeleteModalHandler}
+                    deletecontenthandler={this.props.deletecontenthandler} />
             </div >
         )
     }
