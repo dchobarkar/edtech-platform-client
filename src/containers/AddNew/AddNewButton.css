@@ -5,14 +5,11 @@
 #addbutton .container {
   width: 100%;
 }
-
 #addbutton button {
   margin: 5px auto;
-  float: left;
 }
 
 #addnew {
-  padding-top: 2%;
   width: 100%;
 }
 #addnew p,

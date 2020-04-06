@@ -51,7 +51,6 @@ class EditButtons extends Component {
         </Link>
     )
 
-
     render() {
         let showplaybutton = true;
         if (this.props.sectionid === null || this.props.isexam === true)

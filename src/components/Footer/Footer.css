@@ -1,8 +1,6 @@
 #footer {
-  text-align: center;
-  background-color: rgb(52, 58, 64);
-  padding: 10px 5px;
-  color: aliceblue;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 7px 5px;
 }
 #footer .row {
   justify-content: center;

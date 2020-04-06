@@ -5,20 +5,15 @@
   text-align: center;
   padding: 2%;
 }
-
-#cardadd {
-  width: 15rem;
-  margin: 10px auto;
-  text-decoration-line: none;
+#mycourse .row {
+  margin: 2%;
 }
 
-#plussign {
-  padding: 0 8%;
-}
-
-#card {
-  width: 15rem;
-  margin: 10px auto;
+#carddiv {
+  width: 16rem;
+  margin: 0 auto;
+  padding: 2%;
+  max-height: 450px;
 }
 
 #cardbutton {

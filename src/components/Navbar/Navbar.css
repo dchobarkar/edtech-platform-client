@@ -1,17 +1,22 @@
-#dropdownitem {
-  color: black;
-  text-decoration-line: none;
+.dropdownitem {
+  margin-left: 5px;
 }
 
-#navmenucolor {
-  color: white;
+.ganety_navbar {
+  background: rgba(0, 0, 0, 0.6);
 }
-
-#link {
-  color: aliceblue;
-  text-decoration: none;
-  background-color: none;
+.ganety_navbar .nav-link {
+  padding: 1.2em 1em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 400;
 }
-#link:hover {
-  color: aqua;
+@media (max-width: 991px) {
+  .ganety_navbar .nav-link {
+    padding: 0.5em 0;
+  }
+}
+.ganety_navbar .nav-link.active {
+  color: #fff;
 }

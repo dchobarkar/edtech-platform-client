@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, Button, Form, Col, Row } from 'react-bootstrap';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+
+import DModal from '../../../../components/DModal/DModal';
 
 class EditModal extends Component {
     state = {
@@ -24,7 +26,7 @@ class EditModal extends Component {
     }
 
     LectureVideo = () => (
-        <Form.Group as={Row}>
+        <Form.Group as={Row} className="inputfield">
             <Form.Label column sm={2}>Video</Form.Label>
             <Col sm={10}>
                 <Form.Control
@@ -36,56 +38,49 @@ class EditModal extends Component {
 
     render() {
         return (
-            <Modal centered
+            <DModal
                 show={this.props.show}
-                onHide={this.discardChangeHandler}>
-                <Modal.Header closeButton></Modal.Header>
+                modalhandler={this.discardChangeHandler}>
+                <Form>
+                    <Form.Group as={Row} className="inputfield">
+                        <Form.Label column sm={2}>Title</Form.Label>
+                        <Col sm={10}>
+                            <Form.Control
+                                type="text"
+                                name="title"
+                                value={this.state.title}
+                                onChange={this.inputChangeHandler} />
+                        </Col>
+                    </Form.Group>
 
-                <Modal.Body >
-                    <Form>
-                        <Form.Group as={Row}>
-                            <Form.Label column sm={2}>Title</Form.Label>
-                            <Col sm={10}>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    name="title"
-                                    value={this.state.title}
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
+                    <Form.Group as={Row} className="inputfield">
+                        <Form.Label column sm={2}>Description</Form.Label>
+                        <Col sm={10}>
+                            <Form.Control
+                                as="textarea"
+                                rows="2"
+                                name="description"
+                                value={this.state.description}
+                                onChange={this.inputChangeHandler} />
+                        </Col>
+                    </Form.Group>
 
-                        <Form.Group as={Row}>
-                            <Form.Label column sm={2}>Description</Form.Label>
-                            <Col sm={10}>
-                                <Form.Control
-                                    id="noborder"
-                                    as="textarea"
-                                    rows="2"
-                                    name="description"
-                                    value={this.state.description}
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
+                    {this.props.sectionid ? <this.LectureVideo /> : null}
+                </Form>
 
-                        {this.props.sectionid ? <this.LectureVideo /> : null}
-                    </Form>
-                </Modal.Body>
+                <Button
+                    variant="outline-dark"
+                    onClick={this.discardChangeHandler}>
+                    Discard Changes
+                </Button>
 
-                <Modal.Footer>
-                    <Button
-                        variant="outline-dark"
-                        onClick={this.discardChangeHandler}>
-                        Discard Changes
-                    </Button>
-
-                    <Button
-                        variant="outline-dark"
-                        onClick={() => this.props.updatecontenthandler(this.props.sectionid, this.props.contentid, this.state.title, this.state.description, this.state.lecturevideo)}>
-                        Save
-                    </Button>
-                </Modal.Footer>
-            </Modal >
+                <Button
+                    className="float-right"
+                    variant="outline-dark"
+                    onClick={() => this.props.updatecontenthandler(this.props.sectionid, this.props.contentid, this.state.title, this.state.description, this.state.lecturevideo)}>
+                    Save
+                </Button>
+            </DModal >
         )
     }
 }

@@ -31,11 +31,10 @@ class NewExam extends Component {
                     <div className="row">
                         <p>{this.state.examtitle}</p>
                         <Form>
-                            <Form.Group as={Row} >
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Test Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
-                                        id="noborder"
                                         type="text"
                                         name="examtitle"
                                         value={this.state.examtitle}
@@ -43,11 +42,10 @@ class NewExam extends Component {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} >
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Instructions</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
-                                        id="noborder"
                                         as="textarea"
                                         rows="2"
                                         name="examinstruction"
@@ -55,11 +53,11 @@ class NewExam extends Component {
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} >
+
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Duration</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
-                                        id="noborder"
                                         type="number"
                                         name="duration"
                                         value={this.state.duration}

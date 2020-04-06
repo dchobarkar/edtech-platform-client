@@ -55,38 +55,35 @@ class QueInstructionBox extends Component {
                     <Button
                         variant="light"
                         onClick={this.showExamDetailsHandler}>
-                        <i className="fas fa-info-circle"></i>
-                        Instructions
+                        <i className="fas fa-info-circle"></i> Instructions
                     </Button>
                 </div>
 
                 {this.state.show ?
                     <div className="row" id="examinstructionedit">
                         <Form>
-                            <Form.Group>
+                            <Form.Group className="inputfield">
                                 <Form.Control
                                     disabled={disable}
-                                    id="noborder"
                                     type="text"
                                     name="examtitle"
                                     value={this.state.examtitle}
                                     onChange={this.inputChangeHandler} />
                             </Form.Group>
 
-                            <Form.Group>
+                            <Form.Group className="inputfield">
                                 <Form.Control
                                     disabled={disable}
-                                    id="noborder"
                                     as="textarea"
                                     rows="4"
                                     name="examinstruction"
                                     value={this.state.examinstruction}
                                     onChange={this.inputChangeHandler} />
                             </Form.Group>
-                            <Form.Group>
+
+                            <Form.Group className="inputfield">
                                 <Form.Control
                                     disabled={disable}
-                                    id="noborder"
                                     type="number"
                                     name="duration"
                                     value={this.state.duration}
@@ -98,8 +95,7 @@ class QueInstructionBox extends Component {
                             <Button
                                 variant="light"
                                 onClick={this.showEditHandler}>
-                                <i className="far fa-edit"></i>
-                                Edit
+                                <i className="far fa-edit"></i> Edit
                             </Button>}
 
                         {this.state.edit ?
@@ -107,9 +103,9 @@ class QueInstructionBox extends Component {
                                 <Button
                                     variant="light"
                                     onClick={this.updateExamHandler}>
-                                    <i className="far fa-save"></i>
-                                    Save
+                                    <i className="far fa-save"></i> Save
                                 </Button>
+
                                 <Button
                                     variant="light"
                                     onClick={this.inputClearer}>

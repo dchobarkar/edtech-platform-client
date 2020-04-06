@@ -29,11 +29,10 @@ class NewLecture extends Component {
                     <div className="row">
                         <p>{this.state.lecturetitle}</p>
                         <Form>
-                            <Form.Group as={Row} >
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Lecture Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
-                                        id="noborder"
                                         type="text"
                                         name="lecturetitle"
                                         value={this.state.lecturetitle}
@@ -41,11 +40,10 @@ class NewLecture extends Component {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} >
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Description</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
-                                        id="noborder"
                                         as="textarea"
                                         rows="2"
                                         name="lectureintro"
@@ -54,7 +52,7 @@ class NewLecture extends Component {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row}>
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Video</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control

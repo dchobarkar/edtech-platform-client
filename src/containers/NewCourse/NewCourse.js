@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
 import axios from '../../axios-server';
+
+import LoadingSpinner from '../../components/Spinner/Spinner';
+import DModal from '../../components/DModal/DModal';
 
 import './NewCourse.css';
 
 class NewCourse extends Component {
-    state = {}
+    state = {
+        loading: false,
+        error: false,
+        errormsg: null
+    }
 
     inputChangeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    errorModalHandler = () => {
+        this.setState({ error: false })
     }
 
     newCourseHandler = () => {
@@ -21,113 +30,133 @@ class NewCourse extends Component {
                 "Authorization": "Bearer " + localStorage.authkey
             }
         }
-
         const newCourse = {
             ...this.state
         }
         axios.post('course', newCourse, config)
+            .then(response => { this.props.history.push('/coursecontent/' + response.data.course_id) })
+            .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     }
 
     render() {
+        let newcourseform =
+            <Form className="shadow p-3 mb-5 bg-white rounded">
+                <Form.Group as={Row} className="inputfield">
+                    <Form.Label column sm={2}>Course Title</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Course Title"
+                            name="coursetitle"
+                            onChange={this.inputChangeHandler} />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="inputfield">
+                    <Form.Label column sm={2}>Target Audience</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            as="select"
+                            name="targetaudience_id"
+                            onChange={this.inputChangeHandler}>
+                            <option value="1">8th</option>
+                            <option value="2">9th</option>
+                            <option value="3">10th</option>
+                            <option value="4">11th - PCB</option>
+                            <option value="5">11th - PCM</option>
+                            <option value="6">11th - PCMB</option>
+                            <option value="7">12th - PCB</option>
+                            <option value="8">12th - PCM</option>
+                            <option value="9">12th - PCMB</option>
+                        </Form.Control>
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="inputfield">
+                    <Form.Label column sm={2}>Subject</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            as="select"
+                            name="subject_id"
+                            onChange={this.inputChangeHandler}>
+                            <option value="1">English</option>
+                            <option value="2">Physics</option>
+                            <option value="3">Physics - I</option>
+                            <option value="4">Physics - II</option>
+                            <option value="5">Biology</option>
+                            <option value="6">Biology - I</option>
+                            <option value="7">Biology - II</option>
+                            <option value="8">Chemistry</option>
+                            <option value="9">Chemistry - I</option>
+                            <option value="10">Chemistry - II</option>
+                            <option value="11">Mathematics</option>
+                            <option value="12">Mathematics - I</option>
+                            <option value="13">Mathematics - II</option>
+                            <option value="14">Science</option>
+                            <option value="15">Science - I</option>
+                            <option value="16">Science - II</option>
+                            <option value="17">Marathi</option>
+                            <option value="18">History</option>
+                            <option value="19">Geography</option>
+                        </Form.Control>
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="inputfield">
+                    <Form.Label column sm={2}>Course Fee</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="number"
+                            placeholder="Course Fee"
+                            name="fee"
+                            onChange={this.inputChangeHandler} />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="inputfield">
+                    <Form.Label column sm={2}>Course Introduction</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            as="textarea"
+                            rows="5"
+                            placeholder="Course Introduction"
+                            name="courseintro"
+                            onChange={this.inputChangeHandler} />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row}>
+                    <Col sm={{ span: 10, offset: 2 }}>
+                        <Button
+                            className="float-right"
+                            variant="outline-dark"
+                            onClick={this.newCourseHandler}>
+                            Add Course
+                        </Button>
+                    </Col>
+                </Form.Group>
+            </Form>
+
+        if (this.state.loading) {
+            newcourseform = <LoadingSpinner />
+        }
+
         return (
             <div className="fullscreen">
                 <div className="container" id="newcoursesetup">
                     <h4>New Course Setup</h4>
 
-                    <Form className="shadow p-3 mb-5 bg-white rounded">
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={2}>Course Title</Form.Label>
-                            <Col sm={10}>
-                                <Form.Control
-                                    id="noborder"
-                                    type="text"
-                                    placeholder="Title"
-                                    name="coursetitle"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
+                    {newcourseform}
 
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={2}>Target Audience</Form.Label>
-                            <Col sm={10}>
-                                <Form.Control
-                                    id="noborder"
-                                    as="select"
-                                    name="targetaudience_id"
-                                    onChange={this.inputChangeHandler}>
-                                    <option value="1">8th</option>
-                                    <option value="2">9th</option>
-                                    <option value="3">10th</option>
-                                    <option value="4">11th - PCB</option>
-                                    <option value="5">11th - PCM</option>
-                                    <option value="6">11th - PCMB</option>
-                                    <option value="7">12th - PCB</option>
-                                    <option value="8">12th - PCM</option>
-                                    <option value="9">12th - PCMB</option>
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
-
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={2}>Subject</Form.Label>
-                            <Col sm={10}>
-                                <Form.Control
-                                    id="noborder"
-                                    as="select"
-                                    name="subject_id"
-                                    onChange={this.inputChangeHandler}>
-                                    <option value="1">English</option>
-                                    <option value="2">Physics</option>
-                                    <option value="3">Biology</option>
-                                    <option value="4">Chemistry</option>
-                                    <option value="5">Mathematics</option>
-                                    <option value="6">Science</option>
-                                    <option value="7">Marathi</option>
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
-
-                        <Form.Group as={Row} >
-                            <Form.Label column sm={2}>Course Fee</Form.Label>
-                            <Col sm={10}>
-                                <Form.Control
-                                    id="noborder"
-                                    type="number"
-                                    placeholder="Course Fee"
-                                    name="fee"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
-
-
-                        <Form.Group as={Row}>
-                            <Form.Label column sm={2}>Course Introduction</Form.Label>
-                            <Col sm={10}>
-                                <Form.Control
-                                    id="noborder"
-                                    as="textarea"
-                                    rows="5"
-                                    placeholder="Course Introduction"
-                                    name="courseintro"
-                                    onChange={this.inputChangeHandler} />
-                            </Col>
-                        </Form.Group>
-
-
-                        <Form.Group as={Row}>
-                            <Col sm={{ span: 10, offset: 2 }}>
-                                {/* <Link to="/coursecontent"> */}
-                                <Button
-                                    onClick={this.newCourseHandler}
-                                    className="float-right"
-                                    variant="outline-dark">
-                                    Add Course
-                                    </Button>
-                                {/* </Link> */}
-                            </Col>
-                        </Form.Group>
-
-                    </Form>
+                    {this.state.error ?
+                        <DModal show={this.state.error}
+                            modalhandler={this.errorModalHandler}>
+                            {Array.isArray(this.state.errormsg) ?
+                                <>
+                                    {this.state.errormsg.map((msg, Index) => { return <p key={Index}>{msg}</p> })}
+                                </>
+                                : < p > {this.state.errormsg}</p>}
+                        </DModal> : null}
                 </div>
             </div>
         )

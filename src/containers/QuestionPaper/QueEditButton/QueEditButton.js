@@ -37,7 +37,6 @@ class QueEditButton extends Component {
                     <i className="far fa-edit"></i>
                 </Button>
 
-
                 <QueDeleteModal
                     queIndex={this.props.queIndex}
                     queid={this.props.queid}
@@ -61,7 +60,6 @@ class QueEditButton extends Component {
             </div >
         )
     }
-
 }
 
 export default QueEditButton;

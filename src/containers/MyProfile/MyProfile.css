@@ -12,6 +12,7 @@
   width: 100%;
   height: auto;
   border-radius: 7px;
+  padding-bottom: 7px;
 }
 
 #tutioninfotable {
@@ -19,6 +20,7 @@
 }
 
 #tutionwelcomenote {
+  text-align: justify;
   padding: 5px;
   margin: 10px;
 }

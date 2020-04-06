@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
-import './NewQuestion.css'
+import './NewQuestion.css';
 
 class NewQuestion extends Component {
     state = {
@@ -38,9 +38,8 @@ class NewQuestion extends Component {
                 {this.state.show ?
                     <div className="row">
                         <Form className="shadow p-2 bg-white rounded">
-                            <Form.Group>
+                            <Form.Group className="inputfield">
                                 <Form.Control
-                                    id="noborder"
                                     as="textarea"
                                     rows="2"
                                     placeholder="Question"
@@ -48,7 +47,7 @@ class NewQuestion extends Component {
                                     onChange={this.inputChangeHandler} />
                             </Form.Group>
 
-                            <Form.Group as={Row}>
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Figure</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
@@ -58,10 +57,9 @@ class NewQuestion extends Component {
                             </Form.Group>
 
                             <Form.Row>
-                                <Form.Group>
+                                <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
-                                            id="noborder"
                                             type="text"
                                             placeholder="Option 1"
                                             name="opt1"
@@ -69,10 +67,9 @@ class NewQuestion extends Component {
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group >
+                                <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
-                                            id="noborder"
                                             type="text"
                                             placeholder="Option 2"
                                             name="opt2"
@@ -82,10 +79,9 @@ class NewQuestion extends Component {
                             </Form.Row>
 
                             <Form.Row>
-                                <Form.Group >
+                                <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
-                                            id="noborder"
                                             type="text"
                                             placeholder="Option 3"
                                             name="opt3"
@@ -93,10 +89,9 @@ class NewQuestion extends Component {
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group >
+                                <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
-                                            id="noborder"
                                             type="text"
                                             placeholder="Option 4"
                                             name="opt4"
@@ -105,7 +100,7 @@ class NewQuestion extends Component {
                                 </Form.Group>
                             </Form.Row>
 
-                            <Form.Group >
+                            <Form.Group className="inputfield">
                                 <Col lg={6}>
                                     <Form.Label>Answer</Form.Label>
                                     <Form.Control
@@ -133,16 +128,6 @@ class NewQuestion extends Component {
             </div>
         )
     }
-
 }
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         newquestionregister: (newque) => dispatch({
-//             type: actions.NEWQUESTIONREGISTER, value: { newque }
-//         })
-//     }
-// }
-
-// export default connect(null, mapDispatchToProps)(NewQuestion);
 export default NewQuestion;

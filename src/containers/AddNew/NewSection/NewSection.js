@@ -29,11 +29,10 @@ class NewSection extends Component {
                     <div className="row">
                         <p>{this.state.sectiontitle}</p>
                         <Form>
-                            <Form.Group as={Row}>
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Section Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
-                                        id="noborder"
                                         type="text"
                                         name="sectiontitle"
                                         value={this.state.sectiontitle}
@@ -41,11 +40,10 @@ class NewSection extends Component {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row}>
+                            <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Section Description</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
-                                        id="noborder"
                                         as="textarea"
                                         rows="2"
                                         name="sectionintro"

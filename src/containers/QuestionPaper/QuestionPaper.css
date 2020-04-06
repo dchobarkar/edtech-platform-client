@@ -18,7 +18,10 @@
 #question span {
   padding: 0 2%;
 }
-
-#addnewquestion button {
-  margin-bottom: 2%;
+#question #queimagediv {
+  width: 100%;
+}
+#question #queimagediv img {
+  max-width: 750px;
+  padding: 10px 20%;
 }

@@ -1,10 +1,10 @@
 #loginpage {
-  padding: 8%;
+  padding-top: 8%;
 }
 #loginpage form {
-  width: 250px;
+  max-width: 250px;
 }
 #loginpage p {
-  width: 250px;
+  max-width: 250px;
   padding-top: 60px;
 }

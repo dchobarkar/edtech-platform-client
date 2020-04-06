@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-#noborder {
+.inputfield .form-control {
   border: hidden;
   border-radius: 0%;
   border-bottom: 2px solid gray;

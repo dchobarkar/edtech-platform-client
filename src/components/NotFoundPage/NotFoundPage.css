@@ -1,0 +1,38 @@
+#notfoundpage {
+  padding: 2% 4%;
+}
+#notfoundpage h4 {
+  width: 100%;
+}
+#notfoundpage p {
+  color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  text-align: center;
+}
+
+#ctoprofile {
+  padding-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+#ctoprofile #ctoimage {
+  height: 250px;
+  width: 250px;
+}
+#ctoprofile button {
+  margin: 5px auto;
+  display: block;
+}
+
+#ctofired {
+  padding-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+#ctofired h6 {
+  padding-top: 5px;
+}
+#ctofired #firedimage {
+  height: 250px;
+  width: 250px;
+}
