@@ -25,7 +25,8 @@ class Signup extends Component {
         this.setState({ error: false })
     }
 
-    newUserHandler = () => {
+    newUserHandler = (e) => {
+        e.preventDefault();
         this.setState({ loading: true })
         const user = {
             firstname: this.state.firstname,
@@ -48,11 +49,14 @@ class Signup extends Component {
 
     render() {
         let signup =
-            <Form>
+            <Form onSubmit={(e) => this.newUserHandler(e)}>
                 <Form.Row>
                     <Form.Group as={Col} className="inputfield">
                         <Form.Label>Name</Form.Label>
                         <Form.Control
+                            required
+                            title="Name should only contain alphabets."
+                            pattern="^[a-zA-Z]{0,50}$"
                             type="text"
                             placeholder="Name"
                             name="firstname"
@@ -62,6 +66,9 @@ class Signup extends Component {
                     <Form.Group as={Col} className="inputfield">
                         <Form.Label>Surname</Form.Label>
                         <Form.Control
+                            required
+                            title="Last Name should only contain alphabets."
+                            pattern="^[a-zA-Z]{0,50}$"
                             type="text"
                             placeholder="Surname"
                             name="lastname"
@@ -72,6 +79,9 @@ class Signup extends Component {
                 <Form.Group className="inputfield">
                     <Form.Label>Class Name</Form.Label>
                     <Form.Control
+                        required
+                        title="Class Name should only contain alphabets."
+                        pattern="^[\w\s]{0,100}$"
                         type="text"
                         placeholder="xyz coaching classes"
                         name="classname"
@@ -82,6 +92,9 @@ class Signup extends Component {
                     <Form.Group as={Col} className="inputfield">
                         <Form.Label>Mobile No.</Form.Label>
                         <Form.Control
+                            required
+                            title="Mobile no. should be a valid 10 digit number."
+                            pattern="^[0-9]{10}$"
                             type="text"
                             placeholder="Mobile No."
                             name="mobile"
@@ -91,6 +104,9 @@ class Signup extends Component {
                     <Form.Group as={Col} className="inputfield">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
+                            required
+                            title="Email should be valid."
+                            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
                             type="email"
                             placeholder="Class's Email"
                             name="email"
@@ -101,6 +117,9 @@ class Signup extends Component {
                 <Form.Group className="inputfield">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                        required
+                        title="Password should contain 8 to 20 characters."
+                        pattern="((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).{8,20}$"
                         autoComplete="off"
                         type="password"
                         placeholder="Password"
@@ -111,9 +130,9 @@ class Signup extends Component {
                 <Button
                     className="float-right"
                     variant="outline-dark"
-                    onClick={this.newUserHandler}>
+                    type="submit">
                     Create Account
-            </Button>
+                </Button>
             </Form>
 
         if (this.state.loading) {

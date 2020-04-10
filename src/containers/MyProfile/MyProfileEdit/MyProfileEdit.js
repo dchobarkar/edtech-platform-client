@@ -27,8 +27,8 @@ class MyProfileEdit extends Component {
         this.props.showeditboxhandler()
     }
 
-    submitHandler = () => {
-        this.props.submithandler(this.state.classintro, this.state.country_id, this.state.state_id, this.state.address, this.state.city, this.state.pincode, this.state.bannerimgurl)
+    submitHandler = (e) => {
+        this.props.submithandler(e, this.state.classintro, this.state.country_id, this.state.state_id, this.state.address, this.state.city, this.state.pincode, this.state.bannerimgurl)
         this.inputClearer()
     }
 
@@ -36,11 +36,14 @@ class MyProfileEdit extends Component {
         return (
             <div className="container">
                 <div className="row shadow p-3 mb-5 bg-white rounded" id="editmyinfo">
-                    <Form>
+                    <Form onSubmit={(e) => this.submitHandler(e)}>
                         <Form.Row>
                             <Form.Group as={Col} className="inputfield">
                                 <Form.Label>Country</Form.Label>
                                 <Form.Control
+                                    required
+                                    title="Please select option from given values."
+                                    pattern="^[0-9]+$"
                                     as="select"
                                     name="country_id"
                                     value={this.state.country_id}
@@ -53,6 +56,9 @@ class MyProfileEdit extends Component {
                             <Form.Group as={Col} className="inputfield">
                                 <Form.Label>State</Form.Label>
                                 <Form.Control
+                                    required
+                                    title="Please select option from given values."
+                                    pattern="^[0-9]+$"
                                     as="select"
                                     name="state_id"
                                     value={this.state.state_id}
@@ -102,6 +108,9 @@ class MyProfileEdit extends Component {
                             <Form.Group as={Col} className="inputfield">
                                 <Form.Label>City</Form.Label>
                                 <Form.Control
+                                    required
+                                    title="City can contain alphabets only."
+                                    pattern="^[a-zA-Z]{0,50}$"
                                     type="text"
                                     name="city"
                                     value={this.state.city}
@@ -111,6 +120,9 @@ class MyProfileEdit extends Component {
                             <Form.Group as={Col} className="inputfield">
                                 <Form.Label>Pin Code</Form.Label>
                                 <Form.Control
+                                    required
+                                    title="Please enter a valid 6 digit pincode."
+                                    pattern="^[0-9]{6}$"
                                     type="text"
                                     name="pincode"
                                     value={this.state.pincode}
@@ -122,6 +134,7 @@ class MyProfileEdit extends Component {
                             <Form.Label column sm={4}>Address</Form.Label>
                             <Col sm={8}>
                                 <Form.Control
+                                    required
                                     type="text"
                                     name="address"
                                     value={this.state.address}
@@ -158,7 +171,7 @@ class MyProfileEdit extends Component {
                         <Button
                             className="float-right"
                             variant="outline-dark"
-                            onClick={this.submitHandler}>
+                            type="submit">
                             Save
                         </Button>
                     </Form>

@@ -9,6 +9,11 @@ import './NewCourse.css';
 
 class NewCourse extends Component {
     state = {
+        coursetitle: '',
+        targetaudience_id: "1",
+        subject_id: "1",
+        fee: null,
+        courseintro: '',
         loading: false,
         error: false,
         errormsg: null
@@ -24,7 +29,8 @@ class NewCourse extends Component {
         this.setState({ error: false })
     }
 
-    newCourseHandler = () => {
+    newCourseHandler = (e) => {
+        e.preventDefault();
         let config = {
             headers: {
                 "Authorization": "Bearer " + localStorage.authkey
@@ -34,17 +40,23 @@ class NewCourse extends Component {
             ...this.state
         }
         axios.post('course', newCourse, config)
-            .then(response => { this.props.history.push('/coursecontent/' + response.data.course_id) })
+            .then(response => {
+                this.props.history.push('/coursecontent/' + response.data.course_id)
+                console.log(this.state)
+            })
             .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     }
 
     render() {
         let newcourseform =
-            <Form className="shadow p-3 mb-5 bg-white rounded">
+            <Form className="shadow p-3 mb-5 bg-white rounded" onSubmit={(e) => this.newCourseHandler(e)}>
                 <Form.Group as={Row} className="inputfield">
                     <Form.Label column sm={2}>Course Title</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            required
+                            pattern="^[\w\s]{0,100}$"
+                            title="Please Enter a Valid Course Title."
                             type="text"
                             placeholder="Course Title"
                             name="coursetitle"
@@ -56,6 +68,9 @@ class NewCourse extends Component {
                     <Form.Label column sm={2}>Target Audience</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            required
+                            pattern="^[0-9]+$"
+                            title="Plese select option from given values."
                             as="select"
                             name="targetaudience_id"
                             onChange={this.inputChangeHandler}>
@@ -76,6 +91,9 @@ class NewCourse extends Component {
                     <Form.Label column sm={2}>Subject</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            required
+                            pattern="^[0-9]+$"
+                            title="Plese select option from given values."
                             as="select"
                             name="subject_id"
                             onChange={this.inputChangeHandler}>
@@ -106,6 +124,8 @@ class NewCourse extends Component {
                     <Form.Label column sm={2}>Course Fee</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            required
+                            pattern="^[0-9]+$"
                             type="number"
                             placeholder="Course Fee"
                             name="fee"
@@ -130,12 +150,12 @@ class NewCourse extends Component {
                         <Button
                             className="float-right"
                             variant="outline-dark"
-                            onClick={this.newCourseHandler}>
+                            type="submit">
                             Add Course
                         </Button>
                     </Col>
                 </Form.Group>
-            </Form>
+            </Form >
 
         if (this.state.loading) {
             newcourseform = <LoadingSpinner />

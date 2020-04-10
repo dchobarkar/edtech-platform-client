@@ -28,8 +28,8 @@ class EditButtons extends Component {
         })
     }
 
-    updateContentHandler = (sectionid, contentid, title, description, lecturevideo) => {
-        this.props.updatecontenthandler(sectionid, contentid, title, description, lecturevideo);
+    updateContentHandler = (e, sectionid, contentid, title, description, lecturevideo) => {
+        this.props.updatecontenthandler(e, sectionid, contentid, title, description, lecturevideo);
         this.showEditModalHandler();
     }
 

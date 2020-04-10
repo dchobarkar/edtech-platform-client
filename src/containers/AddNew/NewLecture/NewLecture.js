@@ -13,8 +13,8 @@ class NewLecture extends Component {
         })
     }
 
-    newLectureHandler = () => {
-        this.props.newlecturehandler(this.props.sectionid, this.state.lecturetitle, this.state.lectureintro, this.state.lecturevideo);
+    newLectureHandler = (e) => {
+        this.props.newlecturehandler(e, this.props.sectionid, this.state.lecturetitle, this.state.lectureintro, this.state.lecturevideo);
         this.setState({
             lecturetitle: '',
             lectureintro: ''
@@ -28,11 +28,14 @@ class NewLecture extends Component {
                 <div className="container">
                     <div className="row">
                         <p>{this.state.lecturetitle}</p>
-                        <Form>
+                        <Form onSubmit={(e) => this.newLectureHandler(e)}>
                             <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Lecture Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
+                                        required
+                                        title="Please enter a valid title."
+                                        pattern="^[\w\s]{0,100}$"
                                         type="text"
                                         name="lecturetitle"
                                         value={this.state.lecturetitle}
@@ -64,7 +67,7 @@ class NewLecture extends Component {
                             <Button
                                 className="float-right"
                                 variant="outline-dark"
-                                onClick={this.newLectureHandler}>
+                                type="submit">
                                 Add
                             </Button>
                         </Form>

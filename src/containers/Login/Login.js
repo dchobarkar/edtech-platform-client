@@ -36,7 +36,8 @@ class Login extends Component {
         this.props.history.push('/mycourse')
     }
 
-    submitHandler = () => {
+    submitHandler = (e) => {
+        e.preventDefault();
         this.setState({ loading: true })
         const user = {
             email: this.state.email,
@@ -55,10 +56,13 @@ class Login extends Component {
 
         let loginpage =
             <>
-                <Form>
+                <Form onSubmit={(e) => this.submitHandler(e)}>
                     <Form.Group className="inputfield">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
+                            required
+                            title="Email should be valid."
+                            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
                             name="email"
                             type="email"
                             placeholder="abc@def.com"
@@ -69,6 +73,9 @@ class Login extends Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             autoComplete="off"
+                            required
+                            title="Password should contain 8 to 20 characters."
+                            pattern="((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).{8,20}$"
                             name="password"
                             type="password"
                             placeholder="Password"
@@ -78,7 +85,7 @@ class Login extends Component {
                     <Button
                         className="float-right"
                         variant="light"
-                        onClick={this.submitHandler}>
+                        type="submit">
                         Login
                     </Button>
                 </Form>

@@ -48,7 +48,8 @@ class CourseContent extends Component {
         this.setState({ error: false })
     }
 
-    updateCourseHandler = (coursetitle, targetaudience_id, subject_id, courseintro, fee) => {
+    updateCourseHandler = (e, coursetitle, targetaudience_id, subject_id, courseintro, fee) => {
+        e.preventDefault();
         this.setState({ loading: true })
         let config = {
             headers: {
@@ -77,7 +78,8 @@ class CourseContent extends Component {
             .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     };
 
-    newSectionHandler = (sectiontitle, sectionintro) => {
+    newSectionHandler = (e, sectiontitle, sectionintro) => {
+        e.preventDefault();
         this.setState({ loading: true })
         const newSection = {
             sectiontitle: sectiontitle,
@@ -102,7 +104,8 @@ class CourseContent extends Component {
             .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     };
 
-    newLectureHandler = (sectionid, lecturetitle, lectureintro, lecturevideo) => {
+    newLectureHandler = (e, sectionid, lecturetitle, lectureintro, lecturevideo) => {
+        e.preventDefault();
         this.setState({ loading: true });
         const NewLecture = {
             lecturetitle: lecturetitle,
@@ -126,7 +129,8 @@ class CourseContent extends Component {
             .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     };
 
-    newExamHandler = (sectionid, examtitle, examinstruction, duration) => {
+    newExamHandler = (e, sectionid, examtitle, examinstruction, duration) => {
+        e.preventDefault();
         this.setState({ loading: true })
         const NewExam = {
             examtitle: examtitle,
@@ -150,7 +154,8 @@ class CourseContent extends Component {
             .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     };
 
-    updateContentHandler = (sectionid, contentid, title, description, lecturevideo) => {
+    updateContentHandler = (e, sectionid, contentid, title, description, lecturevideo) => {
+        e.preventDefault();
         if (sectionid === null) {
             this.setState({ loading: true })
             const updatedSectionDetails = {

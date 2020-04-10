@@ -32,8 +32,8 @@ class CourseInfo extends Component {
         })
     }
 
-    updateCourseHandler = () => {
-        this.props.updatecoursehandler(this.state.coursetitle, this.state.targetaudience_id, this.state.subject_id, this.state.courseintro, this.state.fee);
+    updateCourseHandler = (e) => {
+        this.props.updatecoursehandler(e, this.state.coursetitle, this.state.targetaudience_id, this.state.subject_id, this.state.courseintro, this.state.fee);
         this.showCourseDetailsHandler();
     }
 
@@ -60,12 +60,15 @@ class CourseInfo extends Component {
 
                 {this.state.showcoursedetails ?
                     <div id="courseinfobox">
-                        <Form>
+                        <Form onSubmit={(e) => this.updateCourseHandler(e)}>
                             <Form.Group as={Row} className="inputfield" >
                                 <Form.Label column sm={2}>Course Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
                                         disabled={this.state.editcoursedetails}
+                                        required
+                                        pattern="^[\w\s]{0,100}$"
+                                        title="Please Enter a Valid Course Title."
                                         type="text"
                                         name="coursetitle"
                                         value={this.state.coursetitle}
@@ -78,6 +81,9 @@ class CourseInfo extends Component {
                                 <Col sm={10}>
                                     <Form.Control
                                         disabled={this.state.editcoursedetails}
+                                        required
+                                        pattern="^[0-9]+$"
+                                        title="Plese select option from given values."
                                         as="select"
                                         name="targetaudience_id"
                                         value={this.state.targetaudience_id}
@@ -99,6 +105,9 @@ class CourseInfo extends Component {
                                 <Col sm={10}>
                                     <Form.Control
                                         disabled={this.state.editcoursedetails}
+                                        required
+                                        pattern="^[0-9]+$"
+                                        title="Plese select option from given values."
                                         id="noborder"
                                         as="select"
                                         name="subject_id"
@@ -132,6 +141,8 @@ class CourseInfo extends Component {
                                 <Col sm={10}>
                                     <Form.Control
                                         disabled={this.state.editcoursedetails}
+                                        required
+                                        pattern="^[0-9]+$"
                                         type="number"
                                         name="fee"
                                         value={this.state.fee}
@@ -151,31 +162,32 @@ class CourseInfo extends Component {
                                         onChange={this.inputChangeHandler} />
                                 </Col>
                             </Form.Group>
-                        </Form>
 
-                        <div id="courseinfoeditbutton" >
-                            {this.state.editcoursedetails ?
-                                <Button
-                                    variant="light"
-                                    onClick={this.editCourseDetailsHandler}>
-                                    <i className="far fa-edit"></i> Edit
+                            <div id="courseinfoeditbutton" >
+                                {this.state.editcoursedetails ?
+                                    <Button
+                                        variant="light"
+                                        onClick={this.editCourseDetailsHandler}>
+                                        <i className="far fa-edit"></i> Edit
                                 </Button> : null}
 
-                            {this.state.editcoursedetails ?
-                                null : <div>
-                                    <Button
-                                        variant="light"
-                                        onClick={this.updateCourseHandler}>
-                                        <i className="far fa-save"></i> Save
+                                {this.state.editcoursedetails ?
+                                    null : <div>
+                                        <Button
+                                            variant="light"
+                                            type="submit">
+                                            <i className="far fa-save"></i> Save
                                     </Button>
 
-                                    <Button
-                                        variant="light"
-                                        onClick={this.discardChangeHandler}>
-                                        Discard Changes
+                                        <Button
+                                            variant="light"
+                                            onClick={this.discardChangeHandler}>
+                                            Discard Changes
                                     </Button>
-                                </div>}
-                        </div>
+                                    </div>}
+                            </div>
+                        </Form>
+
                     </div> : null}
             </div>
         )

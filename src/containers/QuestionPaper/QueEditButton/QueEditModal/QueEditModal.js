@@ -20,8 +20,8 @@ class QueEditModal extends Component {
         })
     }
 
-    updateQuestionHandler = () => {
-        this.props.updatequestionhandler(this.props.queIndex, this.props.queid, this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4, this.state.answer, this.state.queimage);
+    updateQuestionHandler = (e) => {
+        this.props.updatequestionhandler(e, this.props.queIndex, this.props.queid, this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4, this.state.answer, this.state.queimage);
         this.props.showeditmodal();
     }
 
@@ -44,9 +44,11 @@ class QueEditModal extends Component {
                 show={this.props.show}
                 modalhandler={this.discardChangeHandler}>
 
-                <Form>
+                <Form onSubmit={(e) => this.updateQuestionHandler(e)}>
                     <Form.Group className="inputfield">
                         <Form.Control
+                            required
+                            title="Please enter the question."
                             as="textarea"
                             rows="2"
                             name="que"
@@ -67,6 +69,8 @@ class QueEditModal extends Component {
                         <Form.Group className="inputfield">
                             <Col lg={6}>
                                 <Form.Control
+                                    required
+                                    title="Please enter the option."
                                     type="text"
                                     name="opt1"
                                     value={this.state.opt1}
@@ -77,6 +81,8 @@ class QueEditModal extends Component {
                         <Form.Group className="inputfield">
                             <Col lg={6}>
                                 <Form.Control
+                                    required
+                                    title="Please enter the option."
                                     type="text"
                                     name="opt2"
                                     value={this.state.opt2}
@@ -89,6 +95,8 @@ class QueEditModal extends Component {
                         <Form.Group className="inputfield">
                             <Col lg={6}>
                                 <Form.Control
+                                    required
+                                    title="Please enter the option."
                                     type="text"
                                     name="opt3"
                                     value={this.state.opt3}
@@ -99,6 +107,8 @@ class QueEditModal extends Component {
                         <Form.Group className="inputfield">
                             <Col lg={6}>
                                 <Form.Control
+                                    required
+                                    title="Please enter the option."
                                     type="text"
                                     name="opt4"
                                     value={this.state.opt4}
@@ -111,6 +121,8 @@ class QueEditModal extends Component {
                         <Col lg={6}>
                             <Form.Label>Answer</Form.Label>
                             <Form.Control
+                                required
+                                title="Please select an answer."
                                 as="select"
                                 name="answer"
                                 value={this.state.answer}
@@ -122,20 +134,21 @@ class QueEditModal extends Component {
                             </Form.Control>
                         </Col>
                     </Form.Group>
-                </Form>
 
-                <Button
-                    variant="outline-dark"
-                    onClick={this.discardChangeHandler}>
-                    Discard Changes
+                    <Button
+                        variant="outline-dark"
+                        onClick={this.discardChangeHandler}>
+                        Discard Changes
                     </Button>
 
-                <Button
-                    className="float-right"
-                    variant="outline-dark"
-                    onClick={this.updateQuestionHandler}>
-                    Save
-                </Button>
+                    <Button
+                        className="float-right"
+                        variant="outline-dark"
+                        type="submit">
+                        Save
+                    </Button>
+                </Form>
+
             </DModal >
         )
     }

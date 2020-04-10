@@ -40,8 +40,8 @@ class QueInstructionBox extends Component {
         })
     }
 
-    updateExamHandler = () => {
-        this.props.updateexamhandler(this.state.examtitle, this.state.examinstruction, this.state.duration);
+    updateExamHandler = (e) => {
+        this.props.updateexamhandler(e, this.state.examtitle, this.state.examinstruction, this.state.duration);
         this.showExamDetailsHandler();
     }
 
@@ -61,10 +61,13 @@ class QueInstructionBox extends Component {
 
                 {this.state.show ?
                     <div className="row" id="examinstructionedit">
-                        <Form>
+                        <Form onSubmit={(e) => this.updateExamHandler(e)}>
                             <Form.Group className="inputfield">
                                 <Form.Control
                                     disabled={disable}
+                                    required
+                                    title="Please enter a valid exam title."
+                                    pattern="^[\w\s]{0,100}$"
                                     type="text"
                                     name="examtitle"
                                     value={this.state.examtitle}
@@ -84,35 +87,39 @@ class QueInstructionBox extends Component {
                             <Form.Group className="inputfield">
                                 <Form.Control
                                     disabled={disable}
+                                    required
+                                    title="Please enter the duration of exam."
+                                    pattern="^[0-9]+$"
                                     type="number"
                                     name="duration"
                                     value={this.state.duration}
                                     onChange={this.inputChangeHandler} />
                             </Form.Group>
-                        </Form>
 
-                        {this.state.edit ? null :
-                            <Button
-                                variant="light"
-                                onClick={this.showEditHandler}>
-                                <i className="far fa-edit"></i> Edit
+                            {this.state.edit ? null :
+                                <Button
+                                    variant="light"
+                                    onClick={this.showEditHandler}>
+                                    <i className="far fa-edit"></i> Edit
                             </Button>}
 
-                        {this.state.edit ?
-                            <div>
-                                <Button
-                                    variant="light"
-                                    onClick={this.updateExamHandler}>
-                                    <i className="far fa-save"></i> Save
+                            {this.state.edit ?
+                                <div>
+                                    <Button
+                                        variant="light"
+                                        type="submit">
+                                        <i className="far fa-save"></i> Save
                                 </Button>
 
-                                <Button
-                                    variant="light"
-                                    onClick={this.inputClearer}>
-                                    Discard Changes
+                                    <Button
+                                        variant="light"
+                                        onClick={this.inputClearer}>
+                                        Discard Changes
                                 </Button>
-                            </div> : null}
+                                </div> : null}
+                        </Form>
                     </div > : null}
+
             </div >
         )
     }

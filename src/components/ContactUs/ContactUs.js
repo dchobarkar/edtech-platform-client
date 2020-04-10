@@ -30,7 +30,8 @@ class ContactUs extends Component {
         })
     }
 
-    submitHandler = () => {
+    submitHandler = (e) => {
+        e.preventDefault();
         this.setState({ loading: true })
         const num = {
             mobile: this.state.mobile,
@@ -51,10 +52,12 @@ class ContactUs extends Component {
                 <h6>Want some more Information?</h6>
                 <p>We need a few detail to reach you</p>
 
-                <Form id="contactusform">
+                <Form id="contactusform" onSubmit={(e) => this.submitHandler(e)}>
                     <Form.Group className="inputfield">
                         <Form.Label>Please Enter Your Mobile Number</Form.Label>
                         <Form.Control
+                            required
+                            pattern="^[0-9]{10}$"
                             type="text"
                             name="mobile"
                             placeholder="0000000000"
@@ -62,7 +65,7 @@ class ContactUs extends Component {
                     </Form.Group>
                     <Button
                         variant="outline-dark"
-                        onClick={this.submitHandler}>
+                        type="submit">
                         Contact Me
                     </Button>
                 </Form>

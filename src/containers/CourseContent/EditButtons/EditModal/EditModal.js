@@ -41,11 +41,14 @@ class EditModal extends Component {
             <DModal
                 show={this.props.show}
                 modalhandler={this.discardChangeHandler}>
-                <Form>
+                <Form onSubmit={(e) => this.props.updatecontenthandler(e, this.props.sectionid, this.props.contentid, this.state.title, this.state.description, this.state.lecturevideo)}>
                     <Form.Group as={Row} className="inputfield">
                         <Form.Label column sm={2}>Title</Form.Label>
                         <Col sm={10}>
                             <Form.Control
+                                required
+                                title="Please enter a valid title."
+                                pattern="^[\w\s]{0,100}$"
                                 type="text"
                                 name="title"
                                 value={this.state.title}
@@ -66,20 +69,20 @@ class EditModal extends Component {
                     </Form.Group>
 
                     {this.props.sectionid ? <this.LectureVideo /> : null}
+
+                    <Button
+                        variant="outline-dark"
+                        onClick={this.discardChangeHandler}>
+                        Discard Changes
+                    </Button>
+
+                    <Button
+                        className="float-right"
+                        variant="outline-dark"
+                        type="submit">
+                        Save
+                    </Button>
                 </Form>
-
-                <Button
-                    variant="outline-dark"
-                    onClick={this.discardChangeHandler}>
-                    Discard Changes
-                </Button>
-
-                <Button
-                    className="float-right"
-                    variant="outline-dark"
-                    onClick={() => this.props.updatecontenthandler(this.props.sectionid, this.props.contentid, this.state.title, this.state.description, this.state.lecturevideo)}>
-                    Save
-                </Button>
             </DModal >
         )
     }

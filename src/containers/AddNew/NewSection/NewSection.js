@@ -13,8 +13,8 @@ class NewSection extends Component {
         })
     }
 
-    newSectionHandler = () => {
-        this.props.newsectionhandler(this.state.sectiontitle, this.state.sectionintro);
+    newSectionHandler = (e) => {
+        this.props.newsectionhandler(e, this.state.sectiontitle, this.state.sectionintro);
         this.setState({
             sectiontitle: '',
             sectionintro: ''
@@ -28,11 +28,14 @@ class NewSection extends Component {
                 <div className="container">
                     <div className="row">
                         <p>{this.state.sectiontitle}</p>
-                        <Form>
+                        <Form onSubmit={(e) => this.newSectionHandler(e)}>
                             <Form.Group as={Row} className="inputfield">
                                 <Form.Label column sm={2}>Section Title</Form.Label>
                                 <Col sm={10}>
                                     <Form.Control
+                                        required
+                                        title="Please enter a valid title."
+                                        pattern="^[\w\s]{0,100}$"
                                         type="text"
                                         name="sectiontitle"
                                         value={this.state.sectiontitle}
@@ -55,7 +58,7 @@ class NewSection extends Component {
                             <Button
                                 className="float-right"
                                 variant="outline-dark"
-                                onClick={this.newSectionHandler}>
+                                type="submit">
                                 Add
                             </Button>
                         </Form>

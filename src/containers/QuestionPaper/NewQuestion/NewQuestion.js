@@ -20,8 +20,8 @@ class NewQuestion extends Component {
         })
     }
 
-    newQuestionHandler = () => {
-        this.props.newquestionhandler(this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4, this.state.answer, this.state.queimage);
+    newQuestionHandler = (e) => {
+        this.props.newquestionhandler(e, this.state.que, this.state.opt1, this.state.opt2, this.state.opt3, this.state.opt4, this.state.answer, this.state.queimage);
         this.showInputBoxHandler();
     }
 
@@ -37,9 +37,11 @@ class NewQuestion extends Component {
 
                 {this.state.show ?
                     <div className="row">
-                        <Form className="shadow p-2 bg-white rounded">
+                        <Form className="shadow p-2 bg-white rounded" onSubmit={(e) => this.newQuestionHandler(e)}>
                             <Form.Group className="inputfield">
                                 <Form.Control
+                                    required
+                                    title="Please Enter a question."
                                     as="textarea"
                                     rows="2"
                                     placeholder="Question"
@@ -60,6 +62,8 @@ class NewQuestion extends Component {
                                 <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
+                                            required
+                                            title="Please enter the option."
                                             type="text"
                                             placeholder="Option 1"
                                             name="opt1"
@@ -70,6 +74,8 @@ class NewQuestion extends Component {
                                 <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
+                                            required
+                                            title="Please enter the option."
                                             type="text"
                                             placeholder="Option 2"
                                             name="opt2"
@@ -82,6 +88,8 @@ class NewQuestion extends Component {
                                 <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
+                                            required
+                                            title="Please enter the option."
                                             type="text"
                                             placeholder="Option 3"
                                             name="opt3"
@@ -92,6 +100,8 @@ class NewQuestion extends Component {
                                 <Form.Group className="inputfield">
                                     <Col lg={6}>
                                         <Form.Control
+                                            required
+                                            title="Please enter the option."
                                             type="text"
                                             placeholder="Option 4"
                                             name="opt4"
@@ -104,6 +114,8 @@ class NewQuestion extends Component {
                                 <Col lg={6}>
                                     <Form.Label>Answer</Form.Label>
                                     <Form.Control
+                                        required
+                                        title="Please select the correct answer."
                                         as="select"
                                         name="answer"
                                         onChange={this.inputChangeHandler}>
@@ -119,7 +131,7 @@ class NewQuestion extends Component {
                                 <Button
                                     className="float-right"
                                     variant="outline-dark"
-                                    onClick={this.newQuestionHandler}>
+                                    type="submit">
                                     Add
                                 </Button>
                             </Form.Group>

@@ -68,7 +68,8 @@ class MyProfile extends Component {
         })
     }
 
-    submitHandler = (classintro, country_id, state_id, address, city, pincode, bannerimgurl) => {
+    submitHandler = (e, classintro, country_id, state_id, address, city, pincode, bannerimgurl) => {
+        e.preventDefault();
         this.setState({ loading: true })
         let config = {
             headers: {

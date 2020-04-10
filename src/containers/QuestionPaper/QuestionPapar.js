@@ -41,7 +41,8 @@ class QuestionPaper extends Component {
         this.setState({ error: false })
     }
 
-    updateExamHandler = (examtitle, examinstruction, duration) => {
+    updateExamHandler = (e, examtitle, examinstruction, duration) => {
+        e.preventDefault();
         this.setState({ loading: true })
         const examid = this.props.match.params.id;
         const updatedExam = {
@@ -59,7 +60,8 @@ class QuestionPaper extends Component {
             .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     }
 
-    newQuestionHandler = (que, opt1, opt2, opt3, opt4, answer, queimage) => {
+    newQuestionHandler = (e, que, opt1, opt2, opt3, opt4, answer, queimage) => {
+        e.preventDefault();
         this.setState({ loading: true })
         const queid = this.props.match.params.id;
         const newQuestion = {
@@ -87,9 +89,9 @@ class QuestionPaper extends Component {
             .catch(error => { this.setState({ error: true, loading: false, errormsg: error.response.data.message }) })
     }
 
-    updateQuestionHandler = (queIndex, queid, que, opt1, opt2, opt3, opt4, answer, queimage) => {
+    updateQuestionHandler = (e, queIndex, queid, que, opt1, opt2, opt3, opt4, answer, queimage) => {
+        e.preventDefault();
         this.setState({ loading: true })
-        console.log(queIndex, queid, que, opt1, opt2, opt3, opt4, answer, queimage)
         const updatedQuestion = {
             que: que,
             opt1: opt1,
@@ -99,6 +101,7 @@ class QuestionPaper extends Component {
             answer: answer,
             queimage: queimage
         }
+
         axios.patch('/question/' + queid + '/update', updatedQuestion)
             .then(response => {
                 const updatedQuestion = [...this.state.questionentitys];
