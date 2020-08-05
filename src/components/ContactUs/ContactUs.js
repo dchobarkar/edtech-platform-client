@@ -1,114 +1,101 @@
-import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import axios from '../../axios-server';
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
 
-import LoadingSpinner from '../Spinner/Spinner';
-import DModal from '../DModal/DModal';
+import axios from '../../axios-server';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import Spinner from '../../customFunctions/Spinner/Spinner';
+import CModal from '../../customFunctions/CModal/CModal';
+import CButton from '../../customFunctions/CButton/CButton';
 
 import './ContactUs.css';
 
-class ContactUs extends Component {
-    state = {
-        showmodal: false,
-        error: false,
-        errormsg: null,
-        loading: false
+const ContactUs = React.memo(function ContactUs(props) {
+    const [mobileNo, setMobileNo] = useState("");
+    const [showNoSubmittedModal, setShowNoSubmittedModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const inputChangeHandler = (e) => {
+        setMobileNo(e.target.value)
     }
 
-    inputChangeHandler = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
+    const noSubmittedConfirmationHandler = () => {
+        setShowNoSubmittedModal(!showNoSubmittedModal)
     }
 
-    errorModalHandler = () => {
-        this.setState({ error: false })
-    }
-    modalHandler = () => {
-        this.setState({
-            showmodal: !this.state.showmodal
-        })
-    }
-
-    submitHandler = (e) => {
+    // Send mobile no to bachend
+    const mobileNoSubmitHandler = (e) => {
         e.preventDefault();
-        this.setState({ loading: true })
+        setIsLoading(true)
         const num = {
-            mobile: this.state.mobile,
+            mobileNo: mobileNo,
             time: new Date()
         }
-        axios.post('/contactdata/teacher', num)
+        axios.post("contactdata/teacher", num)
             .then(response => {
-                this.modalHandler()
-                this.setState({ loading: false })
+                setShowNoSubmittedModal(true)
+                setIsLoading(false)
+            }).catch(error => {
+                setIsLoading(false)
             })
-            .catch(error => { this.setState({ loading: false, error: true, errormsg: error.response.data.message }) })
     }
 
-    render() {
+    let contactForm =
+        <React.Fragment>
+            <h6>Want some more Information?</h6>
+            <p>We need a few detail to reach you</p>
 
-        let contactform =
-            <div className="col-sm-8">
-                <h6>Want some more Information?</h6>
-                <p>We need a few detail to reach you</p>
+            <Form onSubmit={(e) => mobileNoSubmitHandler(e)}>
+                <Form.Group className="inputfield">
+                    <Form.Label>Please Enter Your Mobile Number</Form.Label>
+                    <Form.Control
+                        name="mobileNo"
+                        type="text"
+                        placeholder="0000000000"
+                        required
+                        pattern="^[0-9]{10}$"
+                        title="Please enter a valid mobile number."
+                        onChange={inputChangeHandler} />
+                </Form.Group>
 
-                <Form id="contactusform" onSubmit={(e) => this.submitHandler(e)}>
-                    <Form.Group className="inputfield">
-                        <Form.Label>Please Enter Your Mobile Number</Form.Label>
-                        <Form.Control
-                            required
-                            pattern="^[0-9]{10}$"
-                            type="text"
-                            name="mobile"
-                            placeholder="0000000000"
-                            onChange={this.inputChangeHandler} />
-                    </Form.Group>
-                    <Button
-                        variant="outline-dark"
-                        type="submit">
-                        Contact Me
-                    </Button>
-                </Form>
-            </div>
+                <CButton
+                    type="submit"
+                    variant="outline-dark">
+                    Contact Me
+                </CButton>
+            </Form>
+        </React.Fragment>
 
-        if (this.state.loading) {
-            contactform = <LoadingSpinner />
-        }
+    if (isLoading) {
+        contactForm = <Spinner />
+    }
 
-        return (
-            <div className="fullscreen " id="contactus">
-                <div className="container ">
-                    <div className="row align-items-center">
+    return (
+        <React.Fragment>
+            <div id="contactus" className="fullscreen container">
+                <div className="row align-items-center">
 
-                        {contactform}
+                    <div className="col-sm-8">
+                        {contactForm}
+                    </div>
 
-                        <div className="col-sm-4">
-                            <h6>Want to reach us?</h6>
-                            <p>You can reach us at</p>
-                            <p>email: contactus@ganety.com</p>
-                            <p>Phone No.: +91 9404168827</p>
-                        </div>
+                    <div className="col-sm-4">
+                        <h6>Want to reach us?</h6>
+                        <p>You can reach us at</p>
+                        <p>email: contactus@ganety.com</p>
+                        <p>Phone No.: +91 9404168827</p>
                     </div>
                 </div>
-
-                <DModal
-                    show={this.state.showmodal}
-                    modalhandler={this.modalHandler}>
-                    <i className="fas fa-mobile-alt"></i> We will reach you shortly.
-                </DModal>
-
-                {this.state.error ?
-                    <DModal
-                        show={this.state.error}
-                        modalhandler={this.errorModalHandler}>
-                        {Array.isArray(this.state.errormsg) ?
-                            <>
-                                {this.state.errormsg.map((msg, Index) => { return <p key={Index}>{msg}</p> })}
-                            </>
-                            : < p > {this.state.errormsg}</p>}
-                    </DModal> : null}
             </div >
-        )
-    }
-}
-export default ContactUs;
+
+            {/* Modal to be shown after successful mobile no submission */}
+            <CModal
+                show={showNoSubmittedModal}
+                modalhandler={noSubmittedConfirmationHandler}>
+                <i className="fas fa-mobile-alt"></i> We will reach you shortly.
+            </CModal>
+
+        </React.Fragment>
+    )
+})
+
+export default withErrorHandler(ContactUs, axios);

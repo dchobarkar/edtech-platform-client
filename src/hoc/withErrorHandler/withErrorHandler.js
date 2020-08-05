@@ -1,50 +1,63 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from 'react-bootstrap';
 
 const withErrorHandler = (WrappedComponent, axios) => {
-    return class extends Component {
-        state = {
-            error: null,
-            show: false
-        }
-        componentDidMount() {
-            this.reqInterceptor = axios.interceptors.request.use(req => {
-                this.setState({ error: null })
-                return req;
-            })
-            this.resInterceptor = axios.interceptors.response.use(res => res, error => {
-                this.setState({ error: error, show: true })
-                console.log(this.state)
-                return error
+    return props => {
+        const [show, setShow] = useState(false)
+        const [error, setError] = useState(null)
+
+        const reqInterceptor = axios.interceptors.request.use(req => {
+            setError(null)
+            return req;
+        })
+        const resInterceptor = axios.interceptors.response.use(res => res, err => {
+            errorMsgHandler(err)
+            return err
+        })
+
+        useEffect(() => {
+            return () => {
+                axios.interceptors.request.eject(reqInterceptor);
+                axios.interceptors.response.eject(resInterceptor);
             }
-            )
+        }, [reqInterceptor, resInterceptor])
+
+        const errorConfirmedHandler = () => {
+            setShow(false)
+            setError(null)
         }
 
-        componentWillUnmount() {
-            axios.interceptors.request.eject(this.reqInterceptor);
-            axios.interceptors.response.eject(this.resInterceptor);
+        const errorMsgHandler = (error) => {
+            let msg = ""
+            if (error.response) {
+                msg = error.response.data.message
+            } else if (error.request && error.request.response) {
+                msg = error.request.response
+            } else {
+                msg = error.message
+            }
+            setShow(true)
+            setError(msg)
         }
 
-        errorConfirmedHandler = () => {
-            this.setState({ error: null })
-        }
+        return (
+            <React.Fragment>
+                <Modal
+                    centered
+                    show={show}
+                    onHide={errorConfirmedHandler}>
+                    <Modal.Body>
+                        {Array.isArray(error) ?
+                            error.map((msg, Index) => { return <p key={Index}>{msg}</p> })
+                            : <p> {error}</p>
+                        }
+                    </Modal.Body>
+                </Modal>
 
-        render() {
-            return (
-                <>
-                    <Modal
-                        centered
-                        show={this.state.show}
-                        onHide={this.errorConfirmedHandler}>
-                        <Modal.Body>
-                            {this.state.error ? this.state.error.response.data.message : null}
-                        </Modal.Body>
-                    </Modal>
-
-                    <WrappedComponent {...this.props} />
-                </>
-            )
-        }
+                <WrappedComponent {...props} />
+            </React.Fragment>
+        )
     }
 }
+
 export default withErrorHandler;

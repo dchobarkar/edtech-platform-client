@@ -1,0 +1,33 @@
+#classinfo {
+  padding-top: 2%;
+}
+
+#classname {
+  width: 100%;
+  text-align: left;
+  margin: 0 2%;
+  border: 2px solid gray;
+}
+
+#classimg img {
+  width: 100%;
+  height: auto;
+  border-radius: 7px;
+  padding-bottom: 7px;
+}
+
+#classinfotable {
+  text-align: left;
+}
+
+#classwelcomenote {
+  text-align: justify;
+  padding: 5px;
+  margin: 10px;
+}
+
+#classprofilebutton {
+  width: 100%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+}

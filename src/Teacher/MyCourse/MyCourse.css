@@ -1,0 +1,19 @@
+#mycourse {
+  padding-top: 2%;
+}
+#mycourse h4 {
+  text-align: center;
+  padding: 2%;
+}
+
+#mycoursecard {
+  width: 16rem;
+  margin: 0 auto;
+  padding: 2%;
+  max-height: 450px;
+}
+
+#mycoursebutton {
+  width: 100%;
+  border: none;
+}

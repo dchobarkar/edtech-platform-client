@@ -1,0 +1,30 @@
+#coursecontent {
+  padding: 1% 0;
+}
+#coursecontent h4 {
+  text-align: center;
+  padding: 2% 0;
+}
+#coursecontent .row {
+  padding: 2%;
+}
+
+#individualsection {
+  border: 2px solid gray;
+  margin: 25px 0;
+}
+
+#sectionname {
+  width: 100%;
+}
+#sectionname span {
+  font-weight: bold;
+}
+
+#individualcontent {
+  width: 100%;
+  border: 1px solid black;
+  margin: 10px 0;
+  padding: 3px 0;
+  padding-left: 1%;
+}

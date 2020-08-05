@@ -1,0 +1,11 @@
+#loginpage {
+  padding-top: 8%;
+}
+#loginpage form {
+  padding: 0 2%;
+}
+#loginpage p {
+  text-align: end;
+  font-size: 0.8em;
+  padding-top: 60px;
+}
