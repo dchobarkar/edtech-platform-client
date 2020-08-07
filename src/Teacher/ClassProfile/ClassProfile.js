@@ -29,20 +29,20 @@ const ClassProfile = React.memo(function ClassProfile(props) {
     const [showEditBox, setShowEditBox] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
-    let config = {
+    const config = {
         headers: {
             "Authorization": "Bearer " + localStorage.authKey
         }
     }
 
+    // Get class profile information.
     useEffect(() => {
         setIsLoading(true)
-        const config = {
+        axios.get('/tuser/profile', {
             headers: {
                 "Authorization": "Bearer " + localStorage.authKey
             }
-        }
-        axios.get('/tuser/profile', config)
+        })
             .then(response => {
                 setClassProfileState(response.data)
                 setIsLoading(false)
@@ -56,6 +56,7 @@ const ClassProfile = React.memo(function ClassProfile(props) {
         setShowEditBox(!showEditBox)
     }
 
+    // Edit Class Profile
     const editClassProfileHandler = (e, classIntro, country_id, state_id, address, city, pincode, bannerImgUrl) => {
         e.preventDefault();
         setIsLoading(true)
@@ -70,11 +71,10 @@ const ClassProfile = React.memo(function ClassProfile(props) {
 
         axios.patch('/tuser/update', classProfile, config)
             .then(response => {
-                let tempClassProfileState = {
+                setClassProfileState(classProfileState => ({
                     ...classProfileState,
                     ...response.data
-                }
-                setClassProfileState(...tempClassProfileState)
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -115,7 +115,8 @@ const ClassProfile = React.memo(function ClassProfile(props) {
                                     <td>Address</td>
                                     <td>: {classProfileState.address}, {classProfileState.city}</td>
                                 </tr>
-                                : null}
+                                : null
+                            }
                         </tbody>
                     </Table>
                 </div>

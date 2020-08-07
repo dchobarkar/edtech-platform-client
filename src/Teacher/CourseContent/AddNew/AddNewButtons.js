@@ -12,6 +12,7 @@ const AddNewButtons = React.memo(function (props) {
     const [newLecture, setNewLecture] = useState(false);
     const [newExam, setNewExam] = useState(false);
 
+    // General content handler
     const newContentHandler = (e) => {
         switch (e) {
             case "Section":
@@ -60,6 +61,7 @@ const AddNewButtons = React.memo(function (props) {
                 </div>
             </div>
 
+            {/* Display new content adder box according to the selection */}
             {newSection ?
                 <NewSection
                     newSectionHandler={props.newSectionHandler}

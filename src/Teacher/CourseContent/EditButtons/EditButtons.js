@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import VideoPlayer from '../../../customFunctions/VideoPlayer/VideoPlayer';
 import CButton from '../../../customFunctions/CButton/CButton';
+import VideoPlayer from '../../../customFunctions/VideoPlayer/VideoPlayer';
 import EditModal from './EditModal/EditModal';
 import DeleteModal from './DeleteModal/DeleteModal';
 
@@ -12,6 +12,7 @@ const EditButtons = React.memo(function EditButtons(props) {
     const [showEditModal, setShowEditModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
 
+    // Functions to toggle showdescription, video modal,edit modal and delete modal
     const showDescriptionHandler = () => {
         setShowDescription(!showDescription)
     }
@@ -25,6 +26,7 @@ const EditButtons = React.memo(function EditButtons(props) {
         setShowDeleteModal(!showDeleteModal)
     }
 
+    // Callback to the update content handler function in CourseContent
     const updateContentHandler = (e, section_id, content_id, title, description, lectureVideo) => {
         props.updateContentHandler(e, section_id, content_id, title, description, lectureVideo);
         showEditModalHandler();
@@ -39,7 +41,7 @@ const EditButtons = React.memo(function EditButtons(props) {
         </CButton>
     )
     const ExamButton = () => (
-        <Link to={"/questionpaper/" + props.content_id}>
+        <Link to={"/examcontent/" + props.content_id}>
             <CButton
                 className="float-right"
                 variant="light">
@@ -48,9 +50,8 @@ const EditButtons = React.memo(function EditButtons(props) {
         </Link>
     )
 
-    let showVideoButton = true;
-    if (props.section_id === null || props.isExam === true)
-        showVideoButton = false;
+    // Variable to show video button only if its a lecture
+    let showVideoButton = (props.section_id === null || props.isExam === true) ? false : true;
 
     return (
         <React.Fragment>
@@ -99,6 +100,7 @@ const EditButtons = React.memo(function EditButtons(props) {
                 show={showDeleteModal}
                 section_id={props.section_id}
                 content_id={props.content_id}
+                isExam={props.isExam}
                 showDeleteModal={showDeleteModalHandler}
                 deleteContentHandler={props.deleteContentHandler} />
         </React.Fragment>

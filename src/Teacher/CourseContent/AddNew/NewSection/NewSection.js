@@ -18,6 +18,7 @@ const NewSection = React.memo(function NewSection(props) {
         }))
     }
 
+    // Callback to new section function in AddNewButton
     const newSectionHandler = (e) => {
         props.newSectionHandler(e, sectionState.sectionTitle, sectionState.sectionIntro);
         let tempSectionState = {
@@ -31,23 +32,24 @@ const NewSection = React.memo(function NewSection(props) {
     return (
         <div id="addnew" className="container">
             <div className="row">
-                <p>{sectionState.sectionTitle}</p>
+                <p><b>{sectionState.sectionTitle}</b></p>
+
                 <Form onSubmit={(e) => newSectionHandler(e)}>
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Section Title</Form.Label>
                         <Col sm={10}>
                             <Form.Control
                                 name="sectionTitle"
                                 type="text"
+                                value={sectionState.sectionTitle}
                                 required
                                 title="Please enter a valid title."
                                 pattern="^[\w\s]{0,100}$"
-                                value={sectionState.sectionTitle}
                                 onChange={inputChangeHandler} />
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Section Description</Form.Label>
                         <Col sm={10}>
                             <Form.Control

@@ -17,6 +17,7 @@ const NotFoundPage = React.memo(function NotFoundPage(props) {
         <div id="notfoundpage" className="fullscreen container">
             <div className="row">
                 {isCTOFired ?
+                    // Part to be shown afte firing CTO
                     <React.Fragment>
                         <h4>Bye - Bye Saurabh</h4>
                         <div id="ctofired">
@@ -28,7 +29,8 @@ const NotFoundPage = React.memo(function NotFoundPage(props) {
                             <p>We are not saying revenge is in Saurabh's nature, but you might want to change your IP address now!</p>
                         </div>
                     </React.Fragment>
-                    : <React.Fragment>
+                    : //Part to be shown before firing CTO   
+                    <React.Fragment>
                         <h4>Whoops!</h4>
                         <h6>404 - Page not found</h6>
                         <div id="ctoprofile">
@@ -38,7 +40,7 @@ const NotFoundPage = React.memo(function NotFoundPage(props) {
                                 src={require("../../assets/IMG/profile.jpeg")}
                                 roundedCircle />
                             <CButton
-                                variant="outline-dark"
+                                variant="outline-danger"
                                 onClick={fireCTOHandler} >
                                 Fire Saurabh
                             </CButton>
@@ -46,7 +48,7 @@ const NotFoundPage = React.memo(function NotFoundPage(props) {
                         </div>
                     </React.Fragment>
                 }
-                <p>Return to the <Link to="/">Homepage</Link></p>
+                <p>Return to <Link to="/" className="no-decoration">Homepage</Link></p>
             </div>
         </div>
     )

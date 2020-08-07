@@ -3,40 +3,40 @@ import React from 'react';
 // Target Audience
 export const targetAudienceType = () => (
     <React.Fragment>
-        <option value="1">8th</option>
-        <option value="2">9th</option>
-        <option value="3">10th</option>
-        <option value="4">11th - PCB</option>
-        <option value="5">11th - PCM</option>
-        <option value="6">11th - PCMB</option>
-        <option value="7">12th - PCB</option>
-        <option value="8">12th - PCM</option>
-        <option value="9">12th - PCMB</option>
+        <option value={1}>8th</option>
+        <option value={2}>9th</option>
+        <option value={3}>10th</option>
+        <option value={4}>11th - PCB</option>
+        <option value={5}>11th - PCM</option>
+        <option value={6}>11th - PCMB</option>
+        <option value={7}>12th - PCB</option>
+        <option value={8}>12th - PCM</option>
+        <option value={9}>12th - PCMB</option>
     </React.Fragment>
 )
 
 // Subject
 export const subjectType = () => (
     <React.Fragment>
-        <option value="1">English</option>
-        <option value="2">Physics</option>
-        <option value="3">Physics - I</option>
-        <option value="4">Physics - II</option>
-        <option value="5">Biology</option>
-        <option value="6">Biology - I</option>
-        <option value="7">Biology - II</option>
-        <option value="8">Chemistry</option>
-        <option value="9">Chemistry - I</option>
-        <option value="10">Chemistry - II</option>
-        <option value="11">Mathematics</option>
-        <option value="12">Mathematics - I</option>
-        <option value="13">Mathematics - II</option>
-        <option value="14">Science</option>
-        <option value="15">Science - I</option>
-        <option value="16">Science - II</option>
-        <option value="17">Marathi</option>
-        <option value="18">History</option>
-        <option value="19">Geography</option>
+        <option value={1}>English</option>
+        <option value={2}>Physics</option>
+        <option value={3}>Physics - I</option>
+        <option value={4}>Physics - II</option>
+        <option value={5}>Biology</option>
+        <option value={6}>Biology - I</option>
+        <option value={7}>Biology - II</option>
+        <option value={8}>Chemistry</option>
+        <option value={9}>Chemistry - I</option>
+        <option value={10}>Chemistry - II</option>
+        <option value={11}>Mathematics</option>
+        <option value={12}>Mathematics - I</option>
+        <option value={13}>Mathematics - II</option>
+        <option value={14}>Science</option>
+        <option value={15}>Science - I</option>
+        <option value={16}>Science - II</option>
+        <option value={17}>Marathi</option>
+        <option value={18}>History</option>
+        <option value={19}>Geography</option>
     </React.Fragment>
 )
 

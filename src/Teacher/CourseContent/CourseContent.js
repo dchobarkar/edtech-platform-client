@@ -12,17 +12,17 @@ import './CourseContent.css';
 
 const CourseContent = React.memo(function CourseContent(props) {
     const [courseContentState, setCourseContentState] = useState({
-        course_id: null,
+        course_id: '',
         courseTitle: '',
-        courseIntro: null,
-        fee: null,
-        studentsEnrolled: null,
-        ratingPoint: null,
-        noOfRationg: null,
-        targetAudience_id: null,
-        targetAudience: null,
-        subject_id: null,
-        subject: null,
+        courseIntro: '',
+        fee: '',
+        studentsEnrolled: '',
+        ratingPoint: '',
+        noOfRationg: '',
+        targetAudience_id: '',
+        targetAudience: '',
+        subject_id: '',
+        subject: '',
         sections: [
             {
                 lectureEntitys: [],
@@ -39,9 +39,14 @@ const CourseContent = React.memo(function CourseContent(props) {
     }
     const course_id = props.match.params.id
 
+    // Get all course information
     useEffect(() => {
         setIsLoading(true);
-        axios.get('/course/' + course_id + '/allsections', config)
+        axios.get('/course/' + course_id + '/allsections', {
+            headers: {
+                "Authorization": "Bearer " + localStorage.authKey
+            }
+        })
             .then(response => {
                 setCourseContentState(response.data)
                 setIsLoading(false)
@@ -49,25 +54,25 @@ const CourseContent = React.memo(function CourseContent(props) {
             .catch(error => {
                 setIsLoading(false)
             })
-    }, [])
+    }, [course_id])
 
-    const updateCourseHandler = (e, courseTitle, targetAudience_id, subject_id, courseIntro, fee) => {
+    // Update course details
+    const updateCourseHandler = (e, courseTitle, targetAudience_id, subject_id, fee, courseIntro) => {
         e.preventDefault();
         setIsLoading(true)
         const updatedCourseDetails = {
             courseTitle: courseTitle,
             targetAudience_id: targetAudience_id,
             subject_id: subject_id,
+            fee: fee,
             courseIntro: courseIntro,
-            fee: fee
         }
         axios.patch('/course/' + course_id + '/update', updatedCourseDetails, config)
             .then(response => {
-                let tempCourseContentState = {
+                setCourseContentState(courseContentState => ({
                     ...courseContentState,
                     ...response.data
-                }
-                setCourseContentState(tempCourseContentState)
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -75,6 +80,7 @@ const CourseContent = React.memo(function CourseContent(props) {
             })
     };
 
+    // Add new section
     const newSectionHandler = (e, sectionTitle, sectionIntro) => {
         e.preventDefault();
         setIsLoading(true)
@@ -84,14 +90,16 @@ const CourseContent = React.memo(function CourseContent(props) {
         };
         axios.post('/section/' + course_id, newSection, config)
             .then(response => {
-                const newSection = {
-                    ...response.data,
-                    lectureEntitys: [],
-                    examEntitys: []
-                }
-                let tempCourseContentState = { ...courseContentState }
-                tempCourseContentState.sections.push(newSection)
-                setCourseContentState(tempCourseContentState)
+                setCourseContentState(courseContentState => ({
+                    ...courseContentState,
+                    sections: [
+                        ...courseContentState.sections,
+                        {
+                            ...response.data,
+                            lectureEntitys: [],
+                            examEntitys: []
+                        }]
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -99,6 +107,7 @@ const CourseContent = React.memo(function CourseContent(props) {
             })
     };
 
+    // Add new lecture in the respective section
     const newLectureHandler = (e, section_id, lectureTitle, lectureIntro, video) => {
         e.preventDefault();
         setIsLoading(true)
@@ -110,15 +119,22 @@ const CourseContent = React.memo(function CourseContent(props) {
 
         axios.post('/lecture/' + section_id, newLecture, config)
             .then(response => {
-                const tempCourseContentState = { ...courseContentState }
-                const secIndex = tempCourseContentState.sections.findIndex(section => {
+                const secIndex = courseContentState.sections.findIndex(section => {
                     return section.section_id === section_id
                 });
-                const sectionEntity = tempCourseContentState.sections[secIndex]
-                sectionEntity.lectureEntitys.push(response.data)
-                tempCourseContentState.sections[secIndex] = sectionEntity
-
-                setCourseContentState(tempCourseContentState)
+                const newSections = [...courseContentState.sections]
+                const newSectionEntity = {
+                    ...newSections[secIndex],
+                    lectureEntitys: [
+                        ...newSections[secIndex].lectureEntitys,
+                        { ...response.data }
+                    ]
+                }
+                newSections[secIndex] = newSectionEntity
+                setCourseContentState(courseContentState => ({
+                    ...courseContentState,
+                    sections: newSections
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -126,6 +142,7 @@ const CourseContent = React.memo(function CourseContent(props) {
             })
     };
 
+    // Add new exam in the respective section
     const newExamHandler = (e, section_id, examTitle, examInstruction, duration) => {
         e.preventDefault();
         setIsLoading(true)
@@ -136,15 +153,22 @@ const CourseContent = React.memo(function CourseContent(props) {
         }
         axios.post('/exam/' + section_id, newExam, config)
             .then(response => {
-                const tempCourseContentState = { ...courseContentState }
-                const secIndex = tempCourseContentState.sections.findIndex(section => {
+                const secIndex = courseContentState.sections.findIndex(section => {
                     return section.section_id === section_id
                 });
-                const sectionEntity = tempCourseContentState.sections[secIndex]
-                sectionEntity.examEntitys.push(response.data)
-                tempCourseContentState.sections[secIndex] = sectionEntity
-
-                setCourseContentState(tempCourseContentState)
+                const newSections = [...courseContentState.sections]
+                const newSectionEntity = {
+                    ...newSections[secIndex],
+                    examEntitys: [
+                        ...newSections[secIndex].examEntitys,
+                        { ...response.data }
+                    ]
+                }
+                newSections[secIndex] = newSectionEntity
+                setCourseContentState(courseContentState => ({
+                    ...courseContentState,
+                    sections: newSections
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -152,10 +176,12 @@ const CourseContent = React.memo(function CourseContent(props) {
             })
     };
 
+    // Edit content (Section or Lecture)
     const updateContentHandler = (e, section_id, content_id, title, description, lectureVideo) => {
         e.preventDefault();
         setIsLoading(true)
 
+        // For section
         if (section_id === null) {
             const updatedSection = {
                 sectionTitle: title,
@@ -163,22 +189,26 @@ const CourseContent = React.memo(function CourseContent(props) {
             }
             axios.patch('/section/' + content_id + '/update', updatedSection, config)
                 .then(response => {
-                    const tempCourseContentState = { ...courseContentState }
-                    const secIndex = tempCourseContentState.sections.findIndex(section => {
+                    const secIndex = courseContentState.sections.findIndex(section => {
                         return section.section_id === content_id
                     });
-                    const sectionEntity = tempCourseContentState.sections[secIndex]
-                    sectionEntity.sectionTitle = response.data.sectionTitle;
-                    sectionEntity.sectionIntro = response.data.sectionIntro;
-                    tempCourseContentState.sections[secIndex] = sectionEntity
-
-                    setCourseContentState(tempCourseContentState)
+                    const newSections = [...courseContentState.sections]
+                    const newSectionEntity = {
+                        ...newSections[secIndex],
+                        ...response.data
+                    }
+                    newSections[secIndex] = newSectionEntity
+                    setCourseContentState(courseContentState => ({
+                        ...courseContentState,
+                        sections: newSections
+                    }))
                     setIsLoading(false)
                 })
                 .catch(error => {
                     setIsLoading(false)
                 })
         }
+        // For lecture
         else {
             const updatedLecture = new FormData()
             updatedLecture.append('lectureTitle', title)
@@ -187,22 +217,28 @@ const CourseContent = React.memo(function CourseContent(props) {
 
             axios.patch('/lecture/' + content_id + '/update', updatedLecture, config)
                 .then(response => {
-                    const tempCourseContentState = { ...courseContentState }
-                    const secIndex = tempCourseContentState.sections.findIndex(section => {
+                    const secIndex = courseContentState.sections.findIndex(section => {
                         return section.section_id === section_id
                     });
-                    const sectionEntity = tempCourseContentState.sections[secIndex]
-                    const lecIndex = sectionEntity.lectureEntitys.findIndex(lecture => {
+                    const lecIndex = courseContentState.sections[secIndex].lectureEntitys.findIndex(lecture => {
                         return lecture.lecture_id === content_id
                     });
-                    const lectureEntity = sectionEntity.lectureEntitys[lecIndex]
-                    lectureEntity.lectureTitle = response.data.lectureTitle;
-                    lectureEntity.lectureIntro = response.data.lectureIntro;
-                    lectureEntity.lectureVideo = response.data.lectureVideo;
 
-                    tempCourseContentState.sections[secIndex].lectureEntitys[lecIndex] = lectureEntity
+                    const newSections = [...courseContentState.sections,]
+                    const newSectionEntity = { ...newSections[secIndex] }
+                    const newLectureEntitys = [...newSectionEntity.lectureEntitys]
+                    const newLectureEntity = {
+                        ...newLectureEntitys[lecIndex],
+                        ...response.data
+                    }
+                    newLectureEntitys[lecIndex] = newLectureEntity;
+                    newSectionEntity.lectureEntitys = newLectureEntitys;
+                    newSections[secIndex] = newSectionEntity;
 
-                    setCourseContentState(tempCourseContentState)
+                    setCourseContentState(courseContentState => ({
+                        ...courseContentState,
+                        sections: newSections
+                    }))
                     setIsLoading(false)
                 })
                 .catch(error => {
@@ -211,43 +247,52 @@ const CourseContent = React.memo(function CourseContent(props) {
         };
     };
 
+    // Delete content (Section or Lecture)
     const deleteContentHandler = (section_id, content_id) => {
         setIsLoading(true)
+
+        // For Section 
         if (section_id === null) {
             axios.delete('/section/' + content_id, config)
                 .then(response => {
-                    const tempCourseContentState = { ...courseContentState }
-                    const secIndex = tempCourseContentState.sections.findIndex(section => {
+                    const secIndex = courseContentState.sections.findIndex(section => {
                         return section.section_id === content_id
                     });
-                    const sectionEntitys = tempCourseContentState.sections
-                    sectionEntitys.splice(secIndex, 1)
-                    tempCourseContentState.sections = sectionEntitys
-
-                    setCourseContentState(tempCourseContentState)
+                    const newSections = [...courseContentState.sections]
+                    newSections.splice(secIndex, 1)
+                    setCourseContentState(courseContentState => ({
+                        ...courseContentState,
+                        sections: newSections
+                    }))
                     setIsLoading(false)
-
                 })
                 .catch(error => {
                     setIsLoading(false)
                 })
         }
+        // For Lecture
         else {
             axios.delete('/lecture/' + content_id, config)
                 .then(response => {
-                    const tempCourseContentState = { ...courseContentState }
-                    const secIndex = tempCourseContentState.sections.findIndex(section => {
+                    const secIndex = courseContentState.sections.findIndex(section => {
                         return section.section_id === section_id
                     });
-                    const sectionEntity = tempCourseContentState.sections[secIndex]
-                    const lecIndex = sectionEntity.lectureEntitys.findIndex(lecture => {
+                    const lecIndex = courseContentState.sections[secIndex].lectureEntitys.findIndex(lecture => {
                         return lecture.lecture_id === content_id
                     });
-                    sectionEntity.lectureEntitys.splice(lecIndex, 1)
 
-                    tempCourseContentState.sections[secIndex] = sectionEntity
+                    const newSections = [...courseContentState.sections]
+                    const newSectionEntity = { ...newSections[secIndex] }
+                    const newLectureEntitys = [...newSectionEntity.lectureEntitys]
+                    newLectureEntitys.splice(lecIndex, 1)
 
-                    setCourseContentState(tempCourseContentState)
+                    newSectionEntity.lectureEntitys = newLectureEntitys;
+                    newSections[secIndex] = newSectionEntity;
+
+                    setCourseContentState(courseContentState => ({
+                        ...courseContentState,
+                        sections: newSections
+                    }))
                     setIsLoading(false)
                 })
                 .catch(error => {
@@ -256,23 +301,30 @@ const CourseContent = React.memo(function CourseContent(props) {
         };
     };
 
+    // Delete Exam
     const deleteExamHandler = (section_id, exam_id) => {
         setIsLoading(true)
         axios.delete('/exam/' + exam_id, config)
             .then(response => {
-                const tempCourseContentState = { ...courseContentState }
-                const secIndex = tempCourseContentState.sections.findIndex(section => {
+                const secIndex = courseContentState.sections.findIndex(section => {
                     return section.section_id === section_id
                 });
-                const sectionEntity = tempCourseContentState.sections[secIndex]
-                const examIndex = sectionEntity.examEntitys.findIndex(exam => {
+                const examIndex = courseContentState.sections[secIndex].examEntitys.findIndex(exam => {
                     return exam.exam_id === exam_id
                 });
-                sectionEntity.examEntitys.splice(examIndex, 1)
 
-                tempCourseContentState.sections[secIndex] = sectionEntity
+                const newSections = [...courseContentState.sections]
+                const newSectionEntity = { ...newSections[secIndex] }
+                const newExamEntitys = [...newSectionEntity.examEntitys]
+                newExamEntitys.splice(examIndex, 1)
 
-                setCourseContentState(tempCourseContentState)
+                newSectionEntity.examEntitys = newExamEntitys;
+                newSections[secIndex] = newSectionEntity;
+
+                setCourseContentState(courseContentState => ({
+                    ...courseContentState,
+                    sections: newSections
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -284,73 +336,90 @@ const CourseContent = React.memo(function CourseContent(props) {
     let j = 0;
 
     let courseContent =
-        <div id="coursecontent" className="fullscreen container">
+        <div id="coursecontent" className="container">
 
             <h4>{courseContentState.courseTitle}</h4>
-
+            {/* Show course details button */}
             <CourseDetails
                 courseTitle={courseContentState.courseTitle}
                 targetAudience_id={courseContentState.targetAudience_id}
                 subject_id={courseContentState.subject_id}
-                courseIntro={courseContentState.courseIntro}
                 fee={courseContentState.fee}
+                courseIntro={courseContentState.courseIntro}
                 updateCourseHandler={updateCourseHandler} />
 
-            {courseContentState.sections.map((section) => (
-                <div key={section.section_id} id="individualsection" className="row">
+            {/* Render every section */}
+            {courseContentState.sections.map((section, Index) => (
+                <div key={Index} id="individualsection" className="row">
+
                     <div id="sectionname">
 
                         <span>{i = i + 1}.  {section.sectionTitle}</span>
 
+                        {/* Edit options for section */}
                         <EditButtons
                             section_id={null}
                             content_id={section.section_id}
                             title={section.sectionTitle}
                             description={section.sectionIntro}
+                            lectureVideo={null}
+                            isExam={false}
                             updateContentHandler={updateContentHandler}
                             deleteContentHandler={deleteContentHandler} />
                     </div>
 
+                    {/* Render every Lecture */}
                     {section.lectureEntitys.map((lecture) => (
                         <div key={lecture.lecture_id} id="individualcontent">
 
                             <span>{j = j + 1}.  {lecture.lectureTitle}
 
+                                {/* Edit options for Lectures */}
                                 <EditButtons
                                     section_id={section.section_id}
                                     content_id={lecture.lecture_id}
                                     title={lecture.lectureTitle}
                                     description={lecture.lectureIntro}
                                     lectureVideo={lecture.lectureVideo}
+                                    isExam={false}
                                     updateContentHandler={updateContentHandler}
                                     deleteContentHandler={deleteContentHandler} />
                             </span>
                         </div>
                     ))}
 
+                    {/* Enter every Exam */}
                     {section.examEntitys.map((exam) => (
                         <div key={exam.exam_id} id="individualcontent">
 
-                            <span>{j = j + 1}.  {exam.examtitle}
+                            <span>{j = j + 1}.  {exam.examTitle}
+
+                                {/* Edit options for Exam */}
                                 <EditButtons
                                     section_id={section.section_id}
                                     content_id={exam.exam_id}
                                     title={exam.examTitle}
                                     description={exam.examInstruction}
+                                    lectureVideo={null}
                                     isExam={true}
                                     deleteContentHandler={deleteExamHandler} />
                             </span>
                         </div>
                     ))}
 
+                    {/* Add new Lecture and Exam */}
                     <AddNewButtons
                         isInsideSection={true}
                         section_id={section.section_id}
                         newLectureHandler={newLectureHandler}
                         newExamHandler={newExamHandler} />
-
                 </div>
             ))}
+
+            {/* Add new Section */}
+            <AddNewButtons
+                isInsideSection={false}
+                newSectionHandler={newSectionHandler} />
         </div>
 
     if (isLoading) {
@@ -358,14 +427,11 @@ const CourseContent = React.memo(function CourseContent(props) {
     }
 
     return (
-        <React.Fragment>
+        <div className="fullscreen">
 
             {courseContent}
 
-            <AddNewButtons
-                isInsideSection={false}
-                newSectionHandler={newSectionHandler} />
-        </React.Fragment>
+        </div>
     )
 })
 

@@ -4,14 +4,16 @@ import CModal from '../../customFunctions/CModal/CModal';
 import CButton from '../../customFunctions/CButton/CButton';
 
 const Logout = React.memo(function Logout(props) {
-    const [showLogoutModal, setShowLogoutModal] = useState(true)
+    const [showLogoutModal, setShowLogoutModal] = useState(false)
 
     // Check if the user is already logged in
     useEffect(() => {
         if (localStorage.authKey) {
             setShowLogoutModal(true)
+        } else {
+            props.history.push("/login")
         }
-    }, [])
+    }, [props.history])
 
     const modalHandler = () => {
         setShowLogoutModal(!showLogoutModal)
@@ -34,9 +36,9 @@ const Logout = React.memo(function Logout(props) {
                 show={showLogoutModal}
                 backdrop="static"
                 keyboard={false}
-                modalhandler={modalHandler}>
+                onHide={modalHandler}>
 
-                <p>Are you sure you want to log-out?</p>
+                <p>Are you sure you want to logout?</p>
 
                 <CButton
                     variant="outline-dark"

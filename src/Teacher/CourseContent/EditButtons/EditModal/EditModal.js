@@ -6,8 +6,8 @@ import CButton from '../../../../customFunctions/CButton/CButton';
 
 const EditModal = React.memo(function EditModal(props) {
     const [editState, setEditState] = useState({
-        title: '',
-        description: ''
+        title: props.title,
+        description: props.description,
     })
 
     const inputChangeHandler = (e) => {
@@ -27,31 +27,27 @@ const EditModal = React.memo(function EditModal(props) {
         }))
     }
 
-    const inputClearerHandler = () => {
-        setEditState({
-            ...props
-        })
+    const inputClearer = () => {
+        setEditState(editState => ({
+            ...editState,
+            title: props.title,
+            description: props.description
+        }))
         props.showEditModal();
     }
 
-    const LectureVideo = () => (
-        <Form.Group as={Row} className="inputfield">
-            <Form.Label column sm={2}>Video</Form.Label>
-            <Col sm={10}>
-                <Form.Control
-                    name="lectureVideo"
-                    type="file"
-                    onChange={fileInputHandler} />
-            </Col>
-        </Form.Group>
-    )
+    // Call back to the update content handler in EditButtons
+    const updateContentHandler = (e, title, description, lectureVideo) => {
+        props.updateContentHandler(e, props.section_id, props.content_id, title, description, lectureVideo)
+        props.showEditModal()
+    }
 
     return (
         <CModal
             show={props.show}
-            modalHandler={inputClearerHandler}>
-            <Form onSubmit={(e) => props.updateContentHandler(e, props.section_id, props.content_id, editState.title, editState.description, editState.lectureVideo)}>
-                <Form.Group as={Row} className="inputfield">
+            onHide={inputClearer}>
+            <Form onSubmit={(e) => updateContentHandler(e, editState.title, editState.description, editState.lectureVideo)}>
+                <Form.Group as={Row}>
                     <Form.Label column sm={2}>Title</Form.Label>
                     <Col sm={10}>
                         <Form.Control
@@ -65,7 +61,7 @@ const EditModal = React.memo(function EditModal(props) {
                     </Col>
                 </Form.Group>
 
-                <Form.Group as={Row} className="inputfield">
+                <Form.Group as={Row}>
                     <Form.Label column sm={2}>Description</Form.Label>
                     <Col sm={10}>
                         <Form.Control
@@ -77,11 +73,22 @@ const EditModal = React.memo(function EditModal(props) {
                     </Col>
                 </Form.Group>
 
-                {props.section_id ? <LectureVideo /> : null}
+                {props.section_id ?
+                    <Form.Group as={Row}>
+                        <Form.Label column sm={2}>Video</Form.Label>
+                        <Col sm={10}>
+                            <Form.Control
+                                name="lectureVideo"
+                                type="file"
+                                onChange={fileInputHandler} />
+                        </Col>
+                    </Form.Group>
+                    : null
+                }
 
                 <CButton
                     variant="outline-dark"
-                    onClick={inputClearerHandler}>
+                    onClick={inputClearer}>
                     Discard Changes
                 </CButton>
 

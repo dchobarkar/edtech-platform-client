@@ -2,3 +2,11 @@
   min-height: 84vh;
   width: 100%;
 }
+
+.heading-h5 {
+  font-size: 20px;
+}
+
+.no-decoration:hover {
+  text-decoration: none;
+}

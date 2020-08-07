@@ -7,7 +7,7 @@ const NewLecture = React.memo(function NewLecture(props) {
     const [lectureState, setLectureState] = useState({
         lectureTitle: '',
         lectureIntro: '',
-        lectureVideo: ''
+        lectureVideo: null
     })
 
     const inputChangeHandler = (e) => {
@@ -19,7 +19,7 @@ const NewLecture = React.memo(function NewLecture(props) {
         }))
     }
     const fileInputHandler = (e) => {
-        const name = e.target.value;
+        const name = e.target.name;
         const file = e.target.files[0];
         setLectureState(lectureState => ({
             ...lectureState,
@@ -27,6 +27,7 @@ const NewLecture = React.memo(function NewLecture(props) {
         }))
     }
 
+    // Callback to the newlecture handler function in AddNewButtons
     const newLectureHandler = (e) => {
         props.newLectureHandler(e, props.section_id, lectureState.lectureTitle, lectureState.lectureIntro, lectureState.lectureVideo);
         let tempLectureState = {
@@ -41,9 +42,11 @@ const NewLecture = React.memo(function NewLecture(props) {
     return (
         <div id="addnew" className="container">
             <div className="row">
-                <p>{lectureState.lectureTitle}</p>
+
+                <p><b>{lectureState.lectureTitle}</b></p>
+
                 <Form onSubmit={(e) => newLectureHandler(e)}>
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Lecture Title</Form.Label>
                         <Col sm={10}>
                             <Form.Control
@@ -51,13 +54,13 @@ const NewLecture = React.memo(function NewLecture(props) {
                                 type="text"
                                 value={lectureState.lectureTitle}
                                 required
-                                title="Please enter a valid title."
                                 pattern="^[\w\s]{0,100}$"
+                                title="Please enter a valid title."
                                 onChange={inputChangeHandler} />
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Description</Form.Label>
                         <Col sm={10}>
                             <Form.Control
@@ -69,7 +72,7 @@ const NewLecture = React.memo(function NewLecture(props) {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Video</Form.Label>
                         <Col sm={10}>
                             <Form.Control

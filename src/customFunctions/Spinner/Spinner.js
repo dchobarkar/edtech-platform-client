@@ -4,7 +4,14 @@ import './Spinner.css';
 
 const LoadingSpinner = React.memo(function LoadingSpinner(props) {
     return (
-        <div className="loader">Loading...</div>
+        <div className="sk-chase loader">
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+            <div className="sk-chase-dot"></div>
+        </div>
     )
 })
 

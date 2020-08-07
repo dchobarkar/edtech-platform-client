@@ -9,34 +9,37 @@ import './CourseDetails.css';
 const CourseDetails = React.memo(function CourseDetails(props) {
     const [detailsState, setDetailsState] = useState({ ...props })
     const [showCourseDetails, setShowCourseDetails] = useState(false)
-    const [editCourseDetails, setEditCourseDetails] = useState(true)
+    const [editCourseDetails, setEditCourseDetails] = useState(false)
 
     const inputChangeHandler = (e) => {
-        const name = e.target.value;
-        const value = e.target.name;
+        const name = e.target.name;
+        const value = e.target.value;
         setDetailsState(detailsState => ({
             ...detailsState,
             [name]: value
         }))
     }
 
+    // Show course description box with all input fields disabled
     const showCourseDetailsHandler = () => {
         setShowCourseDetails(!showCourseDetails)
         setEditCourseDetails(true)
     }
+    // Toggle edit setting for input field
     const editCourseDetailsHandler = () => {
         setEditCourseDetails(!editCourseDetails)
     }
 
+    // Callback to the edit profile function in CourseContent
     const updateCourseHandler = (e) => {
-        props.updateCourseHandler(e, detailsState.courseTitle, detailsState.targetAudience_id, detailsState.subject_id, detailsState.courseIntro, detailsState.fee);
+        props.updateCourseHandler(e, detailsState.courseTitle, detailsState.targetAudience_id, detailsState.subject_id, detailsState.fee, detailsState.courseIntro);
         showCourseDetailsHandler();
     }
 
-    const inputClearerHandler = () => {
-        setDetailsState(...props)
+    const inputClearer = () => {
+        setDetailsState({ ...props })
         setShowCourseDetails(false)
-        setEditCourseDetails(true)
+        setEditCourseDetails(false)
     }
 
     return (
@@ -50,7 +53,7 @@ const CourseDetails = React.memo(function CourseDetails(props) {
             {showCourseDetails ?
                 <div id="coursedetailsbox">
                     <Form onSubmit={(e) => updateCourseHandler(e)}>
-                        <Form.Group as={Row} className="inputfield" >
+                        <Form.Group as={Row}>
                             <Form.Label column sm={2}>Course Title</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
@@ -65,7 +68,7 @@ const CourseDetails = React.memo(function CourseDetails(props) {
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} className="inputfield" >
+                        <Form.Group as={Row}>
                             <Form.Label column sm={2}>Target Audience</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
@@ -82,7 +85,7 @@ const CourseDetails = React.memo(function CourseDetails(props) {
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} className="inputfield">
+                        <Form.Group as={Row}>
                             <Form.Label column sm={2}>Subject</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
@@ -99,7 +102,7 @@ const CourseDetails = React.memo(function CourseDetails(props) {
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} className="inputfield">
+                        <Form.Group as={Row}>
                             <Form.Label column sm={2}>Course Fee</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
@@ -113,7 +116,7 @@ const CourseDetails = React.memo(function CourseDetails(props) {
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} className="inputfield">
+                        <Form.Group as={Row}>
                             <Form.Label column sm={2}>Course Introduction</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
@@ -126,31 +129,35 @@ const CourseDetails = React.memo(function CourseDetails(props) {
                             </Col>
                         </Form.Group>
 
-                        <div id="coursedetailseditbutton" >
-                            {editCourseDetails ?
+                        {editCourseDetails ?
+                            null :
+                            <div className="row align-items-center">
                                 <CButton
                                     variant="light"
-                                    onClick={editCourseDetailsHandler}>
-                                    <i className="far fa-edit"></i> Edit
+                                    onClick={inputClearer}>
+                                    Discard Changes
                                 </CButton>
-                                : <React.Fragment>
-                                    <CButton
-                                        type="submit"
-                                        variant="light">
-                                        <i className="far fa-save"></i> Save
-                                    </CButton>
-
-                                    <CButton
-                                        variant="light"
-                                        onClick={inputClearerHandler}>
-                                        Discard Changes
-                                    </CButton>
-                                </React.Fragment>
-                            }
-                        </div>
+                                <CButton
+                                    type="submit"
+                                    variant="light">
+                                    <i className="far fa-save"></i> Save
+                                </CButton>
+                            </div>
+                        }
                     </Form>
 
-                </div> : null
+                    {editCourseDetails ?
+                        <div className="row align-items-center">
+                            <CButton
+                                variant="light"
+                                onClick={editCourseDetailsHandler}>
+                                <i className="far fa-edit"></i> Edit
+                            </CButton>
+                        </div>
+                        : null
+                    }
+                </div>
+                : null
             }
         </React.Fragment >
     )

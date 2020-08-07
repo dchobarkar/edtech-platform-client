@@ -7,10 +7,28 @@ const DeleteModal = React.memo(function DeleteModal(props) {
     return (
         <CModal
             show={props.show}
-            modalHandler={props.showDeleteModal}>
+            onHide={props.showDeleteModal}>
 
-            <h4>Do you really want to delete this item?</h4>
-            <p>Once deleted, you can not recover this item</p>
+            {/* Show different delete message for Section, Lecture, Exam */}
+            {props.section_id ?
+                (props.isExam ?
+                    <React.Fragment>
+                        <p className="heading-h5">Do you really want to delete this Exam?</p>
+                        <p>Once deleted, you can not recover this Exam.</p>
+                        <p>Deleting this Exam will also delete all Questions associated with it.</p>
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                        <p className="heading-h5">Do you really want to delete this Lecture?</p>
+                        <p>Once deleted, you can not recover this Lecture.</p>
+                    </React.Fragment>
+                ) :
+                <React.Fragment>
+                    <p className="heading-h5">Do you really want to delete this Section?</p>
+                    <p>Once deleted, you can not recover this Section.</p>
+                    <p>Deleting this Section will also delete all Lectures and Exams associated with it.</p>
+                </React.Fragment>
+            }
 
             <CButton
                 variant="outline-dark"
@@ -20,7 +38,7 @@ const DeleteModal = React.memo(function DeleteModal(props) {
 
             <CButton
                 className="float-right"
-                variant="outline-dark"
+                variant="outline-danger"
                 onClick={() => props.deleteContentHandler(props.section_id, props.content_id)}>
                 Delete
             </CButton>

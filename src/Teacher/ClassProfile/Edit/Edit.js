@@ -17,7 +17,6 @@ const Edit = React.memo(function Edit(props) {
             [name]: value
         }))
     }
-
     const fileInputHanlder = (e) => {
         const name = e.target.name;
         const file = e.target.files[0];
@@ -27,14 +26,16 @@ const Edit = React.memo(function Edit(props) {
         }))
     }
 
+    // Restore all values in the input field
     const inputClearer = () => {
         setEditState({ ...props.classProfile })
         props.showEditBoxHandler()
     }
 
+    // Callback to the edit profile function in ClassProfile
     const editClassProfileHandler = (e) => {
         props.editClassProfileHandler(e, editState.classIntro, editState.country_id, editState.state_id, editState.address, editState.city, editState.pincode, editState.bannerImgUrl)
-        inputClearer()
+        props.showEditBoxHandler()
     }
 
     return (
@@ -42,7 +43,7 @@ const Edit = React.memo(function Edit(props) {
             <div className="row shadow p-3 mb-5 bg-white rounded">
                 <Form onSubmit={(e) => editClassProfileHandler(e)}>
                     <Form.Row>
-                        <Form.Group as={Col} className="inputfield">
+                        <Form.Group as={Col}>
                             <Form.Label>Country</Form.Label>
                             <Form.Control
                                 name="country_id"
@@ -56,7 +57,7 @@ const Edit = React.memo(function Edit(props) {
                             </Form.Control>
                         </Form.Group>
 
-                        <Form.Group as={Col} className="inputfield">
+                        <Form.Group as={Col}>
                             <Form.Label>State</Form.Label>
                             <Form.Control
                                 name="state_id"
@@ -72,7 +73,7 @@ const Edit = React.memo(function Edit(props) {
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group as={Col} className="inputfield">
+                        <Form.Group as={Col}>
                             <Form.Label>City</Form.Label>
                             <Form.Control
                                 name="city"
@@ -84,7 +85,7 @@ const Edit = React.memo(function Edit(props) {
                                 onChange={inputChangeHandler} />
                         </Form.Group>
 
-                        <Form.Group as={Col} className="inputfield">
+                        <Form.Group as={Col}>
                             <Form.Label>Pin Code</Form.Label>
                             <Form.Control
                                 name="pincode"
@@ -97,7 +98,7 @@ const Edit = React.memo(function Edit(props) {
                         </Form.Group>
                     </Form.Row>
 
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={4}>Address</Form.Label>
                         <Col sm={8}>
                             <Form.Control
@@ -111,7 +112,7 @@ const Edit = React.memo(function Edit(props) {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group className="inputfield">
+                    <Form.Group>
                         <Form.Label>Class Intro</Form.Label>
                         <Form.Control
                             name="classIntro"

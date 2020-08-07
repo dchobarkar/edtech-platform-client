@@ -44,8 +44,7 @@ const Login = React.memo(function Login(props) {
         e.preventDefault();
         setIsLoading(true)
         const user = {
-            email: loginState.email,
-            password: loginState.password
+            ...loginState
         }
         axios.post('/auth/login', user)
             .then(response => {
@@ -61,7 +60,7 @@ const Login = React.memo(function Login(props) {
     let loginPage =
         <React.Fragment>
             <Form onSubmit={(e) => loginHandler(e)}>
-                <Form.Group className="inputfield">
+                <Form.Group>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         name="email"
@@ -73,7 +72,7 @@ const Login = React.memo(function Login(props) {
                         onChange={inputChangeHandler} />
                 </Form.Group>
 
-                <Form.Group className="inputfield">
+                <Form.Group>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         name="password"
@@ -94,7 +93,7 @@ const Login = React.memo(function Login(props) {
                 </CButton>
             </Form>
 
-            <p>New here? <Link to={"/signup"}>Let's start your journey.</Link></p>
+            <p>New here? <Link to={"/signup"} className="no-decoration">Let's start your journey.</Link></p>
         </React.Fragment>
 
     if (isLoading) {
@@ -105,21 +104,23 @@ const Login = React.memo(function Login(props) {
         <React.Fragment>
             <div className="fullscreen container">
                 <div className="row" >
-                    <div className="col-lg-9">
+                    <div className="col-lg-9 col-md-8">
 
                     </div>
 
-                    <div id="loginpage" className="col-lg-3">
+                    <div id="loginpage" className="col-lg-3 col-md-4">
                         {loginPage}
                     </div>
                 </div>
             </div>
 
             {/* Modal to be shown if the user is already logged-in */}
-            <CModal show={isLoggedIn}
-                modalhandler={backToHomePageHandler}>
+            <CModal
+                show={isLoggedIn}
+                onHide={backToHomePageHandler}>
                 <p>Please logout first</p>
             </CModal>
+
         </React.Fragment>
     )
 })

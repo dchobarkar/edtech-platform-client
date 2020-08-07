@@ -15,11 +15,11 @@ const NewCourse = React.memo(function NewCourse(props) {
         courseIntro: '',
         targetAudience_id: "1",
         subject_id: '1',
-        fee: null
+        fee: ''
     })
     const [isLoading, setIsLoading] = useState(false)
 
-    let config = {
+    const config = {
         headers: {
             "Authorization": "Bearer " + localStorage.authKey
         }
@@ -34,6 +34,7 @@ const NewCourse = React.memo(function NewCourse(props) {
         }))
     }
 
+    // Post new course
     const newCourseHandler = (e) => {
         e.preventDefault()
         setIsLoading(true)
@@ -52,12 +53,13 @@ const NewCourse = React.memo(function NewCourse(props) {
 
     let newCourseForm =
         <Form className="shadow p-3 mb-5 bg-white rounded" onSubmit={(e) => newCourseHandler(e)}>
-            <Form.Group as={Row} className="inputfield">
+            <Form.Group as={Row}>
                 <Form.Label column sm={2}>Course Title</Form.Label>
                 <Col sm={10}>
                     <Form.Control
                         name="courseTitle"
                         type="text"
+                        value={newCourseState.courseTitle}
                         placeholder="Course Title"
                         required
                         pattern="^[\w\s]{0,100}$"
@@ -66,12 +68,13 @@ const NewCourse = React.memo(function NewCourse(props) {
                 </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="inputfield">
+            <Form.Group as={Row}>
                 <Form.Label column sm={2}>Target Audience</Form.Label>
                 <Col sm={10}>
                     <Form.Control
                         name="targetAudience_id"
                         as="select"
+                        value={newCourseState.targetAudience_id}
                         required
                         pattern="^[0-9]+$"
                         title="Plese select an option from given values."
@@ -81,12 +84,13 @@ const NewCourse = React.memo(function NewCourse(props) {
                 </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="inputfield">
+            <Form.Group as={Row}>
                 <Form.Label column sm={2}>Subject</Form.Label>
                 <Col sm={10}>
                     <Form.Control
                         name="subject_id"
                         as="select"
+                        value={newCourseState.subject_id}
                         required
                         pattern="^[0-9]+$"
                         title="Please select an option from given values."
@@ -96,12 +100,13 @@ const NewCourse = React.memo(function NewCourse(props) {
                 </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="inputfield">
+            <Form.Group as={Row}>
                 <Form.Label column sm={2}>Course Fee</Form.Label>
                 <Col sm={10}>
                     <Form.Control
                         name="fee"
                         placeholder="Course Fee"
+                        value={newCourseState.fee}
                         required
                         pattern="^[0-9]+$"
                         type="number"
@@ -109,13 +114,14 @@ const NewCourse = React.memo(function NewCourse(props) {
                 </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="inputfield">
+            <Form.Group as={Row}>
                 <Form.Label column sm={2}>Course Introduction</Form.Label>
                 <Col sm={10}>
                     <Form.Control
                         name="courseIntro"
                         as="textarea"
                         rows="5"
+                        value={newCourseState.courseIntro}
                         placeholder="Course Introduction"
                         onChange={inputChangeHandler} />
                 </Col>

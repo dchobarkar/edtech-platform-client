@@ -18,6 +18,7 @@ const ContactUs = React.memo(function ContactUs(props) {
         setMobileNo(e.target.value)
     }
 
+    // Trigger modal to show successful mobile no submission
     const noSubmittedConfirmationHandler = () => {
         setShowNoSubmittedModal(!showNoSubmittedModal)
     }
@@ -45,7 +46,7 @@ const ContactUs = React.memo(function ContactUs(props) {
             <p>We need a few detail to reach you</p>
 
             <Form onSubmit={(e) => mobileNoSubmitHandler(e)}>
-                <Form.Group className="inputfield">
+                <Form.Group>
                     <Form.Label>Please Enter Your Mobile Number</Form.Label>
                     <Form.Control
                         name="mobileNo"
@@ -90,7 +91,7 @@ const ContactUs = React.memo(function ContactUs(props) {
             {/* Modal to be shown after successful mobile no submission */}
             <CModal
                 show={showNoSubmittedModal}
-                modalhandler={noSubmittedConfirmationHandler}>
+                onHide={noSubmittedConfirmationHandler}>
                 <i className="fas fa-mobile-alt"></i> We will reach you shortly.
             </CModal>
 

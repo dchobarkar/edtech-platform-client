@@ -8,7 +8,6 @@ import Footer from './components/Footer/Footer';
 import './App.css';
 import './customFunctions/InputField/InputField.css';
 
-
 const Signup = React.lazy(() => {
   return import("./authorization/Signup/Signup")
 })
@@ -66,9 +65,11 @@ const App = React.memo(function App(props) {
 
         <Navbar />
 
-        <Suspense fallback={<div className="fullscreen">
-          <p>...You Shouldn't be seeing this.</p>
-          <p>Please Check your internet connection.</p></div>}>
+        <Suspense fallback={
+          <div className="fullscreen">
+            <p>You Shouldn't be seeing this.</p>
+            <p>Please Check your internet connection....</p></div>
+        }>
 
           <Switch>
             <Route path="/" exact render={(props) => <LandingPage {...props} />} />
@@ -99,6 +100,5 @@ const App = React.memo(function App(props) {
     </BrowserRouter>
   );
 })
-
 
 export default App;

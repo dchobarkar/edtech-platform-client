@@ -1,11 +1,8 @@
 #coursedetailsbox {
-  border: 2px solid gray;
+  margin-top: 1%;
+  border: 1px solid gray;
 }
-
-#coursedetailseditbutton {
-  padding: 0 25%;
-}
-
-#coursedetailseditbutton button {
-  width: 100%;
+#coursedetailsbox button {
+  width: 200px;
+  margin: 1% auto;
 }

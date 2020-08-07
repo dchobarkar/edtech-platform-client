@@ -15,17 +15,15 @@ const VideoPlayer = React.memo(function VideoPlayer(props) {
     return (
         <div onContextMenu={(e) => videoHandler(e)}>
             <CModal
-                show={props.showVideoModal}
-                modalhandler={props.videoModalhandler}>
-                <Player
-                    ref={c => {
-                        this.player = c;
-                    }}
-                    autoPlay>
+                show={props.show}
+                onHide={props.showVideoModalHandler}>
+                <Player autoPlay>
 
                     <source src={props.lectureVideo} />
+
                     <BigPlayButton position="center" />
                     <LoadingSpinner />
+
                     <ControlBar className="my-class">
                         <ReplayControl seconds={10} order={1.1} />
                         <ForwardControl seconds={10} order={1.2} />

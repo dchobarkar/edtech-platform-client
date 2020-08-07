@@ -19,8 +19,9 @@ const NewExam = React.memo(function NewExam(props) {
         }))
     }
 
+    // Callback to the newExamHandler in AddButtons
     const newExamHandler = (e) => {
-        props.newexamhandler(e, props.section_id, examState.examTitle, examState.examInstruction, examState.examDuration);
+        props.newExamHandler(e, props.section_id, examState.examTitle, examState.examInstruction, examState.examDuration);
         let tempExamState = {
             examTitle: '',
             examInstruction: '',
@@ -33,9 +34,11 @@ const NewExam = React.memo(function NewExam(props) {
     return (
         <div id="addnew" className="container">
             <div className="row">
-                <p>{examState.examTitle}</p>
+
+                <p><b>{examState.examTitle}</b></p>
+
                 <Form onSubmit={(e) => newExamHandler(e)}>
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Test Title</Form.Label>
                         <Col sm={10}>
                             <Form.Control
@@ -43,13 +46,13 @@ const NewExam = React.memo(function NewExam(props) {
                                 type="text"
                                 value={examState.examTitle}
                                 required
-                                title="Please enter a valid exam title."
                                 pattern="^[\w\s]{0,100}$"
+                                title="Please enter a valid exam title."
                                 onChange={inputChangeHandler} />
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Instructions</Form.Label>
                         <Col sm={10}>
                             <Form.Control
@@ -61,7 +64,7 @@ const NewExam = React.memo(function NewExam(props) {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="inputfield">
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Duration</Form.Label>
                         <Col sm={10}>
                             <Form.Control
@@ -69,8 +72,8 @@ const NewExam = React.memo(function NewExam(props) {
                                 type="number"
                                 value={examState.examDuration}
                                 required
-                                title="Please enter the duration of exam."
                                 pattern="^[0-9]+$"
+                                title="Please enter the duration of exam."
                                 onChange={inputChangeHandler} />
                         </Col>
                     </Form.Group>

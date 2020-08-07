@@ -1,4 +1,13 @@
 .btn {
   font-size: 12px;
   font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
 }

@@ -13,14 +13,14 @@ const MyCourse = React.memo(function MyCourse(props) {
     const [myCourseState, setMyCourseState] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
+    // Get all courses for the current user
     useEffect(() => {
         setIsLoading(true)
-        const config = {
+        axios.get('/course', {
             headers: {
                 "Authorization": "Bearer " + localStorage.authKey
             }
-        }
-        axios.get('/course', config)
+        })
             .then(response => {
                 setMyCourseState(response.data)
                 setIsLoading(false)
@@ -30,6 +30,7 @@ const MyCourse = React.memo(function MyCourse(props) {
             })
     }, [])
 
+    // Calculate avg rating
     const ratingCalculator = (ratingPoint, noOfRating) => {
         let rating = 0;
         if (noOfRating !== 0) {
@@ -40,14 +41,13 @@ const MyCourse = React.memo(function MyCourse(props) {
 
     let myCourseList =
         <React.Fragment>
-            <Link id="mycoursecard" to="/newcourse">
+            <Link to="/newcourse" id="mycoursecard" className="no-decoration">
                 <Card>
                     <Card.Body>
                         <Card.Title>
                             <i className="far fa-plus-square fa-10x"></i>
                         </Card.Title>
                     </Card.Body>
-
                     <CButton
                         variant="light">
                         Add New Course
@@ -56,7 +56,7 @@ const MyCourse = React.memo(function MyCourse(props) {
             </Link>
 
             {myCourseState.map(course => (
-                <div id="mycoursecard" key={course.course_id}>
+                <div key={course.course_id} id="mycoursecard">
                     <Card className="shadow bg-white rounded">
                         <Card.Body>
                             <Card.Title>{course.courseTitle}</Card.Title>
@@ -73,7 +73,7 @@ const MyCourse = React.memo(function MyCourse(props) {
                         <Link to={"/coursecontent/" + course.course_id}>
                             <CButton
                                 id="mycoursebutton"
-                                variant="outline-dark">
+                                variant="light">
                                 View Details
                             </CButton>
                         </Link>

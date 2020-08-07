@@ -1,16 +1,16 @@
-.inputfield .form-control {
+.form-group .form-control {
   border: none;
   border-radius: 0%;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 1px solid #ccc;
   font: inherit;
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
 }
-.inputfield .form-control:focus {
+.form-group .form-control:focus {
   box-shadow: none;
-  border-color: #ccc;
+  border-color: #007fff;
 }
-.inputfield .form-control:invalid {
+.form-group .form-control:invalid {
   border-bottom: 1px solid red;
+}
+.form-group .form-control:disabled {
+  background-color: transparent;
 }

@@ -6,13 +6,19 @@ const withErrorHandler = (WrappedComponent, axios) => {
         const [show, setShow] = useState(false)
         const [error, setError] = useState(null)
 
-        const reqInterceptor = axios.interceptors.request.use(req => {
-            setError(null)
-            return req;
+        const reqInterceptor = axios.interceptors.request.use(config => {
+            setError(null);
+            return config;
+        }, function (err) {
+            return Promise.reject(err)
         })
-        const resInterceptor = axios.interceptors.response.use(res => res, err => {
+        const resInterceptor = axios.interceptors.response.use(response => {
+            return response;
+        }, function (err) {
+
+            // Extract correct error message 
             errorMsgHandler(err)
-            return err
+            return Promise.request(err)
         })
 
         useEffect(() => {
@@ -27,6 +33,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             setError(null)
         }
 
+        // Extract correct error message from error
         const errorMsgHandler = (error) => {
             let msg = ""
             if (error.response) {
@@ -36,12 +43,18 @@ const withErrorHandler = (WrappedComponent, axios) => {
             } else {
                 msg = error.message
             }
+            if (msg === "Unauthorized") {
+                console.log("I'm here.")
+            }
             setShow(true)
             setError(msg)
         }
 
         return (
             <React.Fragment>
+                <WrappedComponent {...props} />
+
+                {/* Modal to be shown if there is any error present */}
                 <Modal
                     centered
                     show={show}
@@ -49,13 +62,11 @@ const withErrorHandler = (WrappedComponent, axios) => {
                     <Modal.Body>
                         {Array.isArray(error) ?
                             error.map((msg, Index) => { return <p key={Index}>{msg}</p> })
-                            : <p> {error}</p>
+                            : <p>{error}</p>
                         }
                     </Modal.Body>
                 </Modal>
-
-                <WrappedComponent {...props} />
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }
