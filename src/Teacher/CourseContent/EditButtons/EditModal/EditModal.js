@@ -5,11 +5,13 @@ import CModal from '../../../../customFunctions/CModal/CModal';
 import CButton from '../../../../customFunctions/CButton/CButton';
 
 const EditModal = React.memo(function EditModal(props) {
+    // Edit input form state
     const [editState, setEditState] = useState({
         title: props.title,
         description: props.description,
     })
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -18,6 +20,7 @@ const EditModal = React.memo(function EditModal(props) {
             [name]: value
         }))
     }
+    // File input handling function
     const fileInputHandler = (e) => {
         const name = e.target.name;
         const file = e.target.files[0];
@@ -27,6 +30,7 @@ const EditModal = React.memo(function EditModal(props) {
         }))
     }
 
+    // Clear any changes made in the input state
     const inputClearer = () => {
         setEditState(editState => ({
             ...editState,

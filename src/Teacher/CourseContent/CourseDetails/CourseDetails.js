@@ -7,10 +7,14 @@ import { targetAudienceType, subjectType } from '../../../utils/variables';
 import './CourseDetails.css';
 
 const CourseDetails = React.memo(function CourseDetails(props) {
+    // Course details input form state
     const [detailsState, setDetailsState] = useState({ ...props })
+    // Show coursedetails box toggle variable
     const [showCourseDetails, setShowCourseDetails] = useState(false)
+    // Course details box edit state toggler
     const [editCourseDetails, setEditCourseDetails] = useState(false)
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -36,8 +40,9 @@ const CourseDetails = React.memo(function CourseDetails(props) {
         showCourseDetailsHandler();
     }
 
+    // Clear any edited state in the course content box
     const inputClearer = () => {
-        setDetailsState({ ...props })
+        setDetailsState(detailsState => ({ ...props }))
         setShowCourseDetails(false)
         setEditCourseDetails(false)
     }
@@ -130,7 +135,14 @@ const CourseDetails = React.memo(function CourseDetails(props) {
                         </Form.Group>
 
                         {editCourseDetails ?
-                            null :
+                            <div className="row align-items-center">
+                                <CButton
+                                    variant="light"
+                                    onClick={editCourseDetailsHandler}>
+                                    <i className="far fa-edit"></i> Edit
+                                </CButton>
+                            </div>
+                            :
                             <div className="row align-items-center">
                                 <CButton
                                     variant="light"
@@ -145,17 +157,6 @@ const CourseDetails = React.memo(function CourseDetails(props) {
                             </div>
                         }
                     </Form>
-
-                    {editCourseDetails ?
-                        <div className="row align-items-center">
-                            <CButton
-                                variant="light"
-                                onClick={editCourseDetailsHandler}>
-                                <i className="far fa-edit"></i> Edit
-                            </CButton>
-                        </div>
-                        : null
-                    }
                 </div>
                 : null
             }

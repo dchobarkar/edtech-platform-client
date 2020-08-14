@@ -8,8 +8,11 @@ import NewExam from './NewExam/NewExam';
 import './AddNewButton.css';
 
 const AddNewButtons = React.memo(function (props) {
+    // New section box handling variable
     const [newSection, setNewSection] = useState(false);
+    // New lecture box handling variable
     const [newLecture, setNewLecture] = useState(false);
+    // New exam box handling variable
     const [newExam, setNewExam] = useState(false);
 
     // General content handler

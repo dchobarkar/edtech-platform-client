@@ -4,12 +4,14 @@ import { Form, Col, Row } from 'react-bootstrap';
 import CButton from '../../../../customFunctions/CButton/CButton';
 
 const NewLecture = React.memo(function NewLecture(props) {
+    // New lecture input form state
     const [lectureState, setLectureState] = useState({
         lectureTitle: '',
         lectureIntro: '',
         lectureVideo: null
     })
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -18,6 +20,7 @@ const NewLecture = React.memo(function NewLecture(props) {
             [name]: value
         }))
     }
+    // File input handling function
     const fileInputHandler = (e) => {
         const name = e.target.name;
         const file = e.target.files[0];

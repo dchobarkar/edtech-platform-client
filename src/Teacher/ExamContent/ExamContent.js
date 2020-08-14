@@ -4,7 +4,6 @@ import { Image } from 'react-bootstrap';
 import axios from '../../axios-server';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../customFunctions/Spinner/Spinner';
-import CModal from '../../customFunctions/CModal/CModal';
 
 import InstructionBox from './InstructionBox/InstructionBox';
 import EditButtons from './EditButton/EditButton';
@@ -13,13 +12,16 @@ import NewQuestion from './NewQuestion/NewQuestion';
 import './ExamContent.css';
 
 const ExamContent = React.memo(function ExamContent(props) {
+    // Exam input form state
     const [examState, setExamState] = useState({
         exam_id: '',
         examTitle: '',
         examInstruction: '',
         duration: ''
     })
+    // Question list (array)
     const [questionState, setQuestionState] = useState([])
+    // Loading page variable
     const [isLoading, setIsLoading] = useState(false)
 
     const config = {
@@ -29,12 +31,18 @@ const ExamContent = React.memo(function ExamContent(props) {
     }
     const exam_id = props.match.params.id
 
+    // Get exam details along with all questions 
     useEffect(() => {
+        // Check if user is logged in 
         if (!localStorage.authKey) {
             props.history.replace('/login')
         }
         setIsLoading(true)
-        axios.get('/exam/' + exam_id + '/allquestions', config)
+        axios.get('/exam/' + exam_id + '/allquestions', {
+            headers: {
+                "Authorization": "Bearer " + localStorage.authKey
+            }
+        })
             .then(response => {
                 const tempExamState = {
                     exam_id: response.data.exam_id,
@@ -44,7 +52,9 @@ const ExamContent = React.memo(function ExamContent(props) {
                 }
                 const tempQuestionState = response.data.questions
 
-                setExamState(tempExamState)
+                setExamState(examState => ({
+                    ...tempExamState
+                }))
                 setQuestionState(tempQuestionState)
                 setIsLoading(false)
             })
@@ -53,6 +63,7 @@ const ExamContent = React.memo(function ExamContent(props) {
             })
     }, [])
 
+    // Update exam content
     const updateExamHandler = (e, examTitle, examInstruction, duration) => {
         e.preventDefault();
         setIsLoading(true)
@@ -69,7 +80,10 @@ const ExamContent = React.memo(function ExamContent(props) {
                     examInstruction: response.data.examInstruction,
                     duration: response.data.duration
                 }
-                setExamState(tempExamState)
+                setExamState(examState => ({
+                    ...examState,
+                    ...tempExamState
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -77,6 +91,7 @@ const ExamContent = React.memo(function ExamContent(props) {
             })
     }
 
+    // Add new question in exam
     const newQuestionHandler = (e, que, opt1, opt2, opt3, opt4, answer, queImage) => {
         e.preventDefault();
         setIsLoading(true)
@@ -91,12 +106,13 @@ const ExamContent = React.memo(function ExamContent(props) {
 
         axios.post('/question/' + exam_id, newQuestion, config)
             .then(response => {
-                const tempQuestionState = [...questionState]
                 const newQuestion = {
                     ...response.data
                 }
-                tempQuestionState.push(newQuestion)
-                setQuestionState(tempQuestionState)
+                setQuestionState(questionState => ([
+                    ...questionState,
+                    { ...newQuestion }
+                ]))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -104,6 +120,7 @@ const ExamContent = React.memo(function ExamContent(props) {
             })
     }
 
+    // Update a question in exam
     const updateQuestionHandler = (e, queIndex, question_id, que, opt1, opt2, opt3, opt4, answer, queImage) => {
         e.preventDefault();
         setIsLoading(false)
@@ -120,9 +137,15 @@ const ExamContent = React.memo(function ExamContent(props) {
         axios.patch('/question/' + question_id + '/update', updatedQuestion, config)
             .then(response => {
                 const tempQuestionState = [...questionState];
-                tempQuestionState[queIndex] = { ...response.data }
+                const tempQuestion = {
+                    ...tempQuestionState[queIndex],
+                    ...response.data
+                }
+                tempQuestionState[queIndex] = tempQuestion
 
-                setQuestionState(tempQuestionState)
+                setQuestionState(questionState => ([
+                    ...tempQuestionState
+                ]))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -130,6 +153,7 @@ const ExamContent = React.memo(function ExamContent(props) {
             })
     }
 
+    // Delete an question from exam
     const deleteQuestionHandler = (queIndex, question_id) => {
         setIsLoading(false)
         axios.delete('/question/' + question_id)
@@ -137,7 +161,9 @@ const ExamContent = React.memo(function ExamContent(props) {
                 const tempQuestionState = [...questionState]
                 tempQuestionState.splice(queIndex, 1)
 
-                setQuestionState(tempQuestionState)
+                setQuestionState(questionState => ([
+                    ...tempQuestionState
+                ]))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -154,7 +180,7 @@ const ExamContent = React.memo(function ExamContent(props) {
 
                         <EditButtons
                             queIndex={Index}
-                            queid={question.que_id}
+                            que_id={question.que_id}
                             que={question.que}
                             opt1={question.opt1}
                             opt2={question.opt2}
@@ -164,16 +190,16 @@ const ExamContent = React.memo(function ExamContent(props) {
                             updateQuestionHandler={updateQuestionHandler}
                             deleteQuestionHandler={deleteQuestionHandler} />
 
-                        {question.queImage === "none" ?
+                        {question.queImage === "none" || question.queImage === undefined ?
                             null :
                             <div id="queimag">
                                 <Image alt={"Question Image"} src={question.queImage} />
                             </div>
                         }
-                        <span><input type="radio" />1) <label>{question.opt1}</label></span>
-                        <span><input type="radio" />2) <label>{question.opt2}</label></span>
-                        <span><input type="radio" />3) <label>{question.opt3}</label></span>
-                        <span><input type="radio" />4) <label>{question.opt4}</label></span>
+                        <span><input type="radio" defaultChecked={"1" === question.answer} />1) <label>{question.opt1}</label></span>
+                        <span><input type="radio" defaultChecked={"2" === question.answer} />2) <label>{question.opt2}</label></span>
+                        <span><input type="radio" defaultChecked={"3" === question.answer} />3) <label>{question.opt3}</label></span>
+                        <span><input type="radio" defaultChecked={"4" === question.answer} />4) <label>{question.opt4}</label></span>
 
                         <p>Answer : Option {question.answer}</p>
                     </div>
@@ -186,12 +212,13 @@ const ExamContent = React.memo(function ExamContent(props) {
     }
 
     return (
-        <div id="examcontent" className="fullscreen">
+        <div id="examcontent" className="fullscreen container">
             <React.Fragment>
                 <h3>{examState.examTitle}</h3>
+                {/* Exam instructions box */}
                 <InstructionBox
-                    examTitle={examState.examtitle}
-                    examTnstruction={examState.examinstruction}
+                    examTitle={examState.examTitle}
+                    examInstruction={examState.examInstruction}
                     duration={examState.duration}
                     updateExamHandler={updateExamHandler} />
 

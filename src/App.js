@@ -2,11 +2,12 @@ import React, { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
+import Spinner from './customFunctions/Spinner/Spinner';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 
-import './App.css';
 import './customFunctions/InputField/InputField.css';
+import './App.css';
 
 const Signup = React.lazy(() => {
   return import("./authorization/Signup/Signup")
@@ -61,42 +62,42 @@ const NotFoundPage = React.lazy(() => {
 const App = React.memo(function App(props) {
   return (
     <BrowserRouter>
-      <div className="App">
 
-        <Navbar />
+      <Navbar />
 
-        <Suspense fallback={
-          <div className="fullscreen">
-            <p>You Shouldn't be seeing this.</p>
-            <p>Please Check your internet connection....</p></div>
-        }>
+      <Suspense fallback={
+        <div className="fullscreen container">
+          <div className="row align-items-center align-middle">
+            <Spinner />
+          </div>
+        </div>
+      }>
 
-          <Switch>
-            <Route path="/" exact render={(props) => <LandingPage {...props} />} />
-            <Route path="/services" exact render={(props) => <Services {...props} />} />
-            <Route path="/contactus" exact render={(props) => <ContactUs {...props} />} />
-            <Route path="/about" exact render={(props) => <About {...props} />} />
+        <Switch>
+          <Route path="/" exact render={(props) => <LandingPage {...props} />} />
+          <Route path="/services" exact render={(props) => <Services {...props} />} />
+          <Route path="/contactus" exact render={(props) => <ContactUs {...props} />} />
+          <Route path="/about" exact render={(props) => <About {...props} />} />
 
-            <Route path="/signup" exact render={(props) => <Signup {...props} />} />
-            <Route path="/login" exact render={(props) => <Login {...props} />} />
-            <Route path="/logout" exact render={(props) => <Logout {...props} />} />
+          <Route path="/signup" exact render={(props) => <Signup {...props} />} />
+          <Route path="/login" exact render={(props) => <Login {...props} />} />
+          <Route path="/logout" exact render={(props) => <Logout {...props} />} />
 
-            <Route path="/student/mycourse" exact render={(props) => <SMyCourse {...props} />} />
-            <Route path="/student/coursecontent" exact render={(props) => <SCourseContent {...props} />} />
+          <Route path="/student/mycourse" exact render={(props) => <SMyCourse {...props} />} />
+          <Route path="/student/coursecontent" exact render={(props) => <SCourseContent {...props} />} />
 
-            <Route path="/classprofile" exact render={(props) => <ClassProfile {...props} />} />
-            <Route path="/newcourse" exact render={(props) => <NewCourse {...props} />} />
-            <Route path="/mycourse" exact render={(props) => <MyCourse {...props} />} />
-            <Route path="/coursecontent/:id" exact render={(props) => <CourseContent {...props} />} />
-            <Route path="/examcontent/:id" exact render={(props) => <ExamContent {...props} />} />
+          <Route path="/classprofile" exact render={(props) => <ClassProfile {...props} />} />
+          <Route path="/newcourse" exact render={(props) => <NewCourse {...props} />} />
+          <Route path="/mycourse" exact render={(props) => <MyCourse {...props} />} />
+          <Route path="/coursecontent/:id" exact render={(props) => <CourseContent {...props} />} />
+          <Route path="/examcontent/:id" exact render={(props) => <ExamContent {...props} />} />
 
-            <Route render={(props) => <NotFoundPage {...props} />} />
-          </Switch>
-        </Suspense>
+          <Route render={(props) => <NotFoundPage {...props} />} />
+        </Switch>
+      </Suspense>
 
-        <Footer />
+      <Footer />
 
-      </div>
     </BrowserRouter>
   );
 })

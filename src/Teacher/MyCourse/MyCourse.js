@@ -10,7 +10,9 @@ import CButton from '../../customFunctions/CButton/CButton';
 import './MyCourse.css';
 
 const MyCourse = React.memo(function MyCourse(props) {
+    // My courses list
     const [myCourseState, setMyCourseState] = useState([])
+    // Page loading variable
     const [isLoading, setIsLoading] = useState(false)
 
     // Get all courses for the current user

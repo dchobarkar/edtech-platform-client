@@ -4,6 +4,7 @@ import CModal from '../../customFunctions/CModal/CModal';
 import CButton from '../../customFunctions/CButton/CButton';
 
 const Logout = React.memo(function Logout(props) {
+    // Show logout model variable
     const [showLogoutModal, setShowLogoutModal] = useState(false)
 
     // Check if the user is already logged in
@@ -15,6 +16,7 @@ const Logout = React.memo(function Logout(props) {
         }
     }, [props.history])
 
+    // Logout modal toggler
     const modalHandler = () => {
         setShowLogoutModal(!showLogoutModal)
     }
@@ -27,7 +29,7 @@ const Logout = React.memo(function Logout(props) {
 
     // Send user back to its current page
     const nopeLogOutHandler = () => {
-        props.history.go(-2)
+        props.history.go(-1)
     }
 
     return (

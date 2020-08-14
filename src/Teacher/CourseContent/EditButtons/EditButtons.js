@@ -7,9 +7,13 @@ import EditModal from './EditModal/EditModal';
 import DeleteModal from './DeleteModal/DeleteModal';
 
 const EditButtons = React.memo(function EditButtons(props) {
+    // Show description toggler variable
     const [showDescription, setShowDescription] = useState(false)
+    // Show video toggler variable
     const [showVideo, setShowVideo] = useState(false)
+    // Show edit box toggler variable
     const [showEditModal, setShowEditModal] = useState(false)
+    // Show delete box toggler variable
     const [showDeleteModal, setShowDeleteModal] = useState(false)
 
     // Functions to toggle showdescription, video modal,edit modal and delete modal
@@ -31,7 +35,7 @@ const EditButtons = React.memo(function EditButtons(props) {
         props.updateContentHandler(e, section_id, content_id, title, description, lectureVideo);
         showEditModalHandler();
     }
-
+    // Button for lectures
     const LessonButton = () => (
         <CButton
             className="float-right"
@@ -40,6 +44,7 @@ const EditButtons = React.memo(function EditButtons(props) {
             <i className="far fa-edit"></i>
         </CButton>
     )
+    // Button for exams
     const ExamButton = () => (
         <Link to={"/examcontent/" + props.content_id}>
             <CButton

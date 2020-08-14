@@ -5,10 +5,12 @@ import CModal from '../../../../customFunctions/CModal/CModal';
 import CButton from '../../../../customFunctions/CButton/CButton';
 
 const EditModal = React.memo(function EditModal(props) {
+    // Question update input form state
     const [questionState, setQuestionState] = useState({
         ...props
     })
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -17,6 +19,7 @@ const EditModal = React.memo(function EditModal(props) {
             [name]: value
         }))
     }
+    // File input handling function
     const fileInputHandler = (e) => {
         const name = e.target.name;
         const file = e.target.files[0];
@@ -26,25 +29,27 @@ const EditModal = React.memo(function EditModal(props) {
         }))
     }
 
+    // Callback to the udpateQuestionHandler from ExamContent
     const updateQuestionHandler = (e) => {
         props.updateQuestionHandler(e, props.queIndex, props.question_id, questionState.que, questionState.opt1, questionState.opt2, questionState.opt3, questionState.opt4, questionState.answer, questionState.queImage);
-        props.showEditModal();
+        props.showEditModalHandler();
     }
 
-    const inputClearerHandler = () => {
+    // Restore edited state 
+    const inputClearer = () => {
         setQuestionState({
             ...props
         })
-        props.showEditModal();
+        props.showEditModalHandler();
     }
 
     return (
         <CModal
             show={props.show}
-            modalHandler={inputClearerHandler}>
+            onHide={inputClearer}>
 
             <Form onSubmit={(e) => updateQuestionHandler(e)}>
-                <Form.Group className="inputfield">
+                <Form.Group>
                     <Form.Control
                         name="que"
                         as="textarea"
@@ -55,7 +60,7 @@ const EditModal = React.memo(function EditModal(props) {
                         onChange={inputChangeHandler} />
                 </Form.Group>
 
-                <Form.Group as={Row} className="inputfield">
+                <Form.Group as={Row}>
                     <Form.Label column sm={2}>Figure</Form.Label>
                     <Col sm={10}>
                         <Form.Control
@@ -66,7 +71,7 @@ const EditModal = React.memo(function EditModal(props) {
                 </Form.Group>
 
                 <Form.Row>
-                    <Form.Group className="inputfield">
+                    <Form.Group>
                         <Col lg={6}>
                             <Form.Control
                                 name="opt1"
@@ -78,7 +83,7 @@ const EditModal = React.memo(function EditModal(props) {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group className="inputfield">
+                    <Form.Group>
                         <Col lg={6}>
                             <Form.Control
                                 name="opt2"
@@ -92,7 +97,7 @@ const EditModal = React.memo(function EditModal(props) {
                 </Form.Row>
 
                 <Form.Row>
-                    <Form.Group className="inputfield">
+                    <Form.Group>
                         <Col lg={6}>
                             <Form.Control
                                 name="opt3"
@@ -104,7 +109,7 @@ const EditModal = React.memo(function EditModal(props) {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group className="inputfield">
+                    <Form.Group>
                         <Col lg={6}>
                             <Form.Control
                                 name="opt4"
@@ -117,7 +122,7 @@ const EditModal = React.memo(function EditModal(props) {
                     </Form.Group>
                 </Form.Row>
 
-                <Form.Group className="inputfield">
+                <Form.Group >
                     <Col lg={6}>
                         <Form.Label>Answer</Form.Label>
                         <Form.Control
@@ -137,7 +142,7 @@ const EditModal = React.memo(function EditModal(props) {
 
                 <CButton
                     variant="outline-dark"
-                    onClick={inputClearerHandler}>
+                    onClick={inputClearer}>
                     Discard Changes
                 </CButton>
 
@@ -148,8 +153,7 @@ const EditModal = React.memo(function EditModal(props) {
                     Save
                 </CButton>
             </Form>
-
-        </CModal >
+        </CModal>
     )
 })
 

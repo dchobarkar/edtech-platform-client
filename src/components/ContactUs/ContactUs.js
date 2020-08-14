@@ -10,10 +10,14 @@ import CButton from '../../customFunctions/CButton/CButton';
 import './ContactUs.css';
 
 const ContactUs = React.memo(function ContactUs(props) {
+    // Variable to store mobile no.
     const [mobileNo, setMobileNo] = useState("");
+    // Variable to shown successfull mobile no. register msg
     const [showNoSubmittedModal, setShowNoSubmittedModal] = useState(false);
+    // Page loading variable
     const [isLoading, setIsLoading] = useState(false);
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         setMobileNo(e.target.value)
     }

@@ -10,6 +10,7 @@ import Edit from './Edit/Edit';
 import './ClassProfile.css';
 
 const ClassProfile = React.memo(function ClassProfile(props) {
+    // Class profile input state
     const [classProfileState, setClassProfileState] = useState({
         firstName: '',
         lastName: '',
@@ -26,7 +27,9 @@ const ClassProfile = React.memo(function ClassProfile(props) {
         bannerImgUrl: '',
         classIntro: '',
     })
+    // Edit box show state toggle variable
     const [showEditBox, setShowEditBox] = useState(false)
+    // Page loading variable
     const [isLoading, setIsLoading] = useState(false)
 
     const config = {
@@ -52,6 +55,7 @@ const ClassProfile = React.memo(function ClassProfile(props) {
             })
     }, [])
 
+    // Toggle edit box show state
     const showEditBoxHandler = () => {
         setShowEditBox(!showEditBox)
     }

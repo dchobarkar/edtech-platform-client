@@ -6,9 +6,20 @@ import CButton from '../../../customFunctions/CButton/CButton';
 import './NewQuestion.css';
 
 const NewQuestion = React.memo(function NewQuestion(props) {
-    const [newQuestion, setNewQuestion] = useState({})
+    // New question input form state
+    const [newQuestion, setNewQuestion] = useState({
+        que: '',
+        opt1: '',
+        opt2: '',
+        opt3: '',
+        opt4: '',
+        answer: 1,
+        queImage: ''
+    })
+    // New question box toggler variable
     const [showNewQuestion, setShowNewQuestion] = useState(false)
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -17,6 +28,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
             [name]: value
         }))
     }
+    // File input handling function
     const fileInputHandler = (e) => {
         const name = e.target.name;
         const file = e.target.files[0]
@@ -26,17 +38,19 @@ const NewQuestion = React.memo(function NewQuestion(props) {
         }))
     }
 
+    // New question input box show toggler
     const showNewQuestionHandler = () => {
         setShowNewQuestion(!showNewQuestion)
     }
 
+    // Callback to the new question adder function from ExamContent
     const newQuestionHandler = (e) => {
         props.newQuestionHandler(e, newQuestion.que, newQuestion.opt1, newQuestion.opt2, newQuestion.opt3, newQuestion.opt4, newQuestion.answer, newQuestion.queImage);
         showNewQuestionHandler();
     }
 
     return (
-        <div id="addnew" className="container">
+        <div id="addnewquestion" className="container">
             <CButton
                 variant="outline-dark"
                 onClick={showNewQuestionHandler}>
@@ -46,7 +60,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
             {showNewQuestion ?
                 <div className="row">
                     <Form className="shadow p-2 bg-white rounded" onSubmit={(e) => newQuestionHandler(e)}>
-                        <Form.Group className="inputfield">
+                        <Form.Group>
                             <Form.Control
                                 name="que"
                                 as="textarea"
@@ -57,7 +71,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
                                 onChange={inputChangeHandler} />
                         </Form.Group>
 
-                        <Form.Group as={Row} className="inputfield">
+                        <Form.Group as={Row}>
                             <Form.Label column sm={2}>Figure</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
@@ -68,7 +82,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
                         </Form.Group>
 
                         <Form.Row>
-                            <Form.Group className="inputfield">
+                            <Form.Group>
                                 <Col lg={6}>
                                     <Form.Control
                                         name="opt1"
@@ -80,7 +94,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group className="inputfield">
+                            <Form.Group>
                                 <Col lg={6}>
                                     <Form.Control
                                         name="opt2"
@@ -94,7 +108,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
                         </Form.Row>
 
                         <Form.Row>
-                            <Form.Group className="inputfield">
+                            <Form.Group>
                                 <Col lg={6}>
                                     <Form.Control
                                         name="opt3"
@@ -106,7 +120,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group className="inputfield">
+                            <Form.Group>
                                 <Col lg={6}>
                                     <Form.Control
                                         name="opt4"
@@ -119,7 +133,7 @@ const NewQuestion = React.memo(function NewQuestion(props) {
                             </Form.Group>
                         </Form.Row>
 
-                        <Form.Group className="inputfield">
+                        <Form.Group>
                             <Col lg={6}>
                                 <Form.Label>Answer</Form.Label>
                                 <Form.Control

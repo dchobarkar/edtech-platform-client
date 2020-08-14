@@ -1,27 +1,25 @@
-#questionpaper h3 {
+#examcontent h3 {
+  width: 100%;
   text-align: center;
-  padding-top: 2%;
+  padding: 2% 0;
 }
 
-#exampreview {
-  border: 2px solid gray;
-  margin: 2%;
-  padding: 2%;
+#examdetails {
+  border: 1px solid gray;
   max-height: 80vh;
   overflow-y: scroll;
 }
-
-#question {
+#examdetails #question {
   width: 100%;
-  padding: 1% 0;
+  padding: 1% 1%;
 }
-#question span {
+#examdetails #question span {
   padding: 0 2%;
 }
-#question #queimagediv {
+#question #queimag {
   width: 100%;
 }
-#question #queimagediv img {
+#question #queimag img {
   max-width: 750px;
   padding: 10px 20%;
 }

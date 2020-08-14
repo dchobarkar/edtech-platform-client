@@ -4,11 +4,13 @@ import { Form, Col, Row } from 'react-bootstrap';
 import CButton from '../../../../customFunctions/CButton/CButton';
 
 const NewSection = React.memo(function NewSection(props) {
+    // New section input state
     const [sectionState, setSectionState] = useState({
         sectionTitle: '',
         sectionIntro: ''
     })
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;

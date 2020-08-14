@@ -5,27 +5,29 @@ import { NavLink, withRouter } from 'react-router-dom';
 import './Navbar.css';
 
 const NavBar = React.memo(function NavBar(props) {
+    // Function for routing path
     const nextPage = (path) => {
         props.history.push(path)
     }
 
+    // Routes tobe shown in navbar according to the authentication status
     let authenticated =
         localStorage.authKey ?
-            <NavDropdown title="Tutionsname">
+            <NavDropdown title="Tutionsname" id="userfunctions-dropdown">
                 <Nav.Link
-                    href="#4"
+                    href="#"
                     className="nav-link dropdownitem"
                     onSelect={() => nextPage("/classprofile")}>
                     Class Profile
                 </Nav.Link>
                 <Nav.Link
-                    href="#5"
+                    href="#"
                     className="nav-link dropdownitem"
                     onSelect={() => nextPage("/mycourse")}>
                     My Course
                 </Nav.Link>
                 <Nav.Link
-                    href="#6"
+                    href="#"
                     className="nav-link dropdownitem"
                     onSelect={() => nextPage("/analytics")}>
                     Analytics
@@ -34,14 +36,14 @@ const NavBar = React.memo(function NavBar(props) {
                 <NavDropdown.Divider />
 
                 <Nav.Link
-                    href="#7"
+                    href="#"
                     className="nav-link dropdownitem"
                     onSelect={() => nextPage("/logout")}>
                     Logout
                 </Nav.Link>
             </NavDropdown>
             : <Nav.Link
-                href="#8"
+                href="#"
                 className="nav-link"
                 onSelect={() => nextPage("/login")}>
                 Login
@@ -60,19 +62,19 @@ const NavBar = React.memo(function NavBar(props) {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
                     <Nav.Link
-                        href="#1"
+                        href="#"
                         className="nav-link"
                         onSelect={() => nextPage("/services")}>
                         Services
                     </Nav.Link>
                     <Nav.Link
-                        href="#2"
+                        href="#"
                         className="nav-link"
                         onSelect={() => nextPage("/contactus")}>
                         Contact Us
                     </Nav.Link>
                     <Nav.Link
-                        href="#3"
+                        href="#"
                         className="nav-link"
                         onSelect={() => nextPage("/about")}>
                         About

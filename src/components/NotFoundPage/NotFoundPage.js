@@ -7,8 +7,10 @@ import CButton from "../../customFunctions/CButton/CButton";
 import './NotFoundPage.css'
 
 const NotFoundPage = React.memo(function NotFoundPage(props) {
+    // Variable to store cto fired status
     const [isCTOFired, setIsCTOFired] = useState(false)
 
+    // Function to show fired cto page
     const fireCTOHandler = () => {
         setIsCTOFired(true)
     }
@@ -23,7 +25,7 @@ const NotFoundPage = React.memo(function NotFoundPage(props) {
                         <div id="ctofired">
                             <Image
                                 alt={"Saurabh Lodha"}
-                                src={require("../../assets/IMG/fired.jpeg")}
+                                src={require("../../assets/IMG/CTO_Fired.jpeg")}
                                 roundedCircle />
                             <h6>Saurabh, we had fun working with you</h6>
                             <p>We are not saying revenge is in Saurabh's nature, but you might want to change your IP address now!</p>
@@ -37,7 +39,7 @@ const NotFoundPage = React.memo(function NotFoundPage(props) {
                             <p>Our CTO must be fired for this unacceptable failure!!!</p>
                             <Image
                                 alt={"Saurabh Lodha"}
-                                src={require("../../assets/IMG/profile.jpeg")}
+                                src={require("../../assets/IMG/CTO_Profile.jpeg")}
                                 roundedCircle />
                             <CButton
                                 variant="outline-danger"

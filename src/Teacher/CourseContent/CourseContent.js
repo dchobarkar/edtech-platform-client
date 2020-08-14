@@ -11,6 +11,7 @@ import AddNewButtons from './AddNew/AddNewButtons';
 import './CourseContent.css';
 
 const CourseContent = React.memo(function CourseContent(props) {
+    // Course content input form state
     const [courseContentState, setCourseContentState] = useState({
         course_id: '',
         courseTitle: '',
@@ -30,6 +31,7 @@ const CourseContent = React.memo(function CourseContent(props) {
             }
         ],
     });
+    // Loading page variable
     const [isLoading, setIsLoading] = useState(false);
 
     const config = {
@@ -48,7 +50,9 @@ const CourseContent = React.memo(function CourseContent(props) {
             }
         })
             .then(response => {
-                setCourseContentState(response.data)
+                setCourseContentState(courseContentState => ({
+                    ...response.data
+                }))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -388,7 +392,7 @@ const CourseContent = React.memo(function CourseContent(props) {
                         </div>
                     ))}
 
-                    {/* Enter every Exam */}
+                    {/* Render every Exam */}
                     {section.examEntitys.map((exam) => (
                         <div key={exam.exam_id} id="individualcontent">
 

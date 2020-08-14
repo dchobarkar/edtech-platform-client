@@ -5,12 +5,16 @@ import EditModal from './EditModal/EditModal';
 import DeleteModal from './DeleteModal/DeleteModal';
 
 const EditButton = React.memo(function EditButton(props) {
+    // Delete modal show toggle variable
     const [showDeleteModal, setShowDeleteModal] = useState(false)
+    // Edit modal show toggle variable
     const [showEditModal, setShowEditModal] = useState(false)
 
+    // Delete modal toggle function
     const showDeleteModalHandler = () => {
         setShowDeleteModal(!showDeleteModal)
     }
+    // Edit modal toggle function
     const showEditModalHandler = () => {
         setShowEditModal(!showEditModal)
     }
@@ -31,6 +35,7 @@ const EditButton = React.memo(function EditButton(props) {
                 <i className="fas fa-trash-alt"></i>
             </CButton>
 
+            {/* Delete modal */}
             <DeleteModal
                 queIndex={props.queIndex}
                 question_id={props.que_id}
@@ -38,9 +43,10 @@ const EditButton = React.memo(function EditButton(props) {
                 showDeleteModalHandler={showDeleteModalHandler}
                 deleteQuestionHandler={props.deleteQuestionHandler} />
 
+            {/* Edit modal */}
             <EditModal
                 queIndex={props.queIndex}
-                question_id={props.question_id}
+                question_id={props.que_id}
                 que={props.que}
                 opt1={props.opt1}
                 opt2={props.opt2}
@@ -54,6 +60,5 @@ const EditButton = React.memo(function EditButton(props) {
         </React.Fragment>
     )
 })
-
 
 export default EditButton;

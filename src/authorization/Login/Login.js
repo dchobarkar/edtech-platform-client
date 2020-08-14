@@ -11,11 +11,14 @@ import CButton from '../../customFunctions/CButton/CButton';
 import './Login.css';
 
 const Login = React.memo(function Login(props) {
+    // Login input form state
     const [loginState, setLoginState] = useState({
         email: '',
         password: ''
     })
+    // Variable to check login status
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    // Page loading variable
     const [isLoading, setIsLoading] = useState(false)
 
     // Check if the user is already logged in
@@ -25,6 +28,7 @@ const Login = React.memo(function Login(props) {
         }
     }, [])
 
+    // Input Handling Function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;

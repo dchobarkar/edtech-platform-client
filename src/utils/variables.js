@@ -48,7 +48,7 @@ export const countryType = () => (
     </React.Fragment>
 )
 
-// State
+// Indian State
 export const stateType = () => (
     <React.Fragment>
         <option value="1">Please Select</option>

@@ -4,12 +4,14 @@ import { Form, Col, Row } from 'react-bootstrap';
 import CButton from '../../../../customFunctions/CButton/CButton';
 
 const NewExam = React.memo(function NewExam(props) {
+    // New exam input form state
     const [examState, setExamState] = useState({
         examTitle: '',
         examInstruction: '',
         examDuration: ''
     })
 
+    // Input Handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;

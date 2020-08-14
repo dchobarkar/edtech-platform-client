@@ -7,8 +7,10 @@ import { countryType, stateType } from '../../../utils/variables';
 import './Edit.css'
 
 const Edit = React.memo(function Edit(props) {
+    // Edit form input state
     const [editState, setEditState] = useState({ ...props.classProfile })
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -17,6 +19,7 @@ const Edit = React.memo(function Edit(props) {
             [name]: value
         }))
     }
+    // File input handling function
     const fileInputHanlder = (e) => {
         const name = e.target.name;
         const file = e.target.files[0];

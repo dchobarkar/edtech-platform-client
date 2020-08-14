@@ -10,6 +10,7 @@ import { targetAudienceType, subjectType } from '../../utils/variables';
 import './NewCourse.css';
 
 const NewCourse = React.memo(function NewCourse(props) {
+    // New course input state
     const [newCourseState, setNewCourseState] = useState({
         courseTitle: '',
         courseIntro: '',
@@ -17,6 +18,7 @@ const NewCourse = React.memo(function NewCourse(props) {
         subject_id: '1',
         fee: ''
     })
+    // Page loading variable
     const [isLoading, setIsLoading] = useState(false)
 
     const config = {
@@ -25,6 +27,7 @@ const NewCourse = React.memo(function NewCourse(props) {
         }
     }
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;

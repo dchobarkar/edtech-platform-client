@@ -10,6 +10,7 @@ import CButton from '../../customFunctions/CButton/CButton';
 import './Signup.css';
 
 const Signup = React.memo(function Signup(props) {
+    // Signup form input state
     const [signupState, setSignupState] = useState({
         firstName: '',
         lastName: '',
@@ -19,9 +20,12 @@ const Signup = React.memo(function Signup(props) {
         password: '',
         rePassword: ''
     })
-    const [isLoading, setIsLoading] = useState(false)
+    // Variable to show message after user creation 
     const [isUserCreated, setIsUserCreated] = useState(false)
+    // Page loading variable
+    const [isLoading, setIsLoading] = useState(false)
 
+    // Input handling function
     const inputChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -31,6 +35,7 @@ const Signup = React.memo(function Signup(props) {
         }))
     }
 
+    //    Function to push user to login page
     const userCreatedHandler = () => {
         props.history.push("/login")
     }
@@ -58,7 +63,9 @@ const Signup = React.memo(function Signup(props) {
                     password: '',
                     rePassword: ''
                 }
-                setSignupState(tempSignupState)
+                setSignupState(signupState => ({
+                    ...tempSignupState
+                }))
                 setIsLoading(false)
                 setIsUserCreated(true)
             })

@@ -3,15 +3,19 @@ import { Modal } from 'react-bootstrap';
 
 const withErrorHandler = (WrappedComponent, axios) => {
     return props => {
+        // Variable for modal show prop
         const [show, setShow] = useState(false)
+        // Variable to store erro msg
         const [error, setError] = useState(null)
 
+        // Axios request interceptor
         const reqInterceptor = axios.interceptors.request.use(config => {
             setError(null);
             return config;
         }, function (err) {
             return Promise.reject(err)
         })
+        // Axios response interceptor
         const resInterceptor = axios.interceptors.response.use(response => {
             return response;
         }, function (err) {
@@ -21,6 +25,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             return Promise.request(err)
         })
 
+        // Remove interceptors
         useEffect(() => {
             return () => {
                 axios.interceptors.request.eject(reqInterceptor);
@@ -28,6 +33,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             }
         }, [reqInterceptor, resInterceptor])
 
+        // Function to toggle error modal show state
         const errorConfirmedHandler = () => {
             setShow(false)
             setError(null)

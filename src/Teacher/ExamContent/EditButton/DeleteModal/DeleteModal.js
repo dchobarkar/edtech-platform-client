@@ -7,14 +7,14 @@ const DeleteModal = React.memo(function DeleteModal(props) {
     return (
         <CModal
             show={props.show}
-            modalHandler={props.showDeleteModal}>
+            onHide={props.showDeleteModalHandler}>
 
             <h4>Do you really want to delete this item?</h4>
             <p>Once deleted, you can not recover this item</p>
 
             <CButton
                 variant="outline-dark"
-                onClick={props.showDeleteModal}>
+                onClick={props.showDeleteModalHandler}>
                 Close
             </CButton>
 
