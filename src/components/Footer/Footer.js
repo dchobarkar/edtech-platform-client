@@ -7,10 +7,10 @@ const Footer = () => {
         <div id="footer">
             <div className="container">
                 <div className="row">
-                    <p>Made with Knowledge by Team GaNeTy &copy; Copyright 2020</p>
+                    <p>Made with <i className='fa fa-heart animated infinite pulse' /> by Team GaNeTy &copy; Copyright 2020</p>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

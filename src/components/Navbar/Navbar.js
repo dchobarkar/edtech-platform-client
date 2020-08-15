@@ -79,6 +79,12 @@ const NavBar = React.memo(function NavBar(props) {
                         onSelect={() => nextPage("/about")}>
                         About
                     </Nav.Link>
+                    <Nav.Link
+                        href="#"
+                        className="nav-link"
+                        onSelect={() => nextPage("/browsecourses")}>
+                        Courses
+                    </Nav.Link>
 
                     {authenticated}
 

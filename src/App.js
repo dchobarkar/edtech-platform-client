@@ -32,6 +32,13 @@ const About = React.lazy(() => {
   return import("./components/About/About")
 })
 
+const BrowseCourses = React.lazy(() => {
+  return import('./Common/BrowseCourses/BrowseCourses');
+})
+const CourseDetails = React.lazy(() => {
+  return import('./Common/CourseDetails/CourseDetails');
+})
+
 const ClassProfile = React.lazy(() => {
   return import("./Teacher/ClassProfile/ClassProfile")
 })
@@ -74,23 +81,26 @@ const App = React.memo(function App(props) {
       }>
 
         <Switch>
+          <Route path="/signup" exact render={(props) => <Signup {...props} />} />
+          <Route path="/login" exact render={(props) => <Login {...props} />} />
+          <Route path="/logout" exact render={(props) => <Logout {...props} />} />
+
           <Route path="/" exact render={(props) => <LandingPage {...props} />} />
           <Route path="/services" exact render={(props) => <Services {...props} />} />
           <Route path="/contactus" exact render={(props) => <ContactUs {...props} />} />
           <Route path="/about" exact render={(props) => <About {...props} />} />
 
-          <Route path="/signup" exact render={(props) => <Signup {...props} />} />
-          <Route path="/login" exact render={(props) => <Login {...props} />} />
-          <Route path="/logout" exact render={(props) => <Logout {...props} />} />
-
-          <Route path="/student/mycourse" exact render={(props) => <SMyCourse {...props} />} />
-          <Route path="/student/coursecontent" exact render={(props) => <SCourseContent {...props} />} />
+          <Route path="/browsecourses" exact render={(props) => <BrowseCourses {...props} />} />
+          <Route path="/browsecourses/coursedetails/:course_id" exact render={(props) => <CourseDetails {...props} />} />
 
           <Route path="/classprofile" exact render={(props) => <ClassProfile {...props} />} />
           <Route path="/newcourse" exact render={(props) => <NewCourse {...props} />} />
           <Route path="/mycourse" exact render={(props) => <MyCourse {...props} />} />
-          <Route path="/coursecontent/:id" exact render={(props) => <CourseContent {...props} />} />
-          <Route path="/examcontent/:id" exact render={(props) => <ExamContent {...props} />} />
+          <Route path="/coursecontent/:course_id" exact render={(props) => <CourseContent {...props} />} />
+          <Route path="/examcontent/:exam_id" exact render={(props) => <ExamContent {...props} />} />
+
+          <Route path="/student/mycourse" exact render={(props) => <SMyCourse {...props} />} />
+          <Route path="/student/coursecontent" exact render={(props) => <SCourseContent {...props} />} />
 
           <Route render={(props) => <NotFoundPage {...props} />} />
         </Switch>

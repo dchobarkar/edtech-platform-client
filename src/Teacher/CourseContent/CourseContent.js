@@ -39,7 +39,7 @@ const CourseContent = React.memo(function CourseContent(props) {
             "Authorization": "Bearer " + localStorage.authKey
         }
     }
-    const course_id = props.match.params.id
+    const course_id = props.match.params.course_id
 
     // Get all course information
     useEffect(() => {

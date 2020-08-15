@@ -29,7 +29,7 @@ const ExamContent = React.memo(function ExamContent(props) {
             "Authorization": "Bearer " + localStorage.authKey
         }
     }
-    const exam_id = props.match.params.id
+    const exam_id = props.match.params.exam_id
 
     // Get exam details along with all questions 
     useEffect(() => {
@@ -61,7 +61,7 @@ const ExamContent = React.memo(function ExamContent(props) {
             .catch(error => {
                 setIsLoading(false)
             })
-    }, [])
+    }, [exam_id, props.history])
 
     // Update exam content
     const updateExamHandler = (e, examTitle, examInstruction, duration) => {

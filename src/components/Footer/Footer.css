@@ -1,8 +1,14 @@
 #footer {
   background: rgba(0, 0, 0, 0.6);
-  padding: 7px 5px;
+  padding: 15px 0;
+  text-align: center;
 }
 #footer p {
   width: 100%;
-  text-align: center;
+  color: white;
+  font-size: 14px;
+  margin: 0;
+}
+#footer p .fa {
+  color: #e74c3c;
 }

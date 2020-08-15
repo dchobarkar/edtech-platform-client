@@ -9,34 +9,34 @@ import React, { Component } from 'react';
 // import './SCourseContent.css';
 
 class SCourseContent extends Component {
-    //     state = {
-    //         coursetitle: "sdfgsdfg",
-    //         targetaudience_id: 3,
-    //         subject_id: 4,
-    //         courseintro: "fdgsdfhsdfhsdfhsdf",
-    //         sectionentitys: [
-    //             {
-    //                 sectiontitle: "just start",
-    //                 sectionintro: "sdfsfdhsdfhsdfhhf",
-    //                 lectureentitys: [{ lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
-    //                 { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
-    //                 { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
-    //                 { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
-    //                 { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
-    //                 { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" }],
-    //                 examentitys: [
-    //                     { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
-    //                     { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
-    //                     { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
-    //                     { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
-    //                     { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
-    //                 ]
-    //             }
-    //         ],
-    //         loading: false,
-    //         error: false,
-    //         errormsg: null
-    //     };
+    state = {
+        coursetitle: "sdfgsdfg",
+        targetaudience_id: 3,
+        subject_id: 4,
+        courseintro: "fdgsdfhsdfhsdfhsdf",
+        sectionentitys: [
+            {
+                sectiontitle: "just start",
+                sectionintro: "sdfsfdhsdfhsdfhhf",
+                lectureentitys: [{ lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
+                { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
+                { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
+                { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
+                { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" },
+                { lecturetitle: "asdgsfgsdfg", lectureintro: "sdfgdsfhsdfsfdh", lecturevideo: "sgldsjhfgsdjhfghjgf" }],
+                examentitys: [
+                    { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
+                    { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
+                    { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
+                    { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
+                    { examtitle: "ljksdlgksjdfglsdg", examinstruction: "dsfsdfhsdfh" },
+                ]
+            }
+        ],
+        loading: false,
+        error: false,
+        errormsg: null
+    };
 
     //     // componentDidMount() {
     //     //     this.setState({ loading: true })
