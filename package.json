@@ -1,7 +1,11 @@
 {
-  "name": "myapp",
+  "name": "edtech_platform_client",
   "version": "0.1.0",
-  "private": true,
+  "description": "Online Course Platform",
+  "keywords": ["Course","EdTech","Classes","Tutions"],
+  "author": "Darshan Chobarkar",
+  "email":"dchobarkar@gmail.com",
+
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
