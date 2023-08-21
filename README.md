@@ -68,4 +68,4 @@ Darshan Chobarkar - [@dchobarkar](https://www.linkedin.com/in/dchobarkar/) - [@b
 
 - Contributor - [Saurabh Lodha](https://github.com/saurabh-lodha-16)
 
-Project Link: [https://github.com/dchobarkar/edtech-platform-server](https://github.com/dchobarkar/edtech-platform-server)
+Project Link: [https://github.com/dchobarkar/edtech-platform-client](https://github.com/dchobarkar/edtech-platform-client)
